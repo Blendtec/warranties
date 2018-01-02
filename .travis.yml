@@ -25,9 +25,9 @@ script:
 - npm run test:ci
 - echo $TRAVIS_BRANCH
 - if [ $TRAVIS_BRANCH = 'develop' ]; then npm run build:ci https://s3-us-west-1.amazonaws.com/recipe-stage-client.blendtec.com/warranties/
-  --base-href /pages/product-warranties-stage/; fi
+  --base-href /pages/warranty-stage/; fi
 - if [ $TRAVIS_BRANCH = 'master' ]; then npm run build:ci https://s3-us-west-1.amazonaws.com/recipe-client.blendtec.com/warranties/
-  --base-href /pages/product-warranties/; fi
+  --base-href /pages/warranty-1/; fi
 after_success:
 - "./node_modules/.bin/codecov"
 notifications:
@@ -47,7 +47,7 @@ deploy:
       secure: x7iASMaJguH4lXz/tnzKBhl4eko3mdgMRAMzs9EEn3ZqZOhOztfdWep3I7wmZ5JBjTPHinZ4U7qLLQ7RprUQMS2wE6kA4iElX6HodvubesRj1JWhov6AtebhHBVAdH39bD4E9ESQK3uuCv5fJYIMSnMR6+NqBzFG/3rcr2e+cMM9qP5JTnnZ7pbjCVGzWPuKtUtxM1xE1JDQ3OAhfZXh6GI5uqg8MhnP6CipBamyU3mCaiaQqyBft5hLm/mafIUBtTCUMp0D58uvk87jMGYteIaQlW6qF+p4X1kQYXbr8IibdOBuRfILpknYIL9G/q7At2OUhGYN+ORYUkfVJnmF2V99B6RgK3R3rGe5elkS49D4++ZjNPzaOsDQi1ulrPaOlUcWCmdQOgJV94TlMsVMGPO9i/ParVIq2p9ilNnzF7+G6h7yrP2tWzWBs/rW77dloNfPkOwRTdgnoNgNRPsQWA1YuuTZ2tRnByxTwSmvf82LDeN9bqygD7DtFXWsg3LKGhiclqiks2LsDZL4T3KXzh/U52FOZ19jUAe3iDY9ebwnwSX7Z6rBSdVz/BZPc0Z0QUS5kanGi4zb5laUGYK26PRmohiOzH1kyB+lWbQXiJBMcda4faVPxmuXYKnCW5jWgMGSPvB0s61tYo5aHry70b7IHOqIiATBr0gP6HbZJWk=
     bucket: recipe-client.blendtec.com
     local-dir: dist
-    upload-dir: registration
+    upload-dir: warranties
     skip_cleanup: true
     acl: public_read
     on:
@@ -64,7 +64,7 @@ deploy:
       secure: x7iASMaJguH4lXz/tnzKBhl4eko3mdgMRAMzs9EEn3ZqZOhOztfdWep3I7wmZ5JBjTPHinZ4U7qLLQ7RprUQMS2wE6kA4iElX6HodvubesRj1JWhov6AtebhHBVAdH39bD4E9ESQK3uuCv5fJYIMSnMR6+NqBzFG/3rcr2e+cMM9qP5JTnnZ7pbjCVGzWPuKtUtxM1xE1JDQ3OAhfZXh6GI5uqg8MhnP6CipBamyU3mCaiaQqyBft5hLm/mafIUBtTCUMp0D58uvk87jMGYteIaQlW6qF+p4X1kQYXbr8IibdOBuRfILpknYIL9G/q7At2OUhGYN+ORYUkfVJnmF2V99B6RgK3R3rGe5elkS49D4++ZjNPzaOsDQi1ulrPaOlUcWCmdQOgJV94TlMsVMGPO9i/ParVIq2p9ilNnzF7+G6h7yrP2tWzWBs/rW77dloNfPkOwRTdgnoNgNRPsQWA1YuuTZ2tRnByxTwSmvf82LDeN9bqygD7DtFXWsg3LKGhiclqiks2LsDZL4T3KXzh/U52FOZ19jUAe3iDY9ebwnwSX7Z6rBSdVz/BZPc0Z0QUS5kanGi4zb5laUGYK26PRmohiOzH1kyB+lWbQXiJBMcda4faVPxmuXYKnCW5jWgMGSPvB0s61tYo5aHry70b7IHOqIiATBr0gP6HbZJWk=
     bucket: recipe-stage-client.blendtec.com
     local-dir: dist
-    upload-dir: registration
+    upload-dir: warranties
     skip_cleanup: true
     acl: public_read
     on:
