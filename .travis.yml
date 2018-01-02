@@ -40,37 +40,40 @@ env:
   - secure: sj8ZkHP+clRcH6agdNVyhJFy03i/CJ8kfItht3AmO/zGg/knt+YoDtgtAo1u8IOeL3XE+TCLJkFj9Cytwdnzjo4GdHMP0MIKscMEkola6ugE9KzmsryHlZtGp8QlYVd42wC/ZpkgvkwKVssATGAWcPk4s6AcCeq/fMJeTwvZqZZFvsG5XqNl4hs+fakZCc9DxL+T7VKuTiqk9socFG+r25vR398IFy8QLYd4DSrnSwtv8GpVxpl+HyCynQ1+dSTx38lpvC0w+p5EJno3d8Y+27dXnI5hkfKxHbEEt3momBoa7i5gUNOfhBFpw4DI/KabzxN69Sarf6h+bTnzGkCsmSP9U/rH3tc20Z4mtDKkoqYaeWYchHjyUnYZHjkcs5U2bf1wnyhBKpZurzBwKUJ469mT2LPF3oP++pjcaNBdlc9T1BzhGVANm9zzaygO5qvt3hZAFyaS0pFZUxQ+FF/Z3RyOxOaZ9Xnji85BY94UthfsMBDFdP+lGNOKzp8PoaNx6WlS11t/MKat4/kz2ir2e4SaXPJSUrYWlQ1acuYcA8VVvJmIJMM/OxpP3CTIFHS2WmWRzxZc6zur+W4zMtFOdly3GaEv/4IkhChOo0zd4+ZcuNzfP3kSS5kF8gCrN/plR7bmMFwGh/UOaV5i4uXdPzqZahfFNN5Q/aDcvILVZ28=
   - secure: mP/eedPCreQjAFGdKougvfNMkwiLhn0T2sDqkkEwjy/6zQeamVGjkZS25XYxcTg1IMh1/p3XuK6KT5jsQ1pGvuDIYohJtlIA6tCoPCqa5chju1zOoMMwz3XWAem1iWcjxYzpAPwqigDqkFWPgLTTNjB3esAOdUwnK68KRADZUfO5h1ijYvqksKATOe0+UC2qg48u5cLMVThgM+8bVG++ZsWNAsALowZUm67AIrGhDyam/uvqRofDZ15MeHRfmgRuhgb622JVgCvnQgcGhY5OBcVsB7prNbMOPqBAt+uPPIG3DkMF6fkQRjVw83UgEfEsAv/3nTjpiJ5f74ZtzPnUXNlY6Deg7VKnDc4xzXHhaSufKmUP29jwHfk6trgc/9AJND6tEoRBEBG4NX3Ey1jYt7R6s60L5lkDMlcUsDAuhOqc07oqvX8v6AUEB07JRZqqUIFPBbJyVM9zUsyHxaB3QctB3D0gWZ8w2wwSC1GwugEeW5hvy9AmmU/6g3bo0mYwoAMcY+dax4E39j+10V3yPFtIoNHUDhZafUmW1K1rObpt4rx7jA2GBXwEvM8Hm32VQdVajgS8gy3TcImOkW14CBe3ZSgG6vTgMOrOZqwP8R0EzVWkEPS0fwU5SJH/I3Ueuto0ftf+hF4+iTOGEcYAczw4tCpbd4SRF4OfDZWaBhI=
 deploy:
-- provider: s3
-  region: us-west-1
-  access_key_id: AKIAJLMSNKBUNB4P3L4Q
+  matrix:
+  - provider: s3
+    region: us-west-1
+    access_key_id: AKIAJLMSNKBUNB4P3L4Q
+    secret_access_key:
+      secure: MO2vCEsQJX6PcELsP2zJ4RGlW3E80lIF7XVQg8yHF2gMt0T8R8ew4Uq2weCVB6iamsh4doNTRuSFZksMsUJ4+V50inMxW/NnYj/6mNf18VtynlntXwMKrH2zbORwv7ZTm+lXj6OCmXCjh3ic0YISFcXjAC4jwE1Ag2cm+XzQRXxYnHcmceu7WV/bgnnw/FogsWa2bNdwLVehYyEsxKveOaVel19bNuFAlA68vacAqp1RJV4vv1elg+nbFMP8bw8ngSo6SYHETMXIy7VXcpAt6ynRA7kiZqqTahAMn9tov3Z5ZY0ecm0OGSoDaX2B+Kh1ArIeWMI0UGh/jEKHP3WWNKEkbmFGprXg3wH3DERF0EIna+t0vWzEpEEtKvqvm/ntW4Dh7HqdIcPybylNq9WtWonIiMIfhu7EqmlzK9uPB8c/FxRJVg08j45v0c+e2IJog9+DBSKA7zh0DLHrfR5wcWzvaJW5rJha5l7O4CntXUOxipJodztw+0bbmi7jmXOVPAUsipVFaomMiXn0HroAOS+WFkxsuaDcJ5y2gAVDa5BfTY66ZuL7SwitCUzU6xuHpBZSBX/Hjx3q8W0Abh/Sd6r/yybWKCPstwiDXrtwvMK2xanZKTuxTaHaqUFVFo49CuTO4Ym004cLzxVG25mSKqh4voZnfWS7OENRW+pnp0w=
+    bucket: recipe-client.blendtec.com
+    local-dir: dist
+    upload-dir: registration
+    skip_cleanup: true
+    acl: public_read
+    on:
+      branch: master
+  - provider: script
+    skip_cleanup: true
+    script: "./.travis/deploy.sh https://s3-us-west-1.amazonaws.com/recipe-client.blendtec.com/warranties"
+    on:
+      branch: master
+  - provider: s3
+    region: us-west-1
+    access_key_id: AKIAJLMSNKBUNB4P3L4Q
+    secret_access_key:
+      secure: MO2vCEsQJX6PcELsP2zJ4RGlW3E80lIF7XVQg8yHF2gMt0T8R8ew4Uq2weCVB6iamsh4doNTRuSFZksMsUJ4+V50inMxW/NnYj/6mNf18VtynlntXwMKrH2zbORwv7ZTm+lXj6OCmXCjh3ic0YISFcXjAC4jwE1Ag2cm+XzQRXxYnHcmceu7WV/bgnnw/FogsWa2bNdwLVehYyEsxKveOaVel19bNuFAlA68vacAqp1RJV4vv1elg+nbFMP8bw8ngSo6SYHETMXIy7VXcpAt6ynRA7kiZqqTahAMn9tov3Z5ZY0ecm0OGSoDaX2B+Kh1ArIeWMI0UGh/jEKHP3WWNKEkbmFGprXg3wH3DERF0EIna+t0vWzEpEEtKvqvm/ntW4Dh7HqdIcPybylNq9WtWonIiMIfhu7EqmlzK9uPB8c/FxRJVg08j45v0c+e2IJog9+DBSKA7zh0DLHrfR5wcWzvaJW5rJha5l7O4CntXUOxipJodztw+0bbmi7jmXOVPAUsipVFaomMiXn0HroAOS+WFkxsuaDcJ5y2gAVDa5BfTY66ZuL7SwitCUzU6xuHpBZSBX/Hjx3q8W0Abh/Sd6r/yybWKCPstwiDXrtwvMK2xanZKTuxTaHaqUFVFo49CuTO4Ym004cLzxVG25mSKqh4voZnfWS7OENRW+pnp0w=
+    bucket: recipe-stage-client.blendtec.com
+    local-dir: dist
+    upload-dir: registration
+    skip_cleanup: true
+    acl: public_read
+    on:
+      branch: develop
+  - provider: script
+    skip_cleanup: true
+    script: "./.travis/deploy_stage.sh https://s3-us-west-1.amazonaws.com/recipe-stage-client.blendtec.com/warranties"
+    on:
+      branch: develop
   secret_access_key:
-    secure: MO2vCEsQJX6PcELsP2zJ4RGlW3E80lIF7XVQg8yHF2gMt0T8R8ew4Uq2weCVB6iamsh4doNTRuSFZksMsUJ4+V50inMxW/NnYj/6mNf18VtynlntXwMKrH2zbORwv7ZTm+lXj6OCmXCjh3ic0YISFcXjAC4jwE1Ag2cm+XzQRXxYnHcmceu7WV/bgnnw/FogsWa2bNdwLVehYyEsxKveOaVel19bNuFAlA68vacAqp1RJV4vv1elg+nbFMP8bw8ngSo6SYHETMXIy7VXcpAt6ynRA7kiZqqTahAMn9tov3Z5ZY0ecm0OGSoDaX2B+Kh1ArIeWMI0UGh/jEKHP3WWNKEkbmFGprXg3wH3DERF0EIna+t0vWzEpEEtKvqvm/ntW4Dh7HqdIcPybylNq9WtWonIiMIfhu7EqmlzK9uPB8c/FxRJVg08j45v0c+e2IJog9+DBSKA7zh0DLHrfR5wcWzvaJW5rJha5l7O4CntXUOxipJodztw+0bbmi7jmXOVPAUsipVFaomMiXn0HroAOS+WFkxsuaDcJ5y2gAVDa5BfTY66ZuL7SwitCUzU6xuHpBZSBX/Hjx3q8W0Abh/Sd6r/yybWKCPstwiDXrtwvMK2xanZKTuxTaHaqUFVFo49CuTO4Ym004cLzxVG25mSKqh4voZnfWS7OENRW+pnp0w=
-  bucket: recipe-client.blendtec.com
-  local-dir: dist
-  upload-dir: registration
-  skip_cleanup: true
-  acl: public_read
-  on:
-    branch: master
-- provider: script
-  skip_cleanup: true
-  script: "./.travis/deploy.sh https://s3-us-west-1.amazonaws.com/recipe-client.blendtec.com/warranties"
-  on:
-    branch: master
-- provider: s3
-  region: us-west-1
-  access_key_id: AKIAJLMSNKBUNB4P3L4Q
-  secret_access_key:
-    secure: MO2vCEsQJX6PcELsP2zJ4RGlW3E80lIF7XVQg8yHF2gMt0T8R8ew4Uq2weCVB6iamsh4doNTRuSFZksMsUJ4+V50inMxW/NnYj/6mNf18VtynlntXwMKrH2zbORwv7ZTm+lXj6OCmXCjh3ic0YISFcXjAC4jwE1Ag2cm+XzQRXxYnHcmceu7WV/bgnnw/FogsWa2bNdwLVehYyEsxKveOaVel19bNuFAlA68vacAqp1RJV4vv1elg+nbFMP8bw8ngSo6SYHETMXIy7VXcpAt6ynRA7kiZqqTahAMn9tov3Z5ZY0ecm0OGSoDaX2B+Kh1ArIeWMI0UGh/jEKHP3WWNKEkbmFGprXg3wH3DERF0EIna+t0vWzEpEEtKvqvm/ntW4Dh7HqdIcPybylNq9WtWonIiMIfhu7EqmlzK9uPB8c/FxRJVg08j45v0c+e2IJog9+DBSKA7zh0DLHrfR5wcWzvaJW5rJha5l7O4CntXUOxipJodztw+0bbmi7jmXOVPAUsipVFaomMiXn0HroAOS+WFkxsuaDcJ5y2gAVDa5BfTY66ZuL7SwitCUzU6xuHpBZSBX/Hjx3q8W0Abh/Sd6r/yybWKCPstwiDXrtwvMK2xanZKTuxTaHaqUFVFo49CuTO4Ym004cLzxVG25mSKqh4voZnfWS7OENRW+pnp0w=
-  bucket: recipe-stage-client.blendtec.com
-  local-dir: dist
-  upload-dir: registration
-  skip_cleanup: true
-  acl: public_read
-  on:
-    branch: develop
-- provider: script
-  skip_cleanup: true
-  script: "./.travis/deploy_stage.sh https://s3-us-west-1.amazonaws.com/recipe-stage-client.blendtec.com/warranties"
-  on:
-    branch: develop
+    secure: x7iASMaJguH4lXz/tnzKBhl4eko3mdgMRAMzs9EEn3ZqZOhOztfdWep3I7wmZ5JBjTPHinZ4U7qLLQ7RprUQMS2wE6kA4iElX6HodvubesRj1JWhov6AtebhHBVAdH39bD4E9ESQK3uuCv5fJYIMSnMR6+NqBzFG/3rcr2e+cMM9qP5JTnnZ7pbjCVGzWPuKtUtxM1xE1JDQ3OAhfZXh6GI5uqg8MhnP6CipBamyU3mCaiaQqyBft5hLm/mafIUBtTCUMp0D58uvk87jMGYteIaQlW6qF+p4X1kQYXbr8IibdOBuRfILpknYIL9G/q7At2OUhGYN+ORYUkfVJnmF2V99B6RgK3R3rGe5elkS49D4++ZjNPzaOsDQi1ulrPaOlUcWCmdQOgJV94TlMsVMGPO9i/ParVIq2p9ilNnzF7+G6h7yrP2tWzWBs/rW77dloNfPkOwRTdgnoNgNRPsQWA1YuuTZ2tRnByxTwSmvf82LDeN9bqygD7DtFXWsg3LKGhiclqiks2LsDZL4T3KXzh/U52FOZ19jUAe3iDY9ebwnwSX7Z6rBSdVz/BZPc0Z0QUS5kanGi4zb5laUGYK26PRmohiOzH1kyB+lWbQXiJBMcda4faVPxmuXYKnCW5jWgMGSPvB0s61tYo5aHry70b7IHOqIiATBr0gP6HbZJWk=
