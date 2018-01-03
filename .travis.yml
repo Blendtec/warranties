@@ -39,38 +39,40 @@ env:
   - secure: aCGkYkKp01QQv9psmN7CaPOjD5LsWkbxkv2u8Ia4fLnw2WEG8KVNWnUbcOifMeahDfYlz1Mi8yYkxKOknmRrQxKYdJ9X6ny8zqabp1bb5wwUFl/XR7/k6pYSN8iW64RINeNnTopXyIJ8lAFcWXTQQCr1/sHgAYwTrL7XB9DI3BGmiGE3IPe8oHWHtFlOUPNT0F1nxQsMdBEUF5+za4PiPemrQyI7RAgFLDsT2u9NW7qY1uZYCLRh7UDTHN9M06u29mQP7NjH+40rzH5TU0gYlU2ta1M7gUXa5NScjAvnrv7w1msA5nXA4N+9X7cA2BJz3TRO4cyJeNJPe28T74I91fH3ZyZ889MFhTltgGOGZKUCT+rbIOGxmnYDtPLM2NWM04/tQTJUrF9RYnFWSw8eH5ETpGpUrBpDnC/WWhoblnS2ezE/agMmqFYiJCbOEdOmAd8m9XlUTD3+5DTft09AHvhsB6NYYRb5CoZaP4uXNedflisZ4IhbxsHw3rxomfzaNSdEl5dPLp1KShQBNlmk7ubYiuL8fSGyVL89hm5Vz586DgLM/rvq19EZNlSMrjezGvqDR7Fa+vuAMWCHmF6DsJ/3paH1hFIMB1NSVEYP9jrPXXX92LpbTrqxChAalTg1YmMA1jiKypxVTfktr71DmIOqTLD24nBK9govSn113Fg=
   - secure: sj8ZkHP+clRcH6agdNVyhJFy03i/CJ8kfItht3AmO/zGg/knt+YoDtgtAo1u8IOeL3XE+TCLJkFj9Cytwdnzjo4GdHMP0MIKscMEkola6ugE9KzmsryHlZtGp8QlYVd42wC/ZpkgvkwKVssATGAWcPk4s6AcCeq/fMJeTwvZqZZFvsG5XqNl4hs+fakZCc9DxL+T7VKuTiqk9socFG+r25vR398IFy8QLYd4DSrnSwtv8GpVxpl+HyCynQ1+dSTx38lpvC0w+p5EJno3d8Y+27dXnI5hkfKxHbEEt3momBoa7i5gUNOfhBFpw4DI/KabzxN69Sarf6h+bTnzGkCsmSP9U/rH3tc20Z4mtDKkoqYaeWYchHjyUnYZHjkcs5U2bf1wnyhBKpZurzBwKUJ469mT2LPF3oP++pjcaNBdlc9T1BzhGVANm9zzaygO5qvt3hZAFyaS0pFZUxQ+FF/Z3RyOxOaZ9Xnji85BY94UthfsMBDFdP+lGNOKzp8PoaNx6WlS11t/MKat4/kz2ir2e4SaXPJSUrYWlQ1acuYcA8VVvJmIJMM/OxpP3CTIFHS2WmWRzxZc6zur+W4zMtFOdly3GaEv/4IkhChOo0zd4+ZcuNzfP3kSS5kF8gCrN/plR7bmMFwGh/UOaV5i4uXdPzqZahfFNN5Q/aDcvILVZ28=
   - secure: mP/eedPCreQjAFGdKougvfNMkwiLhn0T2sDqkkEwjy/6zQeamVGjkZS25XYxcTg1IMh1/p3XuK6KT5jsQ1pGvuDIYohJtlIA6tCoPCqa5chju1zOoMMwz3XWAem1iWcjxYzpAPwqigDqkFWPgLTTNjB3esAOdUwnK68KRADZUfO5h1ijYvqksKATOe0+UC2qg48u5cLMVThgM+8bVG++ZsWNAsALowZUm67AIrGhDyam/uvqRofDZ15MeHRfmgRuhgb622JVgCvnQgcGhY5OBcVsB7prNbMOPqBAt+uPPIG3DkMF6fkQRjVw83UgEfEsAv/3nTjpiJ5f74ZtzPnUXNlY6Deg7VKnDc4xzXHhaSufKmUP29jwHfk6trgc/9AJND6tEoRBEBG4NX3Ey1jYt7R6s60L5lkDMlcUsDAuhOqc07oqvX8v6AUEB07JRZqqUIFPBbJyVM9zUsyHxaB3QctB3D0gWZ8w2wwSC1GwugEeW5hvy9AmmU/6g3bo0mYwoAMcY+dax4E39j+10V3yPFtIoNHUDhZafUmW1K1rObpt4rx7jA2GBXwEvM8Hm32VQdVajgS8gy3TcImOkW14CBe3ZSgG6vTgMOrOZqwP8R0EzVWkEPS0fwU5SJH/I3Ueuto0ftf+hF4+iTOGEcYAczw4tCpbd4SRF4OfDZWaBhI=
+  - secure: 3M2mh0a1yjeh2mFC0yTb5YbPtvTK4JFR/ByMzMizjFyVvuXuTAgtSSwhpFCU28yQdkuKOa+ppI3nf6B22LYq9WtLZlGkkH+9Rqv53jZkxtDDuopeH2jlT7l4Zng1QiAOf1E/Xe19nElQCtpfGyCgJdFWzotEjUtva+PEc4qoejH0MoVMAawzEMuKARfubMEPd/KgwteMpGecB9aWJhPc1/BOVahm6tAJEHfEADuFqYj/X2jmNRADovYnFKguWvWJYGhpRqE5Z6F/iy+VH7ZdctinFbU7MaS5ugU7ejsXgtcfwMqPigANyaP6RGqFuBAkgWAkA5Lr2ZtvAsXJtv8+E4u91W9qqPlPpgdnwHlIiYfYuBJHOyCP+5h0w/sdw6nTPziYK0lebl7owFMs8qGn59uXaGaDVQ6DtD3Q6+p2z7aGtynL2NZjQnQxc/PU+vNw1XiqcCMSkP2wrnvp/EN11wTr8lBBP0+PbU+XHrqcOhxMWYYLk6Pq6wH/e9HXkjFSAp5+0msJ817bCooOVfLMK2p7pogJ264/k5os3hzSU3PRVjFgtLyTOobsouV8GvLYii07alp1hcSzDXQqd70oCDzbVB5jRspbRvAVHVNvgUEuybYvHc+a/GPcOOEbM/GLJ56ROO8TTtTKwY+tIXzyKkUXIbgsCvbuDGYBxFV8nCI=
+  - secure: ioIM91EVmgk9lP3WTzd7mrb/2cWxCz+NXzrWp9SmzUVjZH8NwnLuxDyvqEA695QGcQRGbDmTE5yPL5NzdtZ5vYMtc+eXldBpbemXI+dxtTXRCEZWAKi1qb0EhkTMtOMeJaM9lrHAgwl1nXiDKElAirlgsQ3JtA02ZLY0cVFSsos1By5PJjYhGQBKjnK90rewIhflDqFHcwKxD74SSdakENbf5Y1dkWje8rE5hPRDZtPjyESnV5ADc0h7PVxzNlTnQM87ORfqw9qRfIgf4bCyFfsdHbSf6IM0G8qd52QycCypZiETCCai2o4NTbxaI79TuD4Z9O8p7NWWtUuhYsIDADywraaBP5WdOj3Brm0x5xjZgxSadXMpHEyGFMqruy0LE6giQT9GpMWUK3CpyuVbU9gig7L1n+Aa00xG+kmvFn98nR5AIvOzXCQsl1iLlDKkIrnmXh9x9R8RouImhv/gugo2Qj1I98zO/acYn0r4S188Ar/y6UFpT/s49EzUruBq30TB7HvOdM8rvcAmhsmYflzGVdE5OXB+CkC0knzUYfAr9as2JHsrXAL8MiVnIOOJTRKcPAfHGgcN7+FS/h3ed9gObRKiNiOMdVm+fgWnISLEhstlPkd7NKvGxSg7KUmFf01RsKTXXJFnw0FuWQN51m7lIgH6gzYqfuHpwfKULK8=
 deploy:
-  - provider: s3
-    region: us-west-1
-    access_key_id: AKIAJLMSNKBUNB4P3L4Q
-    secret_access_key:
-      secure: x7iASMaJguH4lXz/tnzKBhl4eko3mdgMRAMzs9EEn3ZqZOhOztfdWep3I7wmZ5JBjTPHinZ4U7qLLQ7RprUQMS2wE6kA4iElX6HodvubesRj1JWhov6AtebhHBVAdH39bD4E9ESQK3uuCv5fJYIMSnMR6+NqBzFG/3rcr2e+cMM9qP5JTnnZ7pbjCVGzWPuKtUtxM1xE1JDQ3OAhfZXh6GI5uqg8MhnP6CipBamyU3mCaiaQqyBft5hLm/mafIUBtTCUMp0D58uvk87jMGYteIaQlW6qF+p4X1kQYXbr8IibdOBuRfILpknYIL9G/q7At2OUhGYN+ORYUkfVJnmF2V99B6RgK3R3rGe5elkS49D4++ZjNPzaOsDQi1ulrPaOlUcWCmdQOgJV94TlMsVMGPO9i/ParVIq2p9ilNnzF7+G6h7yrP2tWzWBs/rW77dloNfPkOwRTdgnoNgNRPsQWA1YuuTZ2tRnByxTwSmvf82LDeN9bqygD7DtFXWsg3LKGhiclqiks2LsDZL4T3KXzh/U52FOZ19jUAe3iDY9ebwnwSX7Z6rBSdVz/BZPc0Z0QUS5kanGi4zb5laUGYK26PRmohiOzH1kyB+lWbQXiJBMcda4faVPxmuXYKnCW5jWgMGSPvB0s61tYo5aHry70b7IHOqIiATBr0gP6HbZJWk=
-    bucket: recipe-client.blendtec.com
-    local-dir: dist
-    upload-dir: warranties
-    skip_cleanup: true
-    acl: public_read
-    on:
-      branch: master
-  - provider: script
-    skip_cleanup: true
-    script: "./.travis/deploy.sh https://s3-us-west-1.amazonaws.com/recipe-client.blendtec.com/warranties"
-    on:
-      branch: master
-  - provider: s3
-    region: us-west-1
-    access_key_id: AKIAJLMSNKBUNB4P3L4Q
-    secret_access_key:
-      secure: x7iASMaJguH4lXz/tnzKBhl4eko3mdgMRAMzs9EEn3ZqZOhOztfdWep3I7wmZ5JBjTPHinZ4U7qLLQ7RprUQMS2wE6kA4iElX6HodvubesRj1JWhov6AtebhHBVAdH39bD4E9ESQK3uuCv5fJYIMSnMR6+NqBzFG/3rcr2e+cMM9qP5JTnnZ7pbjCVGzWPuKtUtxM1xE1JDQ3OAhfZXh6GI5uqg8MhnP6CipBamyU3mCaiaQqyBft5hLm/mafIUBtTCUMp0D58uvk87jMGYteIaQlW6qF+p4X1kQYXbr8IibdOBuRfILpknYIL9G/q7At2OUhGYN+ORYUkfVJnmF2V99B6RgK3R3rGe5elkS49D4++ZjNPzaOsDQi1ulrPaOlUcWCmdQOgJV94TlMsVMGPO9i/ParVIq2p9ilNnzF7+G6h7yrP2tWzWBs/rW77dloNfPkOwRTdgnoNgNRPsQWA1YuuTZ2tRnByxTwSmvf82LDeN9bqygD7DtFXWsg3LKGhiclqiks2LsDZL4T3KXzh/U52FOZ19jUAe3iDY9ebwnwSX7Z6rBSdVz/BZPc0Z0QUS5kanGi4zb5laUGYK26PRmohiOzH1kyB+lWbQXiJBMcda4faVPxmuXYKnCW5jWgMGSPvB0s61tYo5aHry70b7IHOqIiATBr0gP6HbZJWk=
-    bucket: recipe-stage-client.blendtec.com
-    local-dir: dist
-    upload-dir: warranties
-    skip_cleanup: true
-    acl: public_read
-    on:
-      branch: develop
-  - provider: script
-    skip_cleanup: true
-    script: "./.travis/deploy_stage.sh https://s3-us-west-1.amazonaws.com/recipe-stage-client.blendtec.com/warranties"
-    on:
-      branch: develop
+- provider: s3
+  region: us-west-1
+  access_key_id: AKIAJLMSNKBUNB4P3L4Q
+  secret_access_key:
+    secure: x7iASMaJguH4lXz/tnzKBhl4eko3mdgMRAMzs9EEn3ZqZOhOztfdWep3I7wmZ5JBjTPHinZ4U7qLLQ7RprUQMS2wE6kA4iElX6HodvubesRj1JWhov6AtebhHBVAdH39bD4E9ESQK3uuCv5fJYIMSnMR6+NqBzFG/3rcr2e+cMM9qP5JTnnZ7pbjCVGzWPuKtUtxM1xE1JDQ3OAhfZXh6GI5uqg8MhnP6CipBamyU3mCaiaQqyBft5hLm/mafIUBtTCUMp0D58uvk87jMGYteIaQlW6qF+p4X1kQYXbr8IibdOBuRfILpknYIL9G/q7At2OUhGYN+ORYUkfVJnmF2V99B6RgK3R3rGe5elkS49D4++ZjNPzaOsDQi1ulrPaOlUcWCmdQOgJV94TlMsVMGPO9i/ParVIq2p9ilNnzF7+G6h7yrP2tWzWBs/rW77dloNfPkOwRTdgnoNgNRPsQWA1YuuTZ2tRnByxTwSmvf82LDeN9bqygD7DtFXWsg3LKGhiclqiks2LsDZL4T3KXzh/U52FOZ19jUAe3iDY9ebwnwSX7Z6rBSdVz/BZPc0Z0QUS5kanGi4zb5laUGYK26PRmohiOzH1kyB+lWbQXiJBMcda4faVPxmuXYKnCW5jWgMGSPvB0s61tYo5aHry70b7IHOqIiATBr0gP6HbZJWk=
+  bucket: recipe-client.blendtec.com
+  local-dir: dist
+  upload-dir: warranties
+  skip_cleanup: true
+  acl: public_read
+  on:
+    branch: master
+- provider: script
+  skip_cleanup: true
+  script: "./.travis/deploy.sh https://s3-us-west-1.amazonaws.com/recipe-client.blendtec.com/warranties"
+  on:
+    branch: master
+- provider: s3
+  region: us-west-1
+  access_key_id: AKIAJLMSNKBUNB4P3L4Q
+  secret_access_key:
+    secure: x7iASMaJguH4lXz/tnzKBhl4eko3mdgMRAMzs9EEn3ZqZOhOztfdWep3I7wmZ5JBjTPHinZ4U7qLLQ7RprUQMS2wE6kA4iElX6HodvubesRj1JWhov6AtebhHBVAdH39bD4E9ESQK3uuCv5fJYIMSnMR6+NqBzFG/3rcr2e+cMM9qP5JTnnZ7pbjCVGzWPuKtUtxM1xE1JDQ3OAhfZXh6GI5uqg8MhnP6CipBamyU3mCaiaQqyBft5hLm/mafIUBtTCUMp0D58uvk87jMGYteIaQlW6qF+p4X1kQYXbr8IibdOBuRfILpknYIL9G/q7At2OUhGYN+ORYUkfVJnmF2V99B6RgK3R3rGe5elkS49D4++ZjNPzaOsDQi1ulrPaOlUcWCmdQOgJV94TlMsVMGPO9i/ParVIq2p9ilNnzF7+G6h7yrP2tWzWBs/rW77dloNfPkOwRTdgnoNgNRPsQWA1YuuTZ2tRnByxTwSmvf82LDeN9bqygD7DtFXWsg3LKGhiclqiks2LsDZL4T3KXzh/U52FOZ19jUAe3iDY9ebwnwSX7Z6rBSdVz/BZPc0Z0QUS5kanGi4zb5laUGYK26PRmohiOzH1kyB+lWbQXiJBMcda4faVPxmuXYKnCW5jWgMGSPvB0s61tYo5aHry70b7IHOqIiATBr0gP6HbZJWk=
+  bucket: recipe-stage-client.blendtec.com
+  local-dir: dist
+  upload-dir: warranties
+  skip_cleanup: true
+  acl: public_read
+  on:
+    branch: develop
+- provider: script
+  skip_cleanup: true
+  script: "./.travis/deploy_stage.sh https://s3-us-west-1.amazonaws.com/recipe-stage-client.blendtec.com/warranties"
+  on:
+    branch: develop
