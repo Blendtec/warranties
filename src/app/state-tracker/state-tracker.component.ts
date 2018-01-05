@@ -1,17 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { StoreService } from './services/store.service';
+import { StoreService } from '../services/store.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-state-tracker',
+  templateUrl: './state-tracker.component.html',
+  styleUrls: ['./state-tracker.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class StateTrackerComponent implements OnInit, OnDestroy {
   title = 'app';
   appStateSub: Subscription;
   appState: number;
-  testAppState: number;
   defaultState = 1;
 
 
@@ -31,13 +30,5 @@ export class AppComponent implements OnInit, OnDestroy {
     this.appStateSub.unsubscribe();
   }
 
-  ngIncrementState(howMuch: number) {
-    if (this.appState + howMuch > 0 && this.appState + howMuch < 4 ) {
-      this.storeService.passState(this.appState + howMuch);
-    }
-  }
 
-  setStateTest() {
-    this.storeService.passState(this.testAppState);
-  }
 }
