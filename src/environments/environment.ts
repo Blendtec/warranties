@@ -9,5 +9,6 @@ export const environment = {
   s3: 'https://s3-us-west-1.amazonaws.com/data.blendtec.com',
   bucket: 'https://s3-us-west-1.amazonaws.com/recipe-stage-client.blendtec.com/warranties/',
   warrantiesEndPoint: '',
+  assets: 'assets',
   captchaKey: '6LcWmzIUAAAAADoSNPMqAECfcdIl9Z8B4czc4MjP'
 };

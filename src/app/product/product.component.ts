@@ -14,6 +14,6 @@ export class ProductComponent implements OnInit {
   }
 
   diffState(state: number): void {
-    this.storeService.passState(state);
+    this.storeService.passNumState(state);
   }
 }

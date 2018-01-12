@@ -2,11 +2,12 @@
   <div class="warranty-wiz--steps">
     <app-state-tracker></app-state-tracker>
   </div>
-
+  <div>
+  	<app-country-select></app-country-select>
+  </div>
 <app-additional *ngIf="appState === 3"></app-additional>
 <app-personal *ngIf="appState === 1"></app-personal>
 <app-product *ngIf="appState === 2"></app-product>
-
     <div class="warranty-wiz--nav-bottom">
       <button title="Previous Step" style="float:left;" (click)="ngIncrementState(-1)">Back</button>
       <button title="Next Step" style="float:right;" (click)="ngIncrementState(1)">Next</button>
