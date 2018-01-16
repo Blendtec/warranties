@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
-import { StoreService, StateService, CountryService, RetailerService } from '../services/';
+import { StoreService, GetAssetService, CountryService, RetailerService } from '../services/';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/observable/throw';
@@ -8,7 +8,7 @@ import { OtherPurchasePlaceValidator, StatesValidator } from '../validators/';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { APP_CONFIG, AppConfig } from '../config';
-import { ICountry, IPersonal } from '../models';
+import { ICountry, IPersonal, IState } from '../models';
 
 @Component({
   selector: 'app-personal',
@@ -20,7 +20,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
   public personal: FormGroup;
   public retailers$: Observable<any[]>;
   public countries$: Observable<ICountry[]>;
-  public states$: Observable<any[]>;
+  public states$: Observable<IState[]>;
   public dateOptions: any = {
     dateFormat: 'mm-dd-yyyy',
     indicateInvalidDate: true,
@@ -35,12 +35,12 @@ export class PersonalComponent implements OnInit, OnDestroy {
   constructor(private storeService: StoreService,
     private formBuilder: FormBuilder,
     private countryService: CountryService,
-    private stateService: StateService,
+    private getState: GetAssetService<IState>,
     private retailerService: RetailerService,
      @Inject(APP_CONFIG) private config: AppConfig) {
       this.retailers$ = retailerService.getAll$();
       this.countries$ = countryService.getAll$();
-      this.states$ = stateService.getAll$();
+      this.states$ = getState.getAll$('states.json');
     }
 
   ngOnInit() {
@@ -99,7 +99,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
       });
     }
 
-    this.personal.get('address.stateProvince').setAsyncValidators(StatesValidator.createValidator(this.stateService));
+    this.personal.get('address.stateProvince').setAsyncValidators(StatesValidator.createValidator(this.getState));
 
     this.personal
       .get('address.country')

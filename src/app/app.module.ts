@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { PersonalComponent } from './personal/personal.component';
 import { ProductComponent } from './product/product.component';
 import { AdditionalComponent } from './additional/additional.component';
-import { StoreService, StateService, CountryService, RetailerService } from './services/';
+import { StoreService, GetAssetService, CountryService, RetailerService } from './services/';
 import { StateTrackerComponent } from './state-tracker/state-tracker.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SuccessComponent } from './success/success.component';
@@ -61,7 +61,7 @@ export function HttpLoaderFactory(http: HttpClient, config: AppConfig) {
   ],
   providers: [StoreService,
   FormBuilder,
-  StateService,
+  GetAssetService,
   TranslatePipe,
   WindowService,
   CountryService,

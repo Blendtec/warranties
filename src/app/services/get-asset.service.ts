@@ -5,13 +5,12 @@ import { HttpClient } from '@angular/common/http';
 import { APP_CONFIG, AppConfig } from '../config';
 
 @Injectable()
-export class StateService {
+export class GetAssetService<T> {
 
-  private _resource = 'states.json';
 
   constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) {}
 
-  public getAll$(): Observable<IState[]> {
-    return this.http.get<IState[]>(`${this.config.s3}/${this._resource}`);
+  public getAll$(resource: string): Observable<T[]> {
+    return this.http.get<T[]>(`${this.config.s3}/${resource}`);
   }
 }
