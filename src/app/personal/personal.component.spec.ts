@@ -16,7 +16,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { PersonalComponent } from './personal.component';
 
-/*describe('PersonalComponent', () => {
+describe('PersonalComponent', () => {
 
   const assetSvcMock = jasmine.createSpyObj('GetAssetService', ['getAll$']);
   assetSvcMock.getAll$.and.returnValue(Observable.of([]));
@@ -32,7 +32,7 @@ import { PersonalComponent } from './personal.component';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PersonalComponent, CountrySelectComponent, SerialModalComponent],
+      declarations: [PersonalComponent, CountrySelectComponent],
       imports: [
         AppConfigModule,
         FormsModule,
@@ -48,9 +48,9 @@ import { PersonalComponent } from './personal.component';
         {provide: RetailerService, useValue: retailerSvcMock},
         {provide: CountryService, useValue: countrySvcMock},
         {provide: GetAssetService, useValue: assetSvcMock},
-        {provide: TranslateService, useValue: {} }
-     //   {provide: APP_BASE_HREF, useValue: '/'},
-     //   {provide: APP_CONFIG, useValue: {s3: 's3Url', captchaKey: 'testKey'}}
+        {provide: TranslateService, useValue: {} },
+        {provide: APP_BASE_HREF, useValue: '/'},
+        {provide: APP_CONFIG, useValue: {s3: 's3Url', captchaKey: 'testKey'}}
       ]
     })
     .compileComponents();
@@ -59,10 +59,9 @@ import { PersonalComponent } from './personal.component';
   beforeEach(() => {
     fixture = TestBed.createComponent(PersonalComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  fit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
-});*/
+});

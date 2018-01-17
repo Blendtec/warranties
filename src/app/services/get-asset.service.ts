@@ -8,7 +8,8 @@ import { APP_CONFIG, AppConfig } from '../config';
 export class GetAssetService<T> {
 
 
-  constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) {}
+  constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) {
+  }
 
   public getAll$(resource: string): Observable<T[]> {
     return this.http.get<T[]>(`${this.config.s3}/${resource}`);
