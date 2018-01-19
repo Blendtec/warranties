@@ -32,6 +32,34 @@ export class PersonalComponent implements OnInit, OnDestroy {
   private acceptableFileFormats = ['image/jpeg', 'image/jpg', 'image/png'];
   public wrongFileType = false;
 
+    formConfig = [
+    {
+      type: 'input',
+      label: '',
+      name: 'firstName',
+      placeholder: 'Enter your First Name'
+    },
+    {
+      type: 'input',
+      label: '',
+      name: 'lastName',
+      placeholder: 'Enter your Last Name',
+    },
+    {
+      type: 'select',
+      label: 'Favourite food',
+      name: 'food',
+      options: ['Pizza', 'Hot Dogs', 'Knakworstje', 'Coffee'],
+      placeholder: 'Select an option',
+    },
+    {
+      label: 'Submit',
+      name: 'submit',
+      type: 'button',
+    },
+  ];
+
+
   constructor(private storeService: StoreService,
     private formBuilder: FormBuilder,
     private countryService: CountryService,
@@ -42,6 +70,10 @@ export class PersonalComponent implements OnInit, OnDestroy {
       this.countries$ = countryService.getAll$();
       this.states$ = getState.getAll$('states.json');
     }
+
+  formSubmitted(value) {
+    console.log(value);
+  }
 
   ngOnInit() {
     this.createForm();

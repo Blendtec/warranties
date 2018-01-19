@@ -43,3 +43,16 @@ export class StoreService {
   }
 
 }
+
+/*
+export interace AggregateData {
+  'personal': IPersonal
+  'product': IProduce,
+  'additional': {}
+}
+
+submit ///
+ if valid
+    storeForm.personal = form.value;
+
+    */

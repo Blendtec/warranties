@@ -15,7 +15,6 @@ export class AppComponent implements OnInit, OnDestroy {
   testAppState: number;
   defaultState = 1;
 
-
   constructor(private storeService: StoreService,
     private translate: TranslateService) {
   }
