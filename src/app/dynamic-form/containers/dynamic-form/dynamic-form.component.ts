@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, forwardRef } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
 
 import { FieldConfig } from '../../models/field-config.interface';
 
@@ -19,9 +19,13 @@ import { FieldConfig } from '../../models/field-config.interface';
         [group]="form">
       </ng-container>
     </form>
-  `
+  `,
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DynamicFormComponent), multi: true },
+    { provide: NG_VALIDATORS, useExisting: forwardRef(() => DynamicFormComponent), multi: true }
+  ]
 })
-export class DynamicFormComponent implements OnChanges, OnInit {
+export class DynamicFormComponent implements ControlValueAccessor, OnChanges, OnInit {
   @Input()
   config: FieldConfig[] = [];
 
@@ -29,17 +33,42 @@ export class DynamicFormComponent implements OnChanges, OnInit {
   submit: EventEmitter<any> = new EventEmitter<any>();
 
   form: FormGroup;
+  @Input('dynamicValue') _dynamicValue: any;
+
+  propagateChange:any = () => {};
+  validateFn:any = () => {};
 
   get controls() { return this.config.filter(({type}) => type !== 'button'); }
   get changes() { return this.form.valueChanges; }
   get valid() { return this.form.valid; }
   get value() { return this.form.value; }
 
+  get dynamicValue() {
+    return this._dynamicValue;
+  }
+
+  set dynamicValue(val) {
+    this._dynamicValue = this.form.value;
+    this.propagateChange(this.form.value);
+  }
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.form = this.createGroup();
   }
+
+  writeValue(value) {
+    if (this.form.value) {
+      this._dynamicValue = this.form.value;
+    }
+  }
+
+  registerOnChange(fn) {
+    this.propagateChange = fn;
+  }
+
+  registerOnTouched() {}
 
   ngOnChanges() {
     if (this.form) {
@@ -62,7 +91,15 @@ export class DynamicFormComponent implements OnChanges, OnInit {
 
   createGroup() {
     const group = this.fb.group({});
-    this.controls.forEach(control => group.addControl(control.name, this.createControl(control)));
+    this.controls.forEach(control => {
+      if (control.type === 'repeat') {
+        const groupSub = this.fb.group({});
+        groupSub.addControl(control.name, this.createControl(control));
+        group.addControl(control.name, groupSub);
+      } else {
+        group.addControl(control.name, this.createControl(control));
+      }
+    });
     return group;
   }
 
@@ -74,6 +111,7 @@ export class DynamicFormComponent implements OnChanges, OnInit {
   handleSubmit(event: Event) {
     event.preventDefault();
     event.stopPropagation();
+    console.log(this.form);
     this.submit.emit(this.value);
   }
 

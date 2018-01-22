@@ -53,6 +53,36 @@ export class PersonalComponent implements OnInit, OnDestroy {
       placeholder: 'Select an option',
     },
     {
+      name: 'address',
+      form: [
+          {
+            type: 'input',
+            label: '',
+            name: 'test3',
+            placeholder: 'Enter your First Name'
+          },
+          {
+            type: 'input',
+            label: '',
+            name: 'test2',
+            placeholder: 'Enter your Last Name',
+          },
+          {
+            type: 'select',
+            label: 'Favourite food',
+            name: 'test1',
+            options: ['Pizza', 'Hot Dogs', 'Knakworstje', 'Coffee'],
+            placeholder: 'Select an option',
+          },
+          {
+            label: 'Submit',
+            name: 'submit',
+            type: 'button',
+          }
+      ],
+      type: 'repeat',
+    },
+    {
       label: 'Submit',
       name: 'submit',
       type: 'button',

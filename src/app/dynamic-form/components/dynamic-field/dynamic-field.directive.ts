@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { FormButtonComponent } from '../form-button/form-button.component';
 import { FormInputComponent } from '../form-input/form-input.component';
 import { FormSelectComponent } from '../form-select/form-select.component';
+import { FormRepeatComponent } from '../form-repeat/form-repeat.component';
 
 import { Field } from '../../models/field.interface';
 import { FieldConfig } from '../../models/field-config.interface';
@@ -12,7 +13,7 @@ const components: {[type: string]: Type<Field>} = {
   button: FormButtonComponent,
   input: FormInputComponent,
   select: FormSelectComponent,
-  form:
+  repeat: FormRepeatComponent
 };
 
 @Directive({
