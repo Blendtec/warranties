@@ -1,5 +1,5 @@
-import { Component, ViewContainerRef, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, ViewContainerRef } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 import { Field } from '../../models/field.interface';
 import { FieldConfig } from '../../models/field-config.interface';
@@ -11,26 +11,19 @@ import { FieldConfig } from '../../models/field-config.interface';
   <div [formGroup]="group.controls[config.name]">
       <dynamic-form
         [config]="config.form"
-        [dynamicValue]="dynamicValue">
+        [formName]="config.name"
+        (formToParent)="getChildForm($event)">
       </dynamic-form>
-      <button (click)="checkcode()">asdf</button>
-      </div>
+  </div>
   `
 })
-export class FormRepeatComponent implements Field, OnInit {
+export class FormRepeatComponent implements Field {
   config: FieldConfig;
   group: FormGroup;
-  dynamicValue: any;
 
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit() {
-    this.group.controls[this.config.name] = this.fb.group({
-      dynamicValue: this.dynamicValue;
-    });
+  getChildForm(formValue) {
+    this.group.controls[this.config.name] = formValue;
+    this.group.value[this.config.name] = formValue.value;
   }
 
-  checkcode() {
-    console.log(this.group.controls[this.config.name]);
-  }
 }

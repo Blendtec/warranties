@@ -8,6 +8,7 @@ import { FormButtonComponent } from './components/form-button/form-button.compon
 import { FormInputComponent } from './components/form-input/form-input.component';
 import { FormSelectComponent } from './components/form-select/form-select.component';
 import { FormRepeatComponent } from './components/form-repeat/form-repeat.component';
+import { StoreService } from './services/store.service';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { FormRepeatComponent } from './components/form-repeat/form-repeat.compon
     FormInputComponent,
     FormSelectComponent,
     FormRepeatComponent
-  ]
+  ],
+  providers: [StoreService]
 })
 export class DynamicFormModule {}

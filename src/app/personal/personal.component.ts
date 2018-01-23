@@ -31,6 +31,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
   public contactMethod = '';
   private acceptableFileFormats = ['image/jpeg', 'image/jpg', 'image/png'];
   public wrongFileType = false;
+  public dynamicRepeatValue: any;
 
     formConfig = [
     {
@@ -75,10 +76,29 @@ export class PersonalComponent implements OnInit, OnDestroy {
             placeholder: 'Select an option',
           },
           {
-            label: 'Submit',
-            name: 'submit',
-            type: 'button',
-          }
+            name: 'addressinside',
+            form: [
+                {
+                  type: 'input',
+                  label: '',
+                  name: 'test4',
+                  placeholder: 'Enter Text'
+                }
+            ],
+            type: 'repeat',
+          },
+          {
+            name: 'addressinside2',
+            form: [
+                {
+                  type: 'input',
+                  label: '',
+                  name: 'test3',
+                  placeholder: 'Enter Text again'
+                }
+            ],
+            type: 'repeat',
+          },
       ],
       type: 'repeat',
     },
@@ -117,6 +137,40 @@ export class PersonalComponent implements OnInit, OnDestroy {
     this.storeService.passNumState(state);
   }
 
+  checkIfErrored(): boolean {
+    console.log(this.personal);
+    return true;
+  }
+
+
+  formtester() {
+    this.formConfig = [
+    {
+      type: 'input',
+      label: '',
+      name: 'firstName',
+      placeholder: 'Enter your First Name'
+    },
+    {
+      type: 'input',
+      label: '',
+      name: 'lastName',
+      placeholder: 'Enter your Last Name',
+    },
+    {
+      type: 'select',
+      label: 'Favourite food',
+      name: 'food',
+      options: ['Pizza', 'Hot Dogs', 'Knakworstje', 'Coffee'],
+      placeholder: 'Select an option',
+    },
+    {
+      label: 'Submit',
+      name: 'submit',
+      type: 'button',
+    },
+  ];
+  }
 
   fileUpload(event): void {
     if (event.target.files &&

@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, forwardRef } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, forwardRef, OnDestroy } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { StoreService } from '../../services/store.service';
+import { Subject } from 'rxjs/Subject';
 
 import { FieldConfig } from '../../models/field-config.interface';
 
@@ -19,21 +21,24 @@ import { FieldConfig } from '../../models/field-config.interface';
         [group]="form">
       </ng-container>
     </form>
-  `,
-  providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DynamicFormComponent), multi: true },
-    { provide: NG_VALIDATORS, useExisting: forwardRef(() => DynamicFormComponent), multi: true }
-  ]
+  `
 })
-export class DynamicFormComponent implements ControlValueAccessor, OnChanges, OnInit {
+export class DynamicFormComponent implements OnChanges, OnInit, OnDestroy {
   @Input()
   config: FieldConfig[] = [];
+
+  @Input()
+  formName: string;
 
   @Output()
   submit: EventEmitter<any> = new EventEmitter<any>();
 
+  @Output()
+  formToParent: EventEmitter<any> = new EventEmitter<any>();
+
   form: FormGroup;
-  @Input('dynamicValue') _dynamicValue: any;
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+  outputValues: object[];
 
   propagateChange:any = () => {};
   validateFn:any = () => {};
@@ -43,32 +48,26 @@ export class DynamicFormComponent implements ControlValueAccessor, OnChanges, On
   get valid() { return this.form.valid; }
   get value() { return this.form.value; }
 
-  get dynamicValue() {
-    return this._dynamicValue;
-  }
 
-  set dynamicValue(val) {
-    this._dynamicValue = this.form.value;
-    this.propagateChange(this.form.value);
-  }
-
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit() {
-    this.form = this.createGroup();
-  }
-
-  writeValue(value) {
-    if (this.form.value) {
-      this._dynamicValue = this.form.value;
+  constructor(private fb: FormBuilder, private storeService: StoreService) {
+    this.outputValues = [];
+    if (!this.formName) {
+      this.formName = 'topFormNameParent';
     }
   }
 
-  registerOnChange(fn) {
-    this.propagateChange = fn;
+  ngOnInit() {
+    this.form = this.createGroup();
+    const self = this;
+    this.storeService.retrieveRequestValues$
+      .takeUntil(this.destroy$)
+      .subscribe(data => {
+        self.storeService.passFormValues(self.value, self.formName);
+        self.storeService.passFormStorage(self.form, self.formName);
+        self.outputValues = self.storeService.getFormValues(self.formName);
+        self.formToParent.emit(self.form);
+      });
   }
-
-  registerOnTouched() {}
 
   ngOnChanges() {
     if (this.form) {
@@ -85,7 +84,6 @@ export class DynamicFormComponent implements ControlValueAccessor, OnChanges, On
           const config = this.config.find((control) => control.name === name);
           this.form.addControl(name, this.createControl(config));
         });
-
     }
   }
 
@@ -109,10 +107,11 @@ export class DynamicFormComponent implements ControlValueAccessor, OnChanges, On
   }
 
   handleSubmit(event: Event) {
+    this.storeService.passRequestValues(this.formName);
     event.preventDefault();
     event.stopPropagation();
-    console.log(this.form);
-    this.submit.emit(this.value);
+
+    this.submit.emit(this.form);
   }
 
   setDisabled(name: string, disable: boolean) {
@@ -132,5 +131,9 @@ export class DynamicFormComponent implements ControlValueAccessor, OnChanges, On
 
   setValue(name: string, value: any) {
     this.form.controls[name].setValue(value, {emitEvent: true});
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
   }
 }
