@@ -2,10 +2,14 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { FormGroup } from '@angular/forms';
 
+
 @Injectable()
 export class StoreService {
   private formValues: object;
-  private formStorage: object;
+  public formStorage: object;
+
+  public isTotalFormValid: boolean;
+  public formErrorsByForm: string[];
 
   private requestValues = new Subject<string>();
   retrieveRequestValues$ = this.requestValues.asObservable();
@@ -13,6 +17,20 @@ export class StoreService {
   constructor() {
   	this.formValues = {};
   	this.formStorage = {}
+  }
+
+  startTotalFormValidation() {
+    this.isTotalFormValid = true;
+    this.formErrorsByForm = [];
+  }
+
+  isFormControlValid(valid: boolean, formName: string, errorMessage: string, touched: boolean) {
+    if (this.isTotalFormValid && !valid) {
+      this.isTotalFormValid = false;
+    }
+    if (!valid && errorMessage && touched) {
+      this.formErrorsByForm.push(errorMessage);
+    }
   }
 
   passFormValues(data: object, name: string) {
@@ -24,9 +42,11 @@ export class StoreService {
   }
 
   getFormStorage(name = null) {
-  	if (!name || !this.formStorage[name]) {
+  	if (!name) {
   		return this.formStorage;
-  	} else {
+  	} else if (!this.formStorage[name]) {
+      return false;
+    } else {
   		return this.formStorage[name];
   	}
   }

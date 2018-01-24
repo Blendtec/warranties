@@ -10,6 +10,14 @@ import { FieldConfig } from '../../models/field-config.interface';
   selector: 'dynamic-form',
   styleUrls: ['dynamic-form.component.scss'],
   template: `
+
+ <div class="errors" *ngIf="formName === defaultFormName && storeService.formErrorsByForm.length > 0">
+    <ul>
+      <li *ngFor="let error of storeService.formErrorsByForm">
+        {{ error }}
+      </li>
+    </ul>
+</div>
     <form
       class="dynamic-form"
       [formGroup]="form"
@@ -18,7 +26,8 @@ import { FieldConfig } from '../../models/field-config.interface';
         *ngFor="let field of config;"
         dynamicField
         [config]="field"
-        [group]="form">
+        [group]="form"
+        [groupName]="formName">
       </ng-container>
     </form>
   `
@@ -37,6 +46,7 @@ export class DynamicFormComponent implements OnChanges, OnInit, OnDestroy {
   formToParent: EventEmitter<any> = new EventEmitter<any>();
 
   form: FormGroup;
+  defaultFormName = 'topFormNameParent';
   private destroy$: Subject<boolean> = new Subject<boolean>();
   outputValues: object[];
 
@@ -52,20 +62,33 @@ export class DynamicFormComponent implements OnChanges, OnInit, OnDestroy {
   constructor(private fb: FormBuilder, private storeService: StoreService) {
     this.outputValues = [];
     if (!this.formName) {
-      this.formName = 'topFormNameParent';
+      this.formName = this.defaultFormName;
     }
   }
 
   ngOnInit() {
     this.form = this.createGroup();
     const self = this;
+
+    this.storeService.startTotalFormValidation();
+    this.storeService.passRequestValues(this.formName);
+
     this.storeService.retrieveRequestValues$
       .takeUntil(this.destroy$)
       .subscribe(data => {
-        self.storeService.passFormValues(self.value, self.formName);
-        self.storeService.passFormStorage(self.form, self.formName);
         self.outputValues = self.storeService.getFormValues(self.formName);
         self.formToParent.emit(self.form);
+      });
+
+    this.form.valueChanges
+      .takeUntil(this.destroy$)
+      .subscribe(data => {
+        console.log(self.form);
+        self.storeService.passFormValues(self.value, self.formName);
+        self.storeService.passFormStorage(self.form, self.formName);
+
+        self.storeService.startTotalFormValidation();
+        self.storeService.passRequestValues(self.formName);
       });
   }
 
@@ -107,7 +130,6 @@ export class DynamicFormComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   handleSubmit(event: Event) {
-    this.storeService.passRequestValues(this.formName);
     event.preventDefault();
     event.stopPropagation();
 

@@ -38,7 +38,9 @@ export class PersonalComponent implements OnInit, OnDestroy {
       type: 'input',
       label: '',
       name: 'firstName',
-      placeholder: 'Enter your First Name'
+      placeholder: 'Enter your First Name',
+      validation: [Validators.required],
+      errorMessage: "Please Enter your first name"
     },
     {
       type: 'input',
@@ -60,13 +62,16 @@ export class PersonalComponent implements OnInit, OnDestroy {
             type: 'input',
             label: '',
             name: 'test3',
-            placeholder: 'Enter your First Name'
+            placeholder: 'Enter your First Name',
+            validation: [Validators.required],
+            errorMessage: "Please Enter the second first name"
           },
           {
             type: 'input',
             label: '',
             name: 'test2',
             placeholder: 'Enter your Last Name',
+            errorMessage: "Please Enter the second last name"
           },
           {
             type: 'select',
@@ -82,7 +87,8 @@ export class PersonalComponent implements OnInit, OnDestroy {
                   type: 'input',
                   label: '',
                   name: 'test4',
-                  placeholder: 'Enter Text'
+                  placeholder: 'Enter Text',
+                  validation: [Validators.required]
                 }
             ],
             type: 'repeat',

@@ -26,6 +26,9 @@ export class DynamicFieldDirective implements Field, OnChanges, OnInit {
   @Input()
   group: FormGroup;
 
+  @Input()
+  groupName: string;
+
   component: ComponentRef<Field>;
 
   constructor(

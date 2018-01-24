@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Field } from '../../models/field.interface';
 import { FieldConfig } from '../../models/field-config.interface';
+import { StoreService } from '../../services/store.service';
 
 @Component({
   selector: 'form-button',
@@ -12,7 +13,7 @@ import { FieldConfig } from '../../models/field-config.interface';
       class="dynamic-field form-button"
       [formGroup]="group">
       <button
-        [disabled]="config.disabled"
+        [disabled]="config.disabled || !storeService.isTotalFormValid"
         type="submit">
         {{ config.label }}
       </button>
@@ -22,4 +23,8 @@ import { FieldConfig } from '../../models/field-config.interface';
 export class FormButtonComponent implements Field {
   config: FieldConfig;
   group: FormGroup;
+  formGroupName: string;
+
+  constructor(private storeService: StoreService) {}
+
 }

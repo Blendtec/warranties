@@ -20,6 +20,7 @@ import { FieldConfig } from '../../models/field-config.interface';
 export class FormRepeatComponent implements Field {
   config: FieldConfig;
   group: FormGroup;
+  groupName: string;
 
   getChildForm(formValue) {
     this.group.controls[this.config.name] = formValue;

@@ -8,7 +8,7 @@ import { FieldConfig } from '../../models/field-config.interface';
   selector: 'form-select',
   styleUrls: ['form-select.component.scss'],
   template: `
-    <div 
+    <div
       class="dynamic-field form-select"
       [formGroup]="group">
       <label>{{ config.label }}</label>
@@ -24,4 +24,6 @@ import { FieldConfig } from '../../models/field-config.interface';
 export class FormSelectComponent implements Field {
   config: FieldConfig;
   group: FormGroup;
+  groupName: string;
+
 }
