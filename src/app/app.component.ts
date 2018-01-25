@@ -12,6 +12,7 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'app';
   appStateSub: Subscription;
   appState: number;
+  displayState: number;
   testAppState: number;
   defaultState = 1;
 
@@ -24,10 +25,19 @@ export class AppComponent implements OnInit, OnDestroy {
     this.translate.use('en');
 
     this.appState = this.defaultState;
+    this.displayState = this.defaultState;
     const self = this;
-    this.appStateSub = this.storeService.retrieveNumState$.subscribe(
+    this.appStateSub = this.storeService.displayState$.subscribe(
       data => {
-        self.appState = data;
+        let result = self.appState + data;
+        if (result >= 1) {
+          if (result >= self.appState) {
+            self.displayState = result;
+            self.appState = result;
+          } else if (result < self.appState) {
+            self.displayState = result;
+          }
+        }
       });
   }
 

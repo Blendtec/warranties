@@ -203,9 +203,6 @@
 
           <div formGroupName="purchase">
             <label>{{'LABEL.PURCHASE_DATE' | translate}}</label>
-            <my-date-picker class="input-full" name="date" [options]="dateOptions"
-                            [ngClass]="{error: personal.get('purchase.date').hasError('required') && personal.get('purchase.date').touched}"
-                            formControlName="date"></my-date-picker>
 
             <label class="hidden-label">{{'LABEL.PURCHASE_PLACE' | translate}}</label>
             <select class="input-full"
@@ -243,11 +240,6 @@
 		</div>
 
 
-              <button id="personal-submit--btn" name="button" class="step__footer__continue-btn btn" style="float:right;"
-                      [disabled]="personal.invalid && !wrongFileType"
-                      type="submit">
-                {{'BUTTON.NEXT' | translate}}
-              </button>
 
 
       </div>
@@ -256,9 +248,14 @@
 </div>
 
 
-
       <dynamic-form
         [config]="formConfig"
-        (submit)="formSubmitted($event)">
+        (allFormValues)="formValueCapture($event)"
+        (isTotalValid)="formValidityCapture($event)">>
       </dynamic-form>
-<button (click)="formtester()">tester</button>
+
+              <button id="personal-submit--btn" name="button" class="step__footer__continue-btn btn" style="float:right;"
+                      [disabled]="!isFormValid"
+                      type="submit" (click)="onSubmit()">
+                NEXT
+              </button>

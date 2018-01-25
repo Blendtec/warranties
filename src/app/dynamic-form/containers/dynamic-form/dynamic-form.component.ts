@@ -22,13 +22,14 @@ import { FieldConfig } from '../../models/field-config.interface';
       class="dynamic-form"
       [formGroup]="form"
       (submit)="handleSubmit($event)">
+      <div [ngClass]="{grid:formName === defaultFormName}">
       <ng-container
         *ngFor="let field of config;"
         dynamicField
         [config]="field"
-        [group]="form"
-        [groupName]="formName">
+        [group]="form">
       </ng-container>
+        </div>
     </form>
   `
 })
@@ -44,6 +45,12 @@ export class DynamicFormComponent implements OnChanges, OnInit, OnDestroy {
 
   @Output()
   formToParent: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
+  isTotalValid: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @Output()
+  allFormValues: EventEmitter<any> = new EventEmitter<any>();
 
   form: FormGroup;
   defaultFormName = 'topFormNameParent';
@@ -73,22 +80,26 @@ export class DynamicFormComponent implements OnChanges, OnInit, OnDestroy {
     this.storeService.startTotalFormValidation();
     this.storeService.passRequestValues(this.formName);
 
-    this.storeService.retrieveRequestValues$
+    this.storeService.retrieveRequestValues2$
       .takeUntil(this.destroy$)
       .subscribe(data => {
         self.outputValues = self.storeService.getFormValues(self.formName);
         self.formToParent.emit(self.form);
+        if (self.formName === self.defaultFormName) {
+          self.allFormValues.emit(self.storeService.formValues);
+          self.isTotalValid.emit(self.storeService.isTotalFormValid);
+        }
       });
 
     this.form.valueChanges
       .takeUntil(this.destroy$)
       .subscribe(data => {
-        console.log(self.form);
         self.storeService.passFormValues(self.value, self.formName);
         self.storeService.passFormStorage(self.form, self.formName);
 
         self.storeService.startTotalFormValidation();
         self.storeService.passRequestValues(self.formName);
+        self.storeService.passRequestValues2(self.formName);
       });
   }
 

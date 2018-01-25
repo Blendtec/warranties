@@ -12,17 +12,28 @@ export class StateTrackerComponent implements OnInit, OnDestroy {
   appStateSub: Subscription;
   appState: number;
   defaultState = 1;
+  displayState: number;
 
 
   constructor(private storeService: StoreService) {
   }
 
   ngOnInit() {
+    
+    this.displayState = this.defaultState;
     this.appState = this.defaultState;
     const self = this;
-    this.appStateSub = this.storeService.retrieveNumState$.subscribe(
+    this.appStateSub = this.storeService.displayState$.subscribe(
       data => {
-        self.appState = data;
+        let result = self.appState + data;
+        if (result >= 1) {
+          if (result >= self.appState) {
+            self.displayState = result;
+            self.appState = result;
+          } else if (result < self.appState) {
+            self.displayState = result;
+          }
+        }
       });
   }
 

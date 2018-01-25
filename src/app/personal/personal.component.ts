@@ -21,6 +21,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
   public retailers$: Observable<any[]>;
   public countries$: Observable<ICountry[]>;
   public states$: Observable<IState[]>;
+  public statesByCountry: string[];
   public dateOptions: any = {
     dateFormat: 'mm-dd-yyyy',
     indicateInvalidDate: true,
@@ -33,20 +34,94 @@ export class PersonalComponent implements OnInit, OnDestroy {
   public wrongFileType = false;
   public dynamicRepeatValue: any;
 
+  public isFormValid = false;
+  public formValue = {};
+/*
+      this.personal = this.formBuilder.group({
+        firstName: ['', [Validators.required]],
+        lastName: ['', [Validators.required]],
+        address: this.formBuilder.group({
+          one: ['', [Validators.required]],
+          two: ['', []],
+          city: ['', [Validators.required]],
+          zip: ['', [Validators.required]],
+          country: ['US', [Validators.required]],
+          stateProvince: ['', []],
+          email: ['', [Validators.required, Validators.email]],
+          phone: ['', [Validators.required]]
+        }),
+        contact: this.formBuilder.group({
+          contactMethod: ['', [Validators.required]],
+          contactTime: ['', [Validators.required]]
+        }),
+        purchase: this.formBuilder.group({
+          place: ['', []],
+          other: ['', []],
+          date: ['', [Validators.required]]
+        }, {validator: OtherPurchasePlaceValidator}),
+        receiptPhoto: [{}, []]
+      });
+*/
     formConfig = [
     {
       type: 'input',
-      label: '',
+      label: 'First Name',
       name: 'firstName',
       placeholder: 'Enter your First Name',
       validation: [Validators.required],
-      errorMessage: "Please Enter your first name"
+      errorMessage: "Please Enter your first name",
+      addedClasses: "grid__item small--one-half medium--one-half large--one-half"
     },
     {
       type: 'input',
-      label: '',
+      label: 'Last Name',
       name: 'lastName',
       placeholder: 'Enter your Last Name',
+      validation: [Validators.required],
+      errorMessage: "Please Enter your last name",
+      addedClasses: "grid__item small--one-half medium--one-half large--one-half"
+    },
+    {
+      type: 'repeat',
+      label: 'Address',
+      name: 'address',
+      form: [
+        {
+          type: 'input',
+          label: 'Street Address',
+          name: 'one',
+          placeholder: 'Street Address',
+          addedClasses: "grid__item",
+          validation: [Validators.required],
+          errorMessage: "Address is required",
+        },
+        {
+          type: 'input',
+          label: 'Apt/Suite',
+          name: 'two',
+          placeholder: 'Apt/Suite',
+          addedClasses: "grid__item small--one-half medium--one-half large--one-half"
+        },
+        {
+          type: 'input',
+          label: 'City',
+          name: 'city',
+          placeholder: 'City',
+          addedClasses: "grid__item small--one-half medium--one-half large--one-half",
+          validation: [Validators.required],
+          errorMessage: "City is required",
+        },
+        {
+          type: 'select',
+          label: 'Select State',
+          name: 'state',
+          options: this.statesByCountry,
+          placeholder: 'Select State',
+          addedClasses: "grid__item small--one-half medium--one-half large--one-half",
+          validation: [Validators.required],
+          errorMessage: "Your State is Required",
+        },
+      ]
     },
     {
       type: 'select',
@@ -54,65 +129,68 @@ export class PersonalComponent implements OnInit, OnDestroy {
       name: 'food',
       options: ['Pizza', 'Hot Dogs', 'Knakworstje', 'Coffee'],
       placeholder: 'Select an option',
+      addedClasses: "grid__item"
     },
     {
-      name: 'address',
+      type: 'radio',
+      label: 'What Is The Best Way To Contact You?',
+      name: 'contactMethod',
+      validation: [Validators.required],
+      errorMessage: "Please Enter your preferred contact method",
+      addedClasses: "grid__item",
+      radioOptions: [
+      {
+        label: 'Email',
+        value: 'email'
+      },
+      {
+        label: 'Phone',
+        value: 'phone'
+      }
+      ]
+    },
+    {
+      type: 'radio',
+      label: 'What Is The Best Time Of Day To Reach You?',
+      name: 'contactTime',
+      validation: [Validators.required],
+      errorMessage: "Please Enter the best time to reach you",
+      addedClasses: "grid__item",
+      radioOptions: [
+      {
+        label: 'Morning',
+        value: 'morning'
+      },
+      {
+        label: 'Afternoon',
+        value: 'afternoon'
+      },
+      {
+        label: 'Evening',
+        value: 'evening'
+      }
+      ]
+    },
+    {
+      name: 'purchase',
       form: [
-          {
-            type: 'input',
-            label: '',
-            name: 'test3',
-            placeholder: 'Enter your First Name',
-            validation: [Validators.required],
-            errorMessage: "Please Enter the second first name"
-          },
-          {
-            type: 'input',
-            label: '',
-            name: 'test2',
-            placeholder: 'Enter your Last Name',
-            errorMessage: "Please Enter the second last name"
-          },
-          {
-            type: 'select',
-            label: 'Favourite food',
-            name: 'test1',
-            options: ['Pizza', 'Hot Dogs', 'Knakworstje', 'Coffee'],
-            placeholder: 'Select an option',
-          },
-          {
-            name: 'addressinside',
-            form: [
-                {
-                  type: 'input',
-                  label: '',
-                  name: 'test4',
-                  placeholder: 'Enter Text',
-                  validation: [Validators.required]
-                }
-            ],
-            type: 'repeat',
-          },
-          {
-            name: 'addressinside2',
-            form: [
-                {
-                  type: 'input',
-                  label: '',
-                  name: 'test3',
-                  placeholder: 'Enter Text again'
-                }
-            ],
-            type: 'repeat',
-          },
+        {
+          type: 'date',
+          label: 'Date of Purchase',
+          name: 'purchaseDate',
+          dateOptions: this.dateOptions,
+          addedClasses: "grid__item"
+        },
       ],
       type: 'repeat',
     },
     {
-      label: 'Submit',
-      name: 'submit',
-      type: 'button',
-    },
+      type: 'file',
+      name: 'receiptPhoto',
+      addedClasses: "grid__item",
+      label: 'If you have a photo of the receipt please upload it here.'
+
+    }
   ];
 
 
@@ -123,8 +201,14 @@ export class PersonalComponent implements OnInit, OnDestroy {
     private retailerService: RetailerService,
      @Inject(APP_CONFIG) private config: AppConfig) {
       this.retailers$ = retailerService.getAll$();
-      this.countries$ = countryService.getAll$();
-      this.states$ = getState.getAll$('states.json');
+      this.countries$ = countryService.getAll$()
+      .takeUntil(this.unsubscribe)
+      .subscribe((data) => {
+        console.log(data);
+      });
+      this.states$ = getState.getAll$('states.json')
+      .takeUntil(this.unsubscribe)
+      .subscribe((data) => console.log(data));
     }
 
   formSubmitted(value) {
@@ -144,38 +228,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
   }
 
   checkIfErrored(): boolean {
-    console.log(this.personal);
     return true;
-  }
-
-
-  formtester() {
-    this.formConfig = [
-    {
-      type: 'input',
-      label: '',
-      name: 'firstName',
-      placeholder: 'Enter your First Name'
-    },
-    {
-      type: 'input',
-      label: '',
-      name: 'lastName',
-      placeholder: 'Enter your Last Name',
-    },
-    {
-      type: 'select',
-      label: 'Favourite food',
-      name: 'food',
-      options: ['Pizza', 'Hot Dogs', 'Knakworstje', 'Coffee'],
-      placeholder: 'Select an option',
-    },
-    {
-      label: 'Submit',
-      name: 'submit',
-      type: 'button',
-    },
-  ];
   }
 
   fileUpload(event): void {
@@ -230,14 +283,20 @@ export class PersonalComponent implements OnInit, OnDestroy {
       .subscribe(() => this.personal.get('address.stateProvince').updateValueAndValidity());
   }
 
+   formValidityCapture(value) {
+    this.isFormValid = value;
+    console.log(value);
+  }
 
-  public onSubmit(formData: IPersonal): void {
-    this.storeService.storeForm['personal'] = this.personal;
-    this.storeService.storeFormData['personal'] = formData;
-    if (!this.personal.invalid) {
-      this.storeService.passNumState(2);
+  formValueCapture(value) {
+    this.formValue = value;
+  }
+
+  public onSubmit(): void {
+    this.storeService.storeForm['personal'] = this.formValue;
+    if (this.isFormValid) {
+      this.storeService.passDisplayState(1);
     }
-    console.log(this.storeService.storeFormData['personal']);
   }
 
 }

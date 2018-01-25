@@ -7,12 +7,14 @@ export class StoreService {
   private language = new Subject<string>();
   private tester = true;
   private state = new Subject<string>();
+  private displayState = new Subject<number>();
   private numState = new Subject<number>();
   public storeForm: any;
   public storeFormData: any;
 
   retrieveLanguage$ = this.language.asObservable();
   retrieveState$ = this.state.asObservable();
+  displayState$ = this.displayState.asObservable();
   retrieveNumState$ = this.numState.asObservable();
 
   constructor() {
@@ -20,7 +22,6 @@ export class StoreService {
     this.storeForm = {};
     this.storeFormData = {};
   }
-
 
   passLanguage(data: string) {
     this.language.next(data);
@@ -34,6 +35,10 @@ export class StoreService {
     this.state.next(data);
   }
 
+  passDisplayState(data: number) {
+    this.displayState.next(data);
+  }
+
   passNumState(data: number) {
     this.numState.next(data);
   }
@@ -43,16 +48,3 @@ export class StoreService {
   }
 
 }
-
-/*
-export interace AggregateData {
-  'personal': IPersonal
-  'product': IProduce,
-  'additional': {}
-}
-
-submit ///
- if valid
-    storeForm.personal = form.value;
-
-    */

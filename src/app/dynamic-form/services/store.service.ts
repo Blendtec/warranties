@@ -5,7 +5,7 @@ import { FormGroup } from '@angular/forms';
 
 @Injectable()
 export class StoreService {
-  private formValues: object;
+  public formValues: object;
   public formStorage: object;
 
   public isTotalFormValid: boolean;
@@ -13,6 +13,9 @@ export class StoreService {
 
   private requestValues = new Subject<string>();
   retrieveRequestValues$ = this.requestValues.asObservable();
+
+  private requestValues2 = new Subject<string>();
+  retrieveRequestValues2$ = this.requestValues2.asObservable();
 
   constructor() {
   	this.formValues = {};
@@ -25,7 +28,7 @@ export class StoreService {
   }
 
   isFormControlValid(valid: boolean, formName: string, errorMessage: string, touched: boolean) {
-    if (this.isTotalFormValid && !valid) {
+    if (!valid) {
       this.isTotalFormValid = false;
     }
     if (!valid && errorMessage && touched) {
@@ -59,4 +62,7 @@ export class StoreService {
   	this.requestValues.next(data);
   }
 
+  passRequestValues2(data: string) {
+    this.requestValues2.next(data);
+  }
 }

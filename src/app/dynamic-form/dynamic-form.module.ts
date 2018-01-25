@@ -9,11 +9,16 @@ import { FormInputComponent } from './components/form-input/form-input.component
 import { FormSelectComponent } from './components/form-select/form-select.component';
 import { FormRepeatComponent } from './components/form-repeat/form-repeat.component';
 import { StoreService } from './services/store.service';
+import { FormRadioComponent } from './components/form-radio/form-radio.component';
+import { FormDateComponent } from './components/form-date/form-date.component';
+import { MyDatePickerModule } from 'mydatepicker';
+import { FormFileComponent } from './components/form-file/form-file.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MyDatePickerModule,
   ],
   declarations: [
     DynamicFieldDirective,
@@ -21,7 +26,10 @@ import { StoreService } from './services/store.service';
     FormButtonComponent,
     FormInputComponent,
     FormSelectComponent,
-    FormRepeatComponent
+    FormRepeatComponent,
+    FormRadioComponent,
+    FormDateComponent,
+    FormFileComponent
   ],
   exports: [
     DynamicFormComponent
@@ -30,7 +38,10 @@ import { StoreService } from './services/store.service';
     FormButtonComponent,
     FormInputComponent,
     FormSelectComponent,
-    FormRepeatComponent
+    FormRepeatComponent,
+    FormRadioComponent,
+    FormDateComponent,
+    FormFileComponent
   ],
   providers: [StoreService]
 })

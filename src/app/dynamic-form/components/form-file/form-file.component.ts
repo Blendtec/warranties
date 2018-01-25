@@ -5,33 +5,22 @@ import { Subject } from 'rxjs/Subject';
 import { Field } from '../../models/field.interface';
 import { FieldConfig } from '../../models/field-config.interface';
 import { StoreService } from '../../services/store.service';
-/*
-export interface asyncSettings {
-  observable: any,
-  filterBy: any,
-  option: string,
-  controller: string
-}
-*/
 
 @Component({
-  selector: 'form-select',
-  styleUrls: ['form-select.component.scss'],
+  selector: 'form-file',
+  styleUrls: ['form-file.component.scss'],
   template: `
     <div
-      class="dynamic-field form-select {{config.addedClasses}}"
+      class="dynamic-field form-input {{config.addedClasses}}"
       [formGroup]="group">
-      <label>{{ config.label }}</label>
-      <select (focus)="focusDetection()" [ngClass]="{error: group.controls[config.name].invalid && group.controls[config.name].touched}" [formControlName]="config.name">
-        <option value="">{{ config.placeholder }}</option>
-        <option *ngFor="let option of config.options">
-          {{ option }}
-        </option>
-      </select>
+      <label>{{config.label}}</label>
+		<input class="" placeholder="{{config.label}}" id="{{config.name}}" type="file"
+		(change)="fileUpload($event)"
+	       [ngClass]="{error: group.controls[config.name].invalid && group.controls[config.name].touched}" [formControlName]="config.name">
     </div>
   `
 })
-export class FormSelectComponent implements Field, OnInit, OnDestroy  {
+export class FormFileComponent implements Field, OnInit, OnDestroy  {
   config: FieldConfig;
   group: FormGroup;
   groupName: string;
@@ -71,6 +60,28 @@ export class FormSelectComponent implements Field, OnInit, OnDestroy  {
           }
 
       });
+  }
+
+  fileUpload(event): void {
+    let reader = new FileReader();
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        try{
+        this.group.get(this.config.name).setValue({
+          filename: file.name,
+          filetype: file.type,
+          value: reader.result.split(',')[1]
+        })
+
+        }catch(e) {
+          console.log(e);
+        }
+
+        this.storeService.passRequestValues2('');
+      };
+    }
   }
 
   ngOnDestroy() {

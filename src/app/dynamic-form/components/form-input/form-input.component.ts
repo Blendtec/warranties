@@ -11,12 +11,11 @@ import { StoreService } from '../../services/store.service';
   styleUrls: ['form-input.component.scss'],
   template: `
     <div
-      class="dynamic-field form-input"
+      class="dynamic-field form-input {{config.addedClasses}}"
       [formGroup]="group">
-      <label>{{ config.label }}</label>
-      <input
-      (focus)="focusDetection()"
-        type="text" [ngClass]="{error: invalidForm}"
+      <label class="hidden-label">{{config.label}}</label>
+      <input (focus)="focusDetection()" placeholder="{{config.label}}"
+        type="text" [ngClass]="{error: group.controls[config.name].invalid && group.controls[config.name].touched}"
         [attr.placeholder]="config.placeholder"
         [formControlName]="config.name">
     </div>
@@ -34,7 +33,7 @@ export class FormInputComponent implements Field, OnInit, OnDestroy  {
 
   focusDetection() {
     this.storeService.startTotalFormValidation();
-    this.storeService.passRequestValues('');
+    this.storeService.passRequestValues(this.groupName);
   }
 
   ngOnInit() {
@@ -45,9 +44,14 @@ export class FormInputComponent implements Field, OnInit, OnDestroy  {
       .takeUntil(this.destroy$)
       .subscribe(data => {
 
-        if (typeof self.group.controls[self.config.name] !== 'undefined' && typeof self.group.controls[self.config.name] !== 'undefined' && typeof self.group.controls[self.config.name].invalid !== 'undefined' && self.group.controls[self.config.name].invalid) {
+        if (typeof self.group.controls[self.config.name] !== 'undefined' && 
+          typeof self.group.controls[self.config.name] !== 'undefined' && 
+          typeof self.group.controls[self.config.name].invalid !== 'undefined' && 
+          self.group.controls[self.config.name].invalid) {
+
           let errorMessage = (self.config.errorMessage)?self.config.errorMessage:null;
-          self.storeService.isFormControlValid(!self.group.controls[self.config.name].invalid, self.config.name, errorMessage, self.group.controls[self.config.name].touched);
+          self.storeService.isFormControlValid(!self.group.controls[self.config.name].invalid, 
+            self.config.name, errorMessage, self.group.controls[self.config.name].touched);
 
           if (self.group.controls[self.config.name].touched) {
             self.invalidForm = true;
@@ -64,10 +68,3 @@ export class FormInputComponent implements Field, OnInit, OnDestroy  {
   }
 
 }
-
-
-/*
-input {
-  background-color: #fff6f6;
-}
-*/

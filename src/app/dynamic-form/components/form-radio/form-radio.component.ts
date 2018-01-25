@@ -5,33 +5,25 @@ import { Subject } from 'rxjs/Subject';
 import { Field } from '../../models/field.interface';
 import { FieldConfig } from '../../models/field-config.interface';
 import { StoreService } from '../../services/store.service';
-/*
-export interface asyncSettings {
-  observable: any,
-  filterBy: any,
-  option: string,
-  controller: string
-}
-*/
 
 @Component({
-  selector: 'form-select',
-  styleUrls: ['form-select.component.scss'],
+  selector: 'form-radio',
+  styleUrls: ['form-radio.component.scss'],
   template: `
-    <div
-      class="dynamic-field form-select {{config.addedClasses}}"
-      [formGroup]="group">
-      <label>{{ config.label }}</label>
-      <select (focus)="focusDetection()" [ngClass]="{error: group.controls[config.name].invalid && group.controls[config.name].touched}" [formControlName]="config.name">
-        <option value="">{{ config.placeholder }}</option>
-        <option *ngFor="let option of config.options">
-          {{ option }}
-        </option>
-      </select>
-    </div>
+  	<div [formGroup]="group" class="input-full {{config.addedClasses}}">
+  		<div>
+      		<label>{{config.label}}</label>
+      	</div>
+      	<label *ngFor="let radioOption of config.radioOptions;" for="{{radioOption.label}}" class="radio-seperator">
+        	<input class="" placeholder="{{radioOption.label}}" type="radio" formControlName="{{config.name}}" value="{{radioOption.value}}"
+               [ngClass]="{error: group.controls[config.name].invalid && group.controls[config.name].touched}">
+               {{radioOption.label}}
+        </label>
+	</div>
+
   `
 })
-export class FormSelectComponent implements Field, OnInit, OnDestroy  {
+export class FormRadioComponent implements Field, OnInit, OnDestroy  {
   config: FieldConfig;
   group: FormGroup;
   groupName: string;

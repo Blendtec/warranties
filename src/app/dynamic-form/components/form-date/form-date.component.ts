@@ -5,33 +5,22 @@ import { Subject } from 'rxjs/Subject';
 import { Field } from '../../models/field.interface';
 import { FieldConfig } from '../../models/field-config.interface';
 import { StoreService } from '../../services/store.service';
-/*
-export interface asyncSettings {
-  observable: any,
-  filterBy: any,
-  option: string,
-  controller: string
-}
-*/
 
 @Component({
-  selector: 'form-select',
-  styleUrls: ['form-select.component.scss'],
+  selector: 'form-date',
+  styleUrls: ['form-date.component.scss'],
   template: `
     <div
-      class="dynamic-field form-select {{config.addedClasses}}"
+      class="dynamic-field form-input {{config.addedClasses}}"
       [formGroup]="group">
-      <label>{{ config.label }}</label>
-      <select (focus)="focusDetection()" [ngClass]="{error: group.controls[config.name].invalid && group.controls[config.name].touched}" [formControlName]="config.name">
-        <option value="">{{ config.placeholder }}</option>
-        <option *ngFor="let option of config.options">
-          {{ option }}
-        </option>
-      </select>
+      <label>{{config.label}}</label>
+        <my-date-picker  class="input-full" name="date" [options]="config.dateOptions"
+                        [ngClass]="{error: group.controls[config.name].invalid && group.controls[config.name].touched}"
+                        formControlName="{{config.name}}"></my-date-picker>
     </div>
   `
 })
-export class FormSelectComponent implements Field, OnInit, OnDestroy  {
+export class FormDateComponent implements Field, OnInit, OnDestroy  {
   config: FieldConfig;
   group: FormGroup;
   groupName: string;

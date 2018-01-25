@@ -5,6 +5,9 @@ import { FormButtonComponent } from '../form-button/form-button.component';
 import { FormInputComponent } from '../form-input/form-input.component';
 import { FormSelectComponent } from '../form-select/form-select.component';
 import { FormRepeatComponent } from '../form-repeat/form-repeat.component';
+import { FormRadioComponent } from '../form-radio/form-radio.component';
+import { FormDateComponent } from '../form-date/form-date.component';
+import { FormFileComponent } from '../form-file/form-file.component';
 
 import { Field } from '../../models/field.interface';
 import { FieldConfig } from '../../models/field-config.interface';
@@ -13,7 +16,10 @@ const components: {[type: string]: Type<Field>} = {
   button: FormButtonComponent,
   input: FormInputComponent,
   select: FormSelectComponent,
-  repeat: FormRepeatComponent
+  repeat: FormRepeatComponent,
+  radio: FormRadioComponent,
+  date: FormDateComponent,
+  file: FormFileComponent
 };
 
 @Directive({
