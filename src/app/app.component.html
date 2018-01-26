@@ -2,8 +2,8 @@
   <div class="warranty-wiz--steps">
     <app-state-tracker></app-state-tracker>
   </div>
-<app-additional [ngClass]="{'hideComponent': displayState !== 3}" *ngIf="appState >= 3"></app-additional>
-<app-personal [ngClass]="{'hideComponent': displayState !== 1}" *ngIf="appState >= 1"></app-personal>
-<app-product [ngClass]="{'hideComponent': displayState !== 2}" *ngIf="appState >= 2"></app-product>
+<app-additional *ngIf="appState === 3"></app-additional>
+<app-personal *ngIf="appState === 1"></app-personal>
+<app-product *ngIf="appState === 2"></app-product>
 
 </div>

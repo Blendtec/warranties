@@ -24,8 +24,8 @@ export interface asyncSettings {
       <label>{{ config.label }}</label>
       <select (focus)="focusDetection()" [ngClass]="{error: group.controls[config.name].invalid && group.controls[config.name].touched}" [formControlName]="config.name">
         <option value="">{{ config.placeholder }}</option>
-        <option *ngFor="let option of config.options">
-          {{ option }}
+        <option *ngFor="let option of config.options" value="{{option.code}}">
+          {{ option.name }}
         </option>
       </select>
     </div>
@@ -54,13 +54,13 @@ export class FormSelectComponent implements Field, OnInit, OnDestroy  {
       .takeUntil(this.destroy$)
       .subscribe(data => {
 
-        if (typeof self.group.controls[self.config.name] !== 'undefined' && 
-          typeof self.group.controls[self.config.name] !== 'undefined' && 
-          typeof self.group.controls[self.config.name].invalid !== 'undefined' && 
+        if (typeof self.group.controls[self.config.name] !== 'undefined' &&
+          typeof self.group.controls[self.config.name] !== 'undefined' &&
+          typeof self.group.controls[self.config.name].invalid !== 'undefined' &&
           self.group.controls[self.config.name].invalid) {
 
           let errorMessage = (self.config.errorMessage)?self.config.errorMessage:null;
-          self.storeService.isFormControlValid(!self.group.controls[self.config.name].invalid, 
+          self.storeService.isFormControlValid(!self.group.controls[self.config.name].invalid,
             self.config.name, errorMessage, self.group.controls[self.config.name].touched);
 
           if (self.group.controls[self.config.name].touched) {

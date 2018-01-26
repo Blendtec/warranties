@@ -29,15 +29,8 @@ export class AppComponent implements OnInit, OnDestroy {
     const self = this;
     this.appStateSub = this.storeService.displayState$.subscribe(
       data => {
-        let result = self.appState + data;
-        if (result >= 1) {
-          if (result >= self.appState) {
-            self.displayState = result;
-            self.appState = result;
-          } else if (result < self.appState) {
-            self.displayState = result;
-          }
-        }
+          self.displayState = data;
+          self.appState = data;
       });
   }
 

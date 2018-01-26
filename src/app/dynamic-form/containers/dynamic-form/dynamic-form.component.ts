@@ -85,10 +85,12 @@ export class DynamicFormComponent implements OnChanges, OnInit, OnDestroy {
       .subscribe(data => {
         self.outputValues = self.storeService.getFormValues(self.formName);
         self.formToParent.emit(self.form);
-        if (self.formName === self.defaultFormName) {
-          self.allFormValues.emit(self.storeService.formValues);
-          self.isTotalValid.emit(self.storeService.isTotalFormValid);
-        }
+        setTimeout(function () {
+          if (self.formName === self.defaultFormName) {
+            self.allFormValues.emit(self.storeService.formValues);
+            self.isTotalValid.emit(self.storeService.isTotalFormValid);
+          }
+        }, 50);
       });
 
     this.form.valueChanges

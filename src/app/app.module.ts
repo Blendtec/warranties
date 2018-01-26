@@ -22,7 +22,7 @@ import { CountrySelectComponent } from './directives/country-select/country-sele
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { WindowService } from './services/window.service';
 import { SerialModalComponent } from './directives/serial-modal.component/serial-modal.component';
-import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
+import { MyDatePickerModule } from 'mydatepicker';
 
 
 export function HttpLoaderFactory(http: HttpClient, config: AppConfig) {
@@ -42,8 +42,8 @@ export function HttpLoaderFactory(http: HttpClient, config: AppConfig) {
     SerialModalComponent
   ],
   imports: [
-    DynamicFormModule,
     AppConfigModule,
+    MyDatePickerModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
