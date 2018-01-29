@@ -27,14 +27,16 @@ export class ProductComponent implements OnInit {
   private acceptableFileFormats = ['image/jpeg', 'image/jpg', 'image/png'];
   public wrongFileType = false;
   public dynamicRepeatValue: any;
-
+  public jars$:  Observable<object[]>;
   public isFormValid = false;
   public attemptedToSubmit = false;
 
   constructor(private storeService: StoreService,
     private formBuilder: FormBuilder,
+    private jarInfo: GetAssetService<object[]>
      @Inject(APP_CONFIG) private config: AppConfig) {
 
+      this.jars$ = jarInfo.getAll$('jars.json');
     }
 
   formSubmitted(value) {

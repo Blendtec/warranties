@@ -61,8 +61,9 @@
                 </label>
               </div>
             </div>
-      <div class="grid__item medium--one-half large--one-half">
-          <div class="grid" formGroupName="contact">
+      <div class="grid__item medium--one-half large--one-half" style="margin-top:35px;" formGroupName="motorSerial">
+	        <span style="font-style:bold;">Motor Serial Number</span>
+          <div class="grid">
             <div class="grid__item small--one-half medium--one-half large--one-half">
               <label class="hidden-label">Serial Prefix</label>
               <input class="input-full" placeholder="Serial Prefix" type="text"
@@ -70,15 +71,34 @@
                      formControlName="serialPrefix">
             </div>
             <div class="grid__item small--one-tenth medium--one-tenth large--one-tenth" style="text-align:center;margin-top:16px;font-size:20px;">-</div>
-            <div class="grid__item small--one-quarter medium--one-quarter large--one-quarter">
-              <label class="hidden-label">Serial Suffix</label>
-              <input class="input-full" placeholder="Serial Suffix" type="text"
+            <div class="grid__item small--one-third medium--one-third large--one-third">
+              <label class="hidden-label">Suffix</label>
+              <input class="input-full" placeholder="Suffix" type="text"
                      [ngClass]="{error: checkIfElementIsErrored(product.get('motorSerial.serialSuffix'))}"
                      formControlName="serialSuffix">
             </div>
             <div></div>
           </div>
       </div>
+      <div class="grid__item medium--one-half large--one-half" style="margin-top:35px;" formGroupName="motorSerial">
+	        <label for="ReceiptPhoto" class="input-full">
+	        <span style="font-style:bold;">Motor Serial Number Photo</span>
+	        	<input class="input-full" formControlName="serialPhoto" placeholder="Motor Serial Number Photo" placeholder="Motor" id="ReceiptPhoto" type="file" (change)="fileUpload($event, 'motorSerial.serialPhoto')"
+	               [ngClass]="{error: checkIfElementIsErrored(product.get('motorSerial.serialPhoto'))}">
+	        </label>
+      </div>
+	<div class="grid__item medium--one-half large--one-half" style="margin-top:35px;">
+        <label >What is your Jar size?</label>
+        <select class="input-full"
+                [ngClass]="{error: checkIfElementIsErrored(personal.get('jar.jarSize'))}"
+                formControlName="jar">
+          <option *ngFor="let jar of jars$ | async" [ngValue]="jar.value">
+            {{jar.name}}
+          </option>
+        </select>
+	</div>
+	<div class="grid__item medium--one-half large--one-half" style="margin-top:35px;"></div>
+
 		</div>
 
     <div class="grid input-full">
