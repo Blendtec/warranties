@@ -19,16 +19,8 @@ import { FieldConfig } from '../dynamic-form/models/field-config.interface';
 export class ProductComponent implements OnInit {
 
   public product: FormGroup;
-  public retailers$: Observable<any[]>;
-  public countries$: Observable<ICountry[]>;
-  public states$: Observable<IState[]>;
-  public timeZones$: Observable<object[]>;
   public formValue: object;
-  public dateOptions: any = {
-    dateFormat: 'mm-dd-yyyy',
-    indicateInvalidDate: true,
-    showClearDateBtn: false
-  };
+
   public captchaKey: string;
   private unsubscribe: Subject<void> = new Subject();
   public contactMethod = '';
@@ -41,16 +33,8 @@ export class ProductComponent implements OnInit {
 
   constructor(private storeService: StoreService,
     private formBuilder: FormBuilder,
-    private countryService: CountryService,
-    private getState: GetAssetService<IState>,
-    private retailerService: RetailerService,
-    private getTimeZones: GetAssetService<object[]>,
      @Inject(APP_CONFIG) private config: AppConfig) {
 
-      this.retailers$ = retailerService.getAll$();
-      this.countries$ = countryService.getAll$();
-      this.states$ = getState.getAll$('states.json');
-      this.timeZones$ = getTimeZones.getAll$('time-zones.json');
     }
 
   formSubmitted(value) {
@@ -117,43 +101,25 @@ export class ProductComponent implements OnInit {
       this.product = this.storeService.storeForm['product'];
     } else {
       this.product = this.formBuilder.group({
-        firstName: ['', [Validators.required]],
-        lastName: ['', [Validators.required]],
-        address: this.formBuilder.group({
-          one: ['', [Validators.required]],
-          two: ['', []],
-          city: ['', [Validators.required]],
-          zip: ['', [Validators.required]],
-          country: ['US', [Validators.required]],
-          stateProvince: ['', []],
-          email: ['', [Validators.required, Validators.email]],
-          phone: ['', [Validators.required]]
+        problemType: ['', [Validators.required]],
+        motorSerial: this.formBuilder.group({
+          serialPrefix: ['', [Validators.required]],
+          serialSuffix: ['', [Validators.required]],
+          serialPhoto: ['', [Validators.required]]
         }),
-        contact: this.formBuilder.group({
-          contactMethod: ['', [Validators.required]],
-          contactTime: ['', [Validators.required]],
-          timeZone: ['', [Validators.required]]
+        jar: this.formBuilder.group({
+          jarSize: ['', []],
+          jarNumber: ['', []],
+          jarPhoto: ['', []]
         }),
-        purchase: this.formBuilder.group({
-          place: ['', [Validators.required]],
-          other: ['', []],
-          date: ['', [Validators.required]]
-        }, {validator: OtherPurchasePlaceValidator}),
-        receiptPhoto: [{}, []]
+        problemDescription: ['', [Validators.required]]
       });
     }
 
-    this.product.get('address.stateProvince').setAsyncValidators(StatesValidator.createValidator(this.getState));
-
-    this.product
-      .get('address.country')
-      .valueChanges
-      .takeUntil(this.unsubscribe)
-      .subscribe(() => this.product.get('address.stateProvince').updateValueAndValidity());
   }
 
   previousStep(): void {
-     this.storeService.passDisplayState(-1);
+     this.storeService.passDisplayState(1);
   }
 
   public onSubmit(): void {

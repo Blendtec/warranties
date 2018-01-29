@@ -48,12 +48,16 @@
             {{'VALIDATION.REQUIRED_CONTACT_METHOD' | translate}}
           </li>
           <li
-            *ngIf="checkIfElementIsErrored(personal.get('contact.contactMethod'))">
-            {{'VALIDATION.REQUIRED_CONTACT_METHOD' | translate}}
-          </li>
-          <li
             *ngIf="checkIfElementIsErrored(personal.get('receiptPhoto'))">
             {{'VALIDATION.REQUIRED_RECEIPT_PHOTO' | translate}}
+          </li>
+          <li
+            *ngIf="checkIfElementIsErrored(personal.get('contact.contactTime'))">
+            Contact Time is required
+          </li>
+          <li
+            *ngIf="checkIfElementIsErrored(personal.get('contact.timeZone'))">
+            Time Zone is required
           </li>
           <li *ngIf="!personalDone && personalError">{{'ERROR.personal_FAILED' | translate}}</li>
         </ul>

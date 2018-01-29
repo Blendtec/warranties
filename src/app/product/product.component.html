@@ -1,241 +1,84 @@
 <div class="warranty-wiz--content">
-		<h1 class="warranty-wiz--header">{{'HEADING.product_INFORMATION' | translate}}</h1>
-		<h2 class="warranty-wiz--subheader">{{'LABEL.TELL_ABOUT_YOURSELF' | translate}}</h2>
-		<p class="warranty-wiz--intro">{{'CONTENT.CONFIDENTIAL' | translate}}</p>
-		<p class="warranty-wiz--intro">{{'CONTENT.PHOTO_INFO' | translate}}</p>
+		<h1 class="warranty-wiz--header">PRODUCT INFORMATION</h1>
+    <h2 class="warranty-wiz--subheader">Next, tell us about your problem.</h2>
 
     <form novalidate (ngSubmit)="onSubmit(product)" [formGroup]="product" class="animate-floating-labels">
       <!-- TODO - more elegant solution to massive if -->
       <div class="errors" *ngIf="checkIfErrorsShow(product)"
       >
         <ul>
-          <li *ngIf="checkIfElementIsErrored(product.get('firstName'))">
-            {{'VALIDATION.REQUIRED_FIRST_NAME' | translate}}
+          <li *ngIf="checkIfElementIsErrored(product.get('problemType'))">
+              Select what your problem is
           </li>
-          <li *ngIf="checkIfElementIsErrored(product.get('lastName'))">
-            {{'VALIDATION.REQUIRED_LAST_NAME' | translate}}
-          </li>
-          <li
-            *ngIf="checkIfElementIsErrored(product.get('address.one'))">
-            {{'VALIDATION.REQUIRED_ADDRESS' | translate}}
-          </li>
-          <li
-            *ngIf="checkIfElementIsErrored(product.get('address.city'))">
-            {{'VALIDATION.REQUIRED_CITY' | translate}}
-          </li>
-          <li
-            *ngIf="checkIfElementIsErrored(product.get('address.zip'))">
-            {{'VALIDATION.REQUIRED_ZIP' | translate}}
-          </li>
-          <li
-            *ngIf="checkIfElementIsErrored(product.get('address.country'))">
-            {{'VALIDATION.REQUIRED_COUNTRY' | translate}}
-          </li>
-          <li
-            *ngIf="checkIfElementIsErrored(product.get('address.stateProvince'))">
-            {{'VALIDATION.REQUIRED_STATE' | translate}}
-          </li>
-          <li
-            *ngIf="checkIfElementIsErrored(product.get('address.email'))">
-            {{'VALIDATION.REQUIRED_EMAIL' | translate}}
-          </li>
-          <li
-            *ngIf="checkIfElementIsErrored(product.get('purchase.date'))">
-            {{'VALIDATION.REQUIRED_PURCHASE_DATE' | translate}}
-          </li>
-          <li
-            *ngIf="checkIfElementIsErrored(product.get('contact.contactMethod'))">
-            {{'VALIDATION.REQUIRED_CONTACT_METHOD' | translate}}
-          </li>
-          <li
-            *ngIf="checkIfElementIsErrored(product.get('contact.contactMethod'))">
-            {{'VALIDATION.REQUIRED_CONTACT_METHOD' | translate}}
-          </li>
-          <li
-            *ngIf="checkIfElementIsErrored(product.get('receiptPhoto'))">
-            {{'VALIDATION.REQUIRED_RECEIPT_PHOTO' | translate}}
-          </li>
-          <li *ngIf="!productDone && productError">{{'ERROR.product_FAILED' | translate}}</li>
         </ul>
       </div>
       <div>
 
+<!--
+      this.product = this.formBuilder.group({
+        problemType: ['', [Validators.required]],
+        motorSerial: this.formBuilder.group({
+          serialPrefix: ['', [Validators.required]],
+          serialSuffix: ['', [Validators.required]],
+          serialPhoto: ['', [Validators.required]]
+        }),
+        jar: this.formBuilder.group({
+          jarSize: ['', []],
+          jarNumber: ['', []],
+          jarPhoto: ['', []]
+        }),
+        problemDescription: ['', [Validators.required]]
+      });
 
-          <div class="grid">
+
+
+-->
+    <div class="grid">
+
+      <div class="input-full grid__item">
+              <div>
+                <label>With what are you having a problem?</label>
+              </div>
+              <div>
+                <label for="problemMotor" class="radio-seperator">
+                  <input class="" placeholder="The Blender Motor" id="problemMotor" type="radio" formControlName="problemType" value="motor"
+                       [ngClass]="{error: checkIfElementIsErrored(product.get('problemType'))}">
+                       The Blender Motor
+                </label>
+              </div>
+              <div>
+                <label for="problemJar" class="radio-seperator">
+                  <input class="" placeholder="The Blender Jar" id="problemJar" type="radio" formControlName="problemType" value="jar"
+                       [ngClass]="{error: checkIfElementIsErrored(product.get('problemType'))}">
+                       The Blender Jar
+                </label>
+              </div>
+              <div>
+                <label for="problemBoth" class="radio-seperator">
+                  <input class="" placeholder="Both the motor and the jar" id="problemBoth" type="radio" formControlName="problemType" value="both"
+                       [ngClass]="{error: checkIfElementIsErrored(product.get('problemType'))}">
+                       Both the motor and the jar
+                </label>
+              </div>
+            </div>
+      <div class="grid__item medium--one-half large--one-half">
+          <div class="grid" formGroupName="contact">
             <div class="grid__item small--one-half medium--one-half large--one-half">
-
-              <label class="hidden-label">{{'LABEL.FIRST_NAME' | translate}}</label>
-              <input class="input-full"
-                     [ngClass]="{error: checkIfElementIsErrored(product.get('firstName'))}"
-                     placeholder="{{'LABEL.FIRST_NAME' | translate}}" type="text"
-                     formControlName="firstName">
+              <label class="hidden-label">Serial Prefix</label>
+              <input class="input-full" placeholder="Serial Prefix" type="text"
+                     [ngClass]="{error: checkIfElementIsErrored(product.get('motorSerial.serialPrefix'))}"
+                     formControlName="serialPrefix">
             </div>
-            <div class="grid__item small--one-half medium--one-half large--one-half">
-              <label class="hidden-label">{{'LABEL.LAST_NAME' | translate}}</label>
-              <input class="input-full"
-                     [ngClass]="{error: checkIfElementIsErrored(product.get('lastName'))}"
-                     placeholder="{{'LABEL.LAST_NAME' | translate}}" type="text"
-                     formControlName="lastName">
+            <div class="grid__item small--one-tenth medium--one-tenth large--one-tenth" style="text-align:center;margin-top:16px;font-size:20px;">-</div>
+            <div class="grid__item small--one-quarter medium--one-quarter large--one-quarter">
+              <label class="hidden-label">Serial Suffix</label>
+              <input class="input-full" placeholder="Serial Suffix" type="text"
+                     [ngClass]="{error: checkIfElementIsErrored(product.get('motorSerial.serialSuffix'))}"
+                     formControlName="serialSuffix">
             </div>
+            <div></div>
           </div>
-
-
-          <div formGroupName="address">
-
-            <label class="hidden-label">{{'LABEL.ADDRESS' | translate}}</label>
-            <input class="input-full" placeholder="{{'LABEL.ADDRESS' | translate}}" type="text"
-                   [ngClass]="{error: checkIfElementIsErrored(product.get('address.one'))}"
-                   formControlName="one">
-            <div class="grid">
-              <div class="grid__item small--one-half medium--one-half large--one-half">
-                <label class="hidden-label">{{'LABEL.ADDRESS_TWO' | translate}}</label>
-                <input class="input-full" placeholder="{{'LABEL.ADDRESS_TWO' | translate}}" type="text"
-                       [ngClass]="{error: checkIfElementIsErrored(product.get('address.two'))}"
-                       formControlName="two">
-              </div>
-              <div class="grid__item small--one-half medium--one-half large--one-half">
-                <label class="hidden-label"> {{'LABEL.CITY' | translate}}</label>
-                <input type="text" class="input-full" placeholder="{{'LABEL.CITY' | translate}}"
-                       [ngClass]="{error: checkIfElementIsErrored(product.get('address.city'))}"
-                       formControlName="city">
-              </div>
-            </div>
-
-            <div class="grid">
-              <div class="grid__item small--one-half medium--one-half large--one-half">
-                <label class="hidden-label">{{'LABEL.STATE' | translate}}</label>
-                <select class="input-full"
-                        [ngClass]="{error: checkIfElementIsErrored(product.get('address.stateProvince'))}"
-                        formControlName="stateProvince">
-                  <option value="">{{'OPTION.STATE' | translate}}</option>
-                  <option
-                    *ngFor="let state of states$ | async | filterBy: ['country']: this.product.get('address.country').value"
-                    [disabled]="states$?.length > 0" [ngValue]="state.name">
-                    {{state.name}}
-                  </option>
-                </select>
-              </div>
-              <div class="grid__item small--one-half medium--one-half large--one-half">
-                <label class="hidden-label">{{'LABEL.ZIP' | translate}}</label>
-                <input type="text" class="input-full" placeholder="{{'LABEL.ZIP' | translate}}"
-                       [ngClass]="{error: checkIfElementIsErrored(product.get('address.zip'))}"
-                       formControlName="zip">
-              </div>
-            </div>
-
-            <label class="hidden-label">{{'LABEL.COUNTRY' | translate}}</label>
-            <select class="input-full"
-                    [ngClass]="{error: checkIfElementIsErrored(product.get('address.country'))}"
-                    formControlName="country">
-              <option value="">{{'OPTION.COUNTRY' | translate}}</option>
-              <option *ngFor="let country of countries$ | async" [ngValue]="country.code">
-                {{country.name}}
-              </option>
-            </select>
-
-            <label class="hidden-label">{{'LABEL.EMAIL' | translate}}</label>
-            <input class="input-full" placeholder="{{'LABEL.EMAIL' | translate}}" type="text"
-                   [ngClass]="{error: checkIfElementIsErrored(product.get('address.email'))}"
-                   formControlName="email">
-
-            <label class="hidden-label">{{'LABEL.PHONE' | translate}}</label>
-            <input class="input-full" placeholder="{{'LABEL.PHONE' | translate}}" type="text"
-                   [ngClass]="{error: checkIfElementIsErrored(product.get('address.phone'))}"
-                   formControlName="phone">
-          </div>
-
-          <div formGroupName="contact">
-          	<div class="input-full">
-          		<div>
-	          		<label>{{'LABEL.CONTACT_METHOD' | translate}}</label>
-	          	</div>
-	          	<label for="ContactMethodEmail" class="radio-seperator">
-	            	<input class="" placeholder="{{'LABEL.EMAIL' | translate}}" id="ContactMethodEmail" type="radio" formControlName="contactMethod" value="email"
-	                   [ngClass]="{error: checkIfElementIsErrored(product.get('contact.contactMethod'))}">
-	                   {{'LABEL.EMAIL' | translate}}
-	            </label>
-
-	            <label for="ContactMethodPhone" class="radio-seperator">
-	            	<input class="" placeholder="{{'LABEL.PHONE' | translate}}" id="ContactMethodPhone" type="radio" formControlName="contactMethod" value="phone"
-	                   [ngClass]="{error: checkIfElementIsErrored(product.get('contact.contactMethod'))}">
-	                   {{'LABEL.PHONE' | translate}}
-	            </label>
-			</div>
-			<div class="input-full">
-				<div>
-	          		<label>{{'LABEL.CONTACT_TIME' | translate}}</label>
-	          	</div>
-	          	<label for="ContactTimeMorning" class="radio-seperator">
-	            	<input class="" placeholder="{{'LABEL.MORNING' | translate}}" id="ContactTimeMorning" type="radio" formControlName="contactTime" value="morning"
-	                   [ngClass]="{error:checkIfElementIsErrored(product.get('contact.contactTime'))}">
-	                   {{'LABEL.MORNING' | translate}}
-	            </label>
-
-	            <label for="ContactTimeAfternoon" class="radio-seperator">
-	            	<input class="" placeholder="{{'LABEL.AFTERNOON' | translate}}" id="ContactTimeAfternoon" type="radio" formControlName="contactTime" value="afternoon"
-	                   [ngClass]="{error: checkIfElementIsErrored(product.get('contact.contactTime'))}">
-	                   {{'LABEL.AFTERNOON' | translate}}
-	            </label>
-
-	            <label for="ContactTimeEvening" class="radio-seperator">
-	            	<input class="" placeholder="{{'LABEL.EVENING' | translate}}" id="ContactTimeEvening" type="radio" formControlName="contactTime" value="evening"
-	                   [ngClass]="{error: checkIfElementIsErrored(product.get('contact.contactTime'))}">
-	                   {{'LABEL.EVENING' | translate}}
-	            </label>
-            </div>
-      <div class="input-full">
-        <div>
-                <label>What is your time zone?</label>
-              </div>
-            <label class="hidden-label">{{'LABEL.PURCHASE_PLACE' | translate}}</label>
-            <select class="input-full"
-                    [ngClass]="{error: checkIfElementIsErrored(product.get('contact.timeZone'))}"
-                    formControlName="timeZone">
-              <option *ngFor="let timeZone of timeZones$ | async" [ngValue]="timeZone.code">
-                {{timeZone.name}}
-              </option>
-            </select>
-            </div>
-          </div>
-
-          <div formGroupName="purchase">
-            <label>{{'LABEL.PURCHASE_DATE' | translate}}</label>
-            <my-date-picker  class="input-full" name="date" [options]="dateOptions"
-                            [ngClass]="{error: checkIfElementIsErrored(product.get('purchase.date'))}"
-                            formControlName="date"></my-date-picker>
-            <label class="hidden-label">{{'LABEL.PURCHASE_PLACE' | translate}}</label>
-            <select class="input-full"
-                    [ngClass]="{error: checkIfElementIsErrored(product.get('purchase.place'))}"
-                    formControlName="place">
-              <option value="">{{'LABEL.PURCHASE_PLACE' | translate}}</option>
-              <option *ngFor="let retailer of retailers$ | async" [ngValue]="retailer.name">
-                {{retailer.name}}
-              </option>
-            </select>
-            <label class="hidden-label">{{'LABEL.PURCHASE_PLACE_OTHER' | translate}}</label>
-            <input class="input-full" placeholder="{{'LABEL.PURCHASE_PLACE_OTHER' | translate}}" type="text"
-                   formControlName="other">
-          </div>
-
-		<div class="grid input-full">
-        	<div class="grid__item">
-               {{'LABEL.RECEIPT' | translate}}
-            </div>
-            <div class="grid__item large--one-half medium--one-half">
-		        <label for="ReceiptPhoto" class="input-full">
-		        	<input class="" placeholder="{{'LABEL.RECEIPT' | translate}}" id="ReceiptPhoto" type="file" (change)="fileUpload($event)"
-		               [ngClass]="{error: checkIfElementIsErrored(product.get('receiptPhoto'))}">
-		        </label>
-	        </div>
-	        <div class="grid__item large--one-half medium--one-half">
-				<div *ngIf="wrongFileType" class="errors">
-					<ul>
-					  <li>
-					    {{'VALIDATION.WRONG_FILE_TYPE' | translate}}
-					  </li>
-					</ul>
-				</div>
-	        </div>
+      </div>
 		</div>
 
     <div class="grid input-full">

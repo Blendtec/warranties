@@ -14,7 +14,7 @@ export class AppComponent implements OnInit, OnDestroy {
   appState: number;
   displayState: number;
   testAppState: number;
-  defaultState = 1;
+  defaultState = 2;
 
   constructor(private storeService: StoreService,
     private translate: TranslateService) {
@@ -29,7 +29,6 @@ export class AppComponent implements OnInit, OnDestroy {
     const self = this;
     this.appStateSub = this.storeService.displayState$.subscribe(
       data => {
-          self.displayState = data;
           self.appState = data;
       });
   }

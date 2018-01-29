@@ -159,7 +159,8 @@ export class PersonalComponent implements OnInit, OnDestroy {
     console.log(this.personal);
     console.log(this.personal.get('address.zip'));
     if (this.personal.valid) {
-      this.storeService.passDisplayState(1);
+      console.log('got here');
+      this.storeService.passDisplayState(2);
     }
   }
 
