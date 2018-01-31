@@ -19,7 +19,7 @@ export class StateTrackerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    
+
     this.displayState = this.defaultState;
     this.appState = this.defaultState;
     const self = this;

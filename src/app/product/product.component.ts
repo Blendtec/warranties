@@ -16,7 +16,7 @@ import { FieldConfig } from '../dynamic-form/models/field-config.interface';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, OnDestroy {
 
   public product: FormGroup;
   public formValue: object;
@@ -30,10 +30,11 @@ export class ProductComponent implements OnInit {
   public jars$:  Observable<object[]>;
   public isFormValid = false;
   public attemptedToSubmit = false;
+  public textAreaLength = 500;
 
   constructor(private storeService: StoreService,
     private formBuilder: FormBuilder,
-    private jarInfo: GetAssetService<object[]>
+    private jarInfo: GetAssetService<object[]>,
      @Inject(APP_CONFIG) private config: AppConfig) {
 
       this.jars$ = jarInfo.getAll$('jars.json');
@@ -59,25 +60,22 @@ export class ProductComponent implements OnInit {
     return true;
   }
 
-  checkIfErrorsShow(form: FormGroup): boolean {
-    if ((form.touched || this.attemptedToSubmit) && form.invalid) {
-      return true;
-    }
+  checkIfErrorsShow(form: any): boolean {
     for (let i in form['controls']) {
       if (typeof form['controls'][i]['controls'] === 'object') {
-        if (this.checkIfErrorsShow(form['controls'][i]['controls'])) {
+        if (this.checkIfErrorsShow(form['controls'][i])) {
           return true;
-        } else {
-          if ((form.controls[i].touched || this.attemptedToSubmit) && form.controls[i].invalid) {
+        }
+      } else {
+          if (this.checkIfElementIsErrored(form.controls[i])) {
             return true;
           }
-        }
       }
     }
     return false;
   }
 
-  checkIfElementIsErrored(input: FormControl): boolean {
+  checkIfElementIsErrored(input: object): boolean {
     if ((input['touched'] || this.attemptedToSubmit) && input['invalid']) {
       return true;
     } else {
@@ -90,15 +88,14 @@ export class ProductComponent implements OnInit {
       event.target.files[0] &&
       event.target.files[0].name &&
       event.target.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
-      this.wrongFileType = false;
       this.product.get(photoKey).setValue(event.target.files);
     } else {
-       this.wrongFileType = true;
-       this.product.get(photoKey).setValue({});
+       this.product.get(photoKey).setValue(null);
     }
   }
 
   private createForm(): void {
+    console.log(Validators);
     if (this.storeService.storeForm['product']) {
       this.product = this.storeService.storeForm['product'];
     } else {
@@ -107,17 +104,41 @@ export class ProductComponent implements OnInit {
         motorSerial: this.formBuilder.group({
           serialPrefix: ['', [Validators.required]],
           serialSuffix: ['', [Validators.required]],
-          serialPhoto: ['', [Validators.required]]
+          serialPhoto: [null, [Validators.required]]
         }),
         jar: this.formBuilder.group({
           jarSize: ['', []],
           jarNumber: ['', []],
-          jarPhoto: ['', []]
+          jarPhoto: [null, []]
         }),
         problemDescription: ['', [Validators.required]]
       });
     }
+  }
 
+  requireJars(): void {
+    //    this.registration.get('address.stateProvince').setAsyncValidators(StatesValidator.createValidator(this.stateService));
+    if ((this.product.get('problemType').value === 'jar' || this.product.get('problemType').value === 'both') &&
+      this.product['controls'] &&
+      this.product['controls']['jar'] &&
+      this.product['controls']['jar']['controls']) {
+      this.product['controls']['jar']['controls']['jarNumber'].setValidators(Validators.compose([Validators.required]));
+      this.product['controls']['jar']['controls']['jarNumber'].updateValueAndValidity();
+      this.product['controls']['jar']['controls']['jarSize'].setValidators(Validators.compose([Validators.required]));
+      this.product['controls']['jar']['controls']['jarSize'].updateValueAndValidity();
+      this.product['controls']['jar']['controls']['jarPhoto'].setValidators(Validators.compose([Validators.required]));
+      this.product['controls']['jar']['controls']['jarPhoto'].updateValueAndValidity();
+    } else if (!(this.product.get('problemType').value === 'jar' || this.product.get('problemType').value === 'both') &&
+      this.product['controls'] &&
+      this.product['controls']['jar'] &&
+      this.product['controls']['jar']['controls']) {
+      this.product['controls']['jar']['controls']['jarNumber'].setValidators(Validators.compose([]));
+      this.product['controls']['jar']['controls']['jarNumber'].updateValueAndValidity();
+      this.product['controls']['jar']['controls']['jarSize'].setValidators(Validators.compose([]));
+      this.product['controls']['jar']['controls']['jarSize'].updateValueAndValidity();
+      this.product['controls']['jar']['controls']['jarPhoto'].setValidators(Validators.compose([]));
+      this.product['controls']['jar']['controls']['jarPhoto'].updateValueAndValidity();
+    }
   }
 
   previousStep(): void {
@@ -128,9 +149,8 @@ export class ProductComponent implements OnInit {
     this.storeService.storeForm['product'] = this.product;
     this.attemptedToSubmit = true;
     console.log(this.product);
-    console.log(this.product.get('address.zip'));
     if (this.product.valid) {
-      this.storeService.passDisplayState(1);
+      this.storeService.passDisplayState(3);
     }
   }
 

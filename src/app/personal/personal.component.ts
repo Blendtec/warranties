@@ -73,25 +73,23 @@ export class PersonalComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  checkIfErrorsShow(form: FormGroup): boolean {
-    if ((form.touched || this.attemptedToSubmit) && form.invalid) {
-      return true;
-    }
+  checkIfErrorsShow(form: any): boolean {
     for (let i in form['controls']) {
       if (typeof form['controls'][i]['controls'] === 'object') {
-        if (this.checkIfErrorsShow(form['controls'][i]['controls'])) {
+        if (this.checkIfErrorsShow(form['controls'][i])) {
           return true;
-        } else {
-          if ((form.controls[i].touched || this.attemptedToSubmit) && form.controls[i].invalid) {
+        }
+      } else {
+          if (this.checkIfElementIsErrored(form.controls[i])) {
             return true;
           }
-        }
       }
     }
     return false;
   }
 
-  checkIfElementIsErrored(input: FormControl): boolean {
+
+  checkIfElementIsErrored(input: object): boolean {
     if ((input['touched'] || this.attemptedToSubmit) && input['invalid']) {
       return true;
     } else {
@@ -157,7 +155,6 @@ export class PersonalComponent implements OnInit, OnDestroy {
     this.storeService.storeForm['personal'] = this.personal;
     this.attemptedToSubmit = true;
     console.log(this.personal);
-    console.log(this.personal.get('address.zip'));
     if (this.personal.valid) {
       console.log('got here');
       this.storeService.passDisplayState(2);
