@@ -3,7 +3,7 @@
     <h2 class="warranty-wiz--subheader">Let's dig a little deeper.</h2>
     <p class="warranty-wiz--intro">These next questions will help us more quickly identify a solution to your issue and process your claim.</p>
 
-    <form novalidate (ngSubmit)="onSubmit(additional)" [formGroup]="additional" class="animate-floating-labels">
+    <form novalidate (ngSubmit)="onSubmit()" [formGroup]="additional" class="animate-floating-labels">
       <!-- TODO - more elegant solution to massive if -->
       <div class="errors" *ngIf="checkIfErrorsShow(additional)"
       >

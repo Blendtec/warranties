@@ -4,7 +4,7 @@
 		<p class="warranty-wiz--intro">{{'CONTENT.CONFIDENTIAL' | translate}}</p>
 		<p class="warranty-wiz--intro">{{'CONTENT.PHOTO_INFO' | translate}}</p>
 
-    <form novalidate (ngSubmit)="onSubmit(personal)" [formGroup]="personal" class="animate-floating-labels">
+    <form novalidate (ngSubmit)="onSubmit()" [formGroup]="personal" class="animate-floating-labels">
       <!-- TODO - more elegant solution to massive if -->
       <div class="errors" *ngIf="checkIfErrorsShow(personal)"
       >

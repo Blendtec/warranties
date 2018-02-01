@@ -2,7 +2,7 @@
 		<h1 class="warranty-wiz--header">PRODUCT INFORMATION</h1>
     <h2 class="warranty-wiz--subheader">Next, tell us about your problem.</h2>
 
-    <form novalidate (ngSubmit)="onSubmit(product)" [formGroup]="product" class="animate-floating-labels">
+    <form novalidate (ngSubmit)="onSubmit()" [formGroup]="product" class="animate-floating-labels">
       <!-- TODO - more elegant solution to massive if -->
       <div class="errors" *ngIf="checkIfErrorsShow(product)"
       >
