@@ -4,12 +4,11 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/observable/throw';
 import { Subscription } from 'rxjs/Subscription';
-import { OtherPurchasePlaceValidator, StatesValidator } from '../validators/';
+import { RecaptchaValidator } from '../validators/';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { APP_CONFIG, AppConfig } from '../config';
 import { ICountry, IState } from '../models';
-import { FieldConfig } from '../dynamic-form/models/field-config.interface';
 
 @Component({
   selector: 'app-additional',
@@ -26,18 +25,16 @@ export class AdditionalComponent implements OnInit, OnDestroy {
   public contactMethod = '';
   private acceptableFileFormats = ['image/jpeg', 'image/jpg', 'image/png'];
   public wrongFileType = false;
-  public dynamicRepeatValue: any;
-  public jars$:  Observable<object[]>;
-  public isFormValid = false;
   public attemptedToSubmit = false;
-  public textAreaLength = 500;
+
+  public showshaftSecure = false;
+  public showjarleaking = false;
+  public showspinsmooth = false;
 
   constructor(private storeService: StoreService,
     private formBuilder: FormBuilder,
-    private jarInfo: GetAssetService<object[]>,
      @Inject(APP_CONFIG) private config: AppConfig) {
-
-      this.jars$ = jarInfo.getAll$('jars.json');
+    this.captchaKey = config.captchaKey;
     }
 
   formSubmitted(value) {
@@ -52,16 +49,8 @@ export class AdditionalComponent implements OnInit, OnDestroy {
     this.unsubscribe.next();
   }
 
-  diffState(state: number): void {
-    this.storeService.passNumState(state);
-  }
-
-  checkIfErrored(): boolean {
-    return true;
-  }
-
   checkIfErrorsShow(form: any): boolean {
-    for (let i in form['controls']) {
+    for (const i in form['controls']) {
       if (typeof form['controls'][i]['controls'] === 'object') {
         if (this.checkIfErrorsShow(form['controls'][i])) {
           return true;
@@ -95,62 +84,57 @@ export class AdditionalComponent implements OnInit, OnDestroy {
   }
 
   private createForm(): void {
-    console.log(Validators);
     if (this.storeService.storeForm['additional']) {
       this.additional = this.storeService.storeForm['additional'];
     } else {
       this.additional = this.formBuilder.group({
-        problemType: ['', [Validators.required]],
-        motorSerial: this.formBuilder.group({
-          serialPrefix: ['', [Validators.required]],
-          serialSuffix: ['', [Validators.required]],
-          serialPhoto: [null, [Validators.required]]
-        }),
-        jar: this.formBuilder.group({
-          jarSize: ['', []],
-          jarNumber: ['', []],
-          jarPhoto: [null, []]
-        }),
-        problemDescription: ['', [Validators.required]]
+        unusualSounds: ['', [Validators.required]],
+        shaftSecure: ['', []],
+        jarLeaking: ['', []],
+        spinSmooth: ['', []],
+        problemPhoto: [null, [Validators.required]],
+        recaptcha: [false, [RecaptchaValidator]]
       });
     }
   }
 
-  requireJars(): void {
-    //    this.registration.get('address.stateProvince').setAsyncValidators(StatesValidator.createValidator(this.stateService));
-    if ((this.additional.get('problemType').value === 'jar' || this.additional.get('problemType').value === 'both') &&
-      this.additional['controls'] &&
-      this.additional['controls']['jar'] &&
-      this.additional['controls']['jar']['controls']) {
-      this.additional['controls']['jar']['controls']['jarNumber'].setValidators(Validators.compose([Validators.required]));
-      this.additional['controls']['jar']['controls']['jarNumber'].updateValueAndValidity();
-      this.additional['controls']['jar']['controls']['jarSize'].setValidators(Validators.compose([Validators.required]));
-      this.additional['controls']['jar']['controls']['jarSize'].updateValueAndValidity();
-      this.additional['controls']['jar']['controls']['jarPhoto'].setValidators(Validators.compose([Validators.required]));
-      this.additional['controls']['jar']['controls']['jarPhoto'].updateValueAndValidity();
-    } else if (!(this.additional.get('problemType').value === 'jar' || this.additional.get('problemType').value === 'both') &&
-      this.additional['controls'] &&
-      this.additional['controls']['jar'] &&
-      this.additional['controls']['jar']['controls']) {
-      this.additional['controls']['jar']['controls']['jarNumber'].setValidators(Validators.compose([]));
-      this.additional['controls']['jar']['controls']['jarNumber'].updateValueAndValidity();
-      this.additional['controls']['jar']['controls']['jarSize'].setValidators(Validators.compose([]));
-      this.additional['controls']['jar']['controls']['jarSize'].updateValueAndValidity();
-      this.additional['controls']['jar']['controls']['jarPhoto'].setValidators(Validators.compose([]));
-      this.additional['controls']['jar']['controls']['jarPhoto'].updateValueAndValidity();
+  changeRequire(): void {
+    if (this.additional.get('unusualSounds').value === 'yes') {
+      this.additional['controls']['spinSmooth'].setValidators(Validators.compose([Validators.required]));
+      this.additional['controls']['spinSmooth'].updateValueAndValidity();
+      this.showspinsmooth = true;
+
+      this.additional['controls']['shaftSecure'].setValidators(Validators.compose([]));
+      this.additional['controls']['shaftSecure'].updateValueAndValidity();
+      this.showshaftSecure = false;
+    }
+
+    if (this.additional.get('unusualSounds').value === 'no') {
+      this.additional['controls']['spinSmooth'].setValidators(Validators.compose([]));
+      this.additional['controls']['spinSmooth'].updateValueAndValidity();
+      this.showspinsmooth = false;
+      this.additional['controls']['shaftSecure'].setValidators(Validators.compose([Validators.required]));
+      this.additional['controls']['shaftSecure'].updateValueAndValidity();
+      this.showshaftSecure = true;
+    }
+
+    if (this.additional.get('spinSmooth').value || this.additional.get('shaftSecure').value) {
+      this.additional['controls']['jarLeaking'].setValidators(Validators.compose([Validators.required]));
+      this.additional['controls']['jarLeaking'].updateValueAndValidity();
+      this.showjarleaking = true;
     }
   }
 
   previousStep(): void {
-     this.storeService.passDisplayState(1);
+     this.storeService.passDisplayState(2);
   }
 
   public onSubmit(): void {
     this.storeService.storeForm['additional'] = this.additional;
     this.attemptedToSubmit = true;
-    console.log(this.additional);
     if (this.additional.valid) {
-      this.storeService.passDisplayState(3);
+      console.log(this.storeService.storeForm);
+      this.storeService.passDisplayState(4);
     }
   }
 

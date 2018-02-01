@@ -9,7 +9,6 @@ import { AdditionalComponent } from './additional/additional.component';
 import { StoreService, GetAssetService, CountryService, RetailerService } from './services/';
 import { StateTrackerComponent } from './state-tracker/state-tracker.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SuccessComponent } from './success/success.component';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RecaptchaModule } from 'ng-recaptcha';
@@ -37,7 +36,6 @@ export function HttpLoaderFactory(http: HttpClient, config: AppConfig) {
     ProductComponent,
     AdditionalComponent,
     StateTrackerComponent,
-    SuccessComponent,
     CountrySelectComponent,
     SerialModalComponent
   ],

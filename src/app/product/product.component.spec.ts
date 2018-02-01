@@ -3,7 +3,7 @@ import { StoreService } from '../services/store.service';
 
 import { ProductComponent } from './product.component';
 
-describe('ProductComponent', () => {
+xdescribe('ProductComponent', () => {
   let component: ProductComponent;
   let fixture: ComponentFixture<ProductComponent>;
 

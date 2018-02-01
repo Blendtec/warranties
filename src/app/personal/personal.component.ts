@@ -9,7 +9,6 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { APP_CONFIG, AppConfig } from '../config';
 import { ICountry, IPersonal, IState } from '../models';
-import { FieldConfig } from '../dynamic-form/models/field-config.interface';
 
 @Component({
   selector: 'app-personal',
@@ -74,7 +73,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
   }
 
   checkIfErrorsShow(form: any): boolean {
-    for (let i in form['controls']) {
+    for (const i in form['controls']) {
       if (typeof form['controls'][i]['controls'] === 'object') {
         if (this.checkIfErrorsShow(form['controls'][i])) {
           return true;
@@ -154,9 +153,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
   public onSubmit(): void {
     this.storeService.storeForm['personal'] = this.personal;
     this.attemptedToSubmit = true;
-    console.log(this.personal);
     if (this.personal.valid) {
-      console.log('got here');
       this.storeService.passDisplayState(2);
     }
   }

@@ -9,7 +9,6 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { APP_CONFIG, AppConfig } from '../config';
 import { ICountry, IState } from '../models';
-import { FieldConfig } from '../dynamic-form/models/field-config.interface';
 
 @Component({
   selector: 'app-product',
@@ -61,7 +60,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   checkIfErrorsShow(form: any): boolean {
-    for (let i in form['controls']) {
+    for (const i in form['controls']) {
       if (typeof form['controls'][i]['controls'] === 'object') {
         if (this.checkIfErrorsShow(form['controls'][i])) {
           return true;
@@ -95,7 +94,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   private createForm(): void {
-    console.log(Validators);
     if (this.storeService.storeForm['product']) {
       this.product = this.storeService.storeForm['product'];
     } else {
@@ -148,7 +146,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   public onSubmit(): void {
     this.storeService.storeForm['product'] = this.product;
     this.attemptedToSubmit = true;
-    console.log(this.product);
     if (this.product.valid) {
       this.storeService.passDisplayState(3);
     }
