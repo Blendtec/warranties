@@ -3,5 +3,6 @@ export interface AppConfig {
   warrantiesEndPoint: string;
   captchaKey: string;
   bucket: string;
+  assets: string;
   s3: string;
 }

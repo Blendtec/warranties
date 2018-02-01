@@ -1,3 +1,125 @@
-<p>
-  additional works!
-</p>
+<div class="warranty-wiz--content">
+		<h1 class="warranty-wiz--header">ADDITIONAL INFORMATION</h1>
+    <h2 class="warranty-wiz--subheader">Let's dig a little deeper.</h2>
+    <p class="warranty-wiz--intro">These next questions will help us more quickly identify a solution to your issue and process your claim.</p>
+
+    <form novalidate (ngSubmit)="onSubmit()" [formGroup]="additional" class="animate-floating-labels">
+      <!-- TODO - more elegant solution to massive if -->
+      <div class="errors" *ngIf="checkIfErrorsShow(additional)"
+      >
+        <ul>
+          <li *ngIf="checkIfElementIsErrored(additional.get('unusualSounds'))">
+              Are there any unusual sounds?
+          </li>
+          <li *ngIf="checkIfElementIsErrored(additional.get('shaftSecure'))">
+              Does the shaft feel secure?
+          </li>
+          <li *ngIf="checkIfElementIsErrored(additional.get('jarLeaking'))">
+              Is the jar leaking?
+          </li>
+          <li *ngIf="checkIfElementIsErrored(additional.get('spinSmooth'))">
+              Does the shaft spin smoothly?
+          </li>
+          <li *ngIf="checkIfElementIsErrored(additional.get('problemPhoto'))">
+              Please upload a photo of the problem. Make sure that the image is either a jpg, png, or gif.
+          </li>
+          <li *ngIf="checkIfElementIsErrored(additional.get('recaptcha'))">
+              Please use the captcha to verify that you're human.
+          </li>
+        </ul>
+      </div>
+      <div>
+
+    <div class="grid">
+
+      <div class="input-full grid__item">
+              <div>
+                <label style="font-weight:bold;">When running your blender on its most frequently used cycle without the jar on, does it make any unusual sounds?</label>
+              </div>
+                <label for="unusualSoundsYes" class="radio-seperator">
+                  <input class="" placeholder="Yes" id="unusualSoundsYes" (change)="changeRequire()" type="radio" formControlName="unusualSounds" value="yes"
+                       [ngClass]="{error: checkIfElementIsErrored(additional.get('unusualSounds'))}">
+                       Yes
+                </label>
+                <label for="unusualSoundsNo" class="radio-seperator">
+                  <input class="" placeholder="No" id="unusualSoundsNo" (change)="changeRequire()" type="radio" formControlName="unusualSounds" value="no"
+                       [ngClass]="{error: checkIfElementIsErrored(additional.get('unusualSounds'))}">
+                       No
+                </label>
+            </div>
+            <div class="input-full grid__item" style="margin-top:35px;" *ngIf="showspinsmooth">
+              <div>
+                <label style="font-weight:bold;">Turn the shaft underneath the jar by hand. Does it spin smoothly?</label>
+              </div>
+                <label for="spinSmoothYes" class="radio-seperator">
+                  <input class="" placeholder="Yes" id="spinSmoothYes" (change)="changeRequire()" type="radio" formControlName="spinSmooth" value="yes"
+                       [ngClass]="{error: checkIfElementIsErrored(additional.get('spinSmooth'))}">
+                       Yes
+                </label>
+                <label for="spinSmoothNo" class="radio-seperator">
+                  <input class="" placeholder="No" id="spinSmoothNo" (change)="changeRequire()" type="radio" formControlName="spinSmooth" value="no"
+                       [ngClass]="{error: checkIfElementIsErrored(additional.get('spinSmooth'))}">
+                       No
+                </label>
+            </div>
+            <div class="input-full grid__item" style="margin-top:35px;" *ngIf="showshaftSecure">
+              <div>
+                <label style="font-weight:bold;">If you wiggle the shaft from side to side and up and down, does it feel secure? (There will be a small amount of play but no more than a few millimeters)</label>
+              </div>
+                <label for="shaftSecureYes" class="radio-seperator">
+                  <input class="" placeholder="Yes" id="shaftSecureYes" (change)="changeRequire()" type="radio" formControlName="shaftSecure" value="yes"
+                       [ngClass]="{error: checkIfElementIsErrored(additional.get('shaftSecure'))}">
+                       Yes
+                </label>
+                <label for="shaftSecureNo" class="radio-seperator">
+                  <input class="" placeholder="No" id="shaftSecureNo" (change)="changeRequire()" type="radio" formControlName="shaftSecure" value="no"
+                       [ngClass]="{error: checkIfElementIsErrored(additional.get('shaftSecure'))}">
+                       No
+                </label>
+            </div>
+            <div class="input-full grid__item" style="margin-top:35px;" *ngIf="showjarleaking">
+              <div>
+                <label style="font-weight:bold;">Is your jar leaking?</label>
+              </div>
+                <label for="jarLeakingYes" class="radio-seperator">
+                  <input class="" placeholder="Yes" id="jarLeakingYes" (change)="changeRequire()" type="radio" formControlName="jarLeaking" value="yes"
+                       [ngClass]="{error: checkIfElementIsErrored(additional.get('jarLeaking'))}">
+                       Yes
+                </label>
+                <label for="jarLeakingNo" class="radio-seperator">
+                  <input class="" placeholder="No" id="jarLeakingNo" (change)="changeRequire()" type="radio" formControlName="jarLeaking" value="no"
+                       [ngClass]="{error: checkIfElementIsErrored(additional.get('jarLeaking'))}">
+                       No
+                </label>
+            </div>
+            <div class="input-full grid__item medium--one-half large--one-half" style="margin-top:35px;">
+             <label for="problemPhoto" class="input-full">
+              <span style="font-style:bold;">Photo of the problem</span>
+                <input class="input-full" placeholder="Photo of the Problem" id="problemPhoto" type="file" (change)="fileUpload($event, 'problemPhoto')"
+                     [ngClass]="{error: checkIfElementIsErrored(additional.get('problemPhoto'))}">
+              </label>
+            </div>
+            <div class="input-full grid__item " style="margin-top:35px;">
+              <re-captcha (resolved)="additional.get('recaptcha').setValue($event)"
+                            siteKey="{{captchaKey}}"></re-captcha>
+            </div>
+   </div>
+    <div class="grid input-full">
+      <button id="additional-submit--btn" name="button" class="step__footer__continue-btn btn" style="float:left;"
+      	(click)="previousStep()"
+              >
+        Previous
+      </button>
+      <button id="additional-submit--btn" name="button" class="step__footer__continue-btn btn" style="float:right;"
+              type="submit">
+        SUBMIT
+      </button>
+    </div>
+
+
+      </div>
+
+    </form>
+
+</div>
+
