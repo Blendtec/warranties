@@ -1,8 +1,8 @@
 <div class="warranty-wiz--content">
-		<h1 class="warranty-wiz--header">{{'HEADING.PERSONAL_INFORMATION' | translate}}</h1>
-		<h2 class="warranty-wiz--subheader">{{'LABEL.TELL_ABOUT_YOURSELF' | translate}}</h2>
-		<p class="warranty-wiz--intro">{{'CONTENT.CONFIDENTIAL' | translate}}</p>
-		<p class="warranty-wiz--intro">{{'CONTENT.PHOTO_INFO' | translate}}</p>
+		<h1 class="warranty-wiz--header">Personal Information</h1>
+		<h2 class="warranty-wiz--subheader">First, Tell us about yourself</h2>
+		<p class="warranty-wiz--intro">We need this information so we know how to get back with you. We keep all of this strictly confidential.</p>
+		<p class="warranty-wiz--intro">*Please note that photos will be required of the items and issues you are experiencing.  If these cannot be attached to this claim, we ask that you call or chat with Customer Care to place your claim. Customer Care is available at 1-800-748-5400 or through the Live Chat (M-F, 7am-6pm MST)</p>
 
     <form novalidate (ngSubmit)="onSubmit()" [formGroup]="personal" class="animate-floating-labels">
       <!-- TODO - more elegant solution to massive if -->
@@ -10,46 +10,46 @@
       >
         <ul>
           <li *ngIf="checkIfElementIsErrored(personal.get('firstName'))">
-            {{'VALIDATION.REQUIRED_FIRST_NAME' | translate}}
+            First Name
           </li>
           <li *ngIf="checkIfElementIsErrored(personal.get('lastName'))">
-            {{'VALIDATION.REQUIRED_LAST_NAME' | translate}}
+            Last Name
           </li>
           <li
             *ngIf="checkIfElementIsErrored(personal.get('address.one'))">
-            {{'VALIDATION.REQUIRED_ADDRESS' | translate}}
+            Address is required
           </li>
           <li
             *ngIf="checkIfElementIsErrored(personal.get('address.city'))">
-            {{'VALIDATION.REQUIRED_CITY' | translate}}
+            City is required
           </li>
           <li
             *ngIf="checkIfElementIsErrored(personal.get('address.zip'))">
-            {{'VALIDATION.REQUIRED_ZIP' | translate}}
+            Zipcode is required
           </li>
           <li
             *ngIf="checkIfElementIsErrored(personal.get('address.country'))">
-            {{'VALIDATION.REQUIRED_COUNTRY' | translate}}
+            Country is required
           </li>
           <li
             *ngIf="checkIfElementIsErrored(personal.get('address.stateProvince'))">
-            {{'VALIDATION.REQUIRED_STATE' | translate}}
+            State is required
           </li>
           <li
             *ngIf="checkIfElementIsErrored(personal.get('address.email'))">
-            {{'VALIDATION.REQUIRED_EMAIL' | translate}}
+            Valid Email is required
           </li>
           <li
             *ngIf="checkIfElementIsErrored(personal.get('purchase.date'))">
-            {{'VALIDATION.REQUIRED_PURCHASE_DATE' | translate}}
+            Purchase Date is required
           </li>
           <li
             *ngIf="checkIfElementIsErrored(personal.get('contact.contactMethod'))">
-            {{'VALIDATION.REQUIRED_CONTACT_METHOD' | translate}}
+            Contact Method is required
           </li>
           <li
             *ngIf="checkIfElementIsErrored(personal.get('receiptPhoto'))">
-            {{'VALIDATION.REQUIRED_RECEIPT_PHOTO' | translate}}
+            Receipt Photo is required
           </li>
           <li
             *ngIf="checkIfElementIsErrored(personal.get('contact.contactTime'))">
@@ -59,7 +59,6 @@
             *ngIf="checkIfElementIsErrored(personal.get('contact.timeZone'))">
             Time Zone is required
           </li>
-          <li *ngIf="!personalDone && personalError">{{'ERROR.personal_FAILED' | translate}}</li>
         </ul>
       </div>
       <div>
@@ -68,17 +67,17 @@
           <div class="grid">
             <div class="grid__item small--one-half medium--one-half large--one-half">
 
-              <label class="hidden-label">{{'LABEL.FIRST_NAME' | translate}}</label>
+              <label class="hidden-label">First Name</label>
               <input class="input-full"
                      [ngClass]="{error: checkIfElementIsErrored(personal.get('firstName'))}"
-                     placeholder="{{'LABEL.FIRST_NAME' | translate}}" type="text"
+                     placeholder="First Name" type="text"
                      formControlName="firstName">
             </div>
             <div class="grid__item small--one-half medium--one-half large--one-half">
-              <label class="hidden-label">{{'LABEL.LAST_NAME' | translate}}</label>
+              <label class="hidden-label">Last Name</label>
               <input class="input-full"
                      [ngClass]="{error: checkIfElementIsErrored(personal.get('lastName'))}"
-                     placeholder="{{'LABEL.LAST_NAME' | translate}}" type="text"
+                     placeholder="Last Name" type="text"
                      formControlName="lastName">
             </div>
           </div>
@@ -87,19 +86,19 @@
           <div formGroupName="address">
 
             <label class="hidden-label">{{'LABEL.ADDRESS' | translate}}</label>
-            <input class="input-full" placeholder="{{'LABEL.ADDRESS' | translate}}" type="text"
+            <input class="input-full" placeholder="Street Address" type="text"
                    [ngClass]="{error: checkIfElementIsErrored(personal.get('address.one'))}"
                    formControlName="one">
             <div class="grid">
               <div class="grid__item small--one-half medium--one-half large--one-half">
-                <label class="hidden-label">{{'LABEL.ADDRESS_TWO' | translate}}</label>
-                <input class="input-full" placeholder="{{'LABEL.ADDRESS_TWO' | translate}}" type="text"
+                <label class="hidden-label">Apt/Suite</label>
+                <input class="input-full" placeholder="Apt/Suite" type="text"
                        [ngClass]="{error: checkIfElementIsErrored(personal.get('address.two'))}"
                        formControlName="two">
               </div>
               <div class="grid__item small--one-half medium--one-half large--one-half">
-                <label class="hidden-label"> {{'LABEL.CITY' | translate}}</label>
-                <input type="text" class="input-full" placeholder="{{'LABEL.CITY' | translate}}"
+                <label class="hidden-label"> City</label>
+                <input type="text" class="input-full" placeholder="City"
                        [ngClass]="{error: checkIfElementIsErrored(personal.get('address.city'))}"
                        formControlName="city">
               </div>
@@ -107,11 +106,11 @@
 
             <div class="grid">
               <div class="grid__item small--one-half medium--one-half large--one-half">
-                <label class="hidden-label">{{'LABEL.STATE' | translate}}</label>
+                <label class="hidden-label">State</label>
                 <select class="input-full"
                         [ngClass]="{error: checkIfElementIsErrored(personal.get('address.stateProvince'))}"
                         formControlName="stateProvince">
-                  <option value="">{{'OPTION.STATE' | translate}}</option>
+                  <option value="">Select State</option>
                   <option
                     *ngFor="let state of states$ | async | filterBy: ['country']: this.personal.get('address.country').value"
                     [disabled]="states$?.length > 0" [ngValue]="state.name">
@@ -120,30 +119,30 @@
                 </select>
               </div>
               <div class="grid__item small--one-half medium--one-half large--one-half">
-                <label class="hidden-label">{{'LABEL.ZIP' | translate}}</label>
-                <input type="text" class="input-full" placeholder="{{'LABEL.ZIP' | translate}}"
+                <label class="hidden-label">Zip Code</label>
+                <input type="text" class="input-full" placeholder="Zip Code"
                        [ngClass]="{error: checkIfElementIsErrored(personal.get('address.zip'))}"
                        formControlName="zip">
               </div>
             </div>
 
-            <label class="hidden-label">{{'LABEL.COUNTRY' | translate}}</label>
+            <label class="hidden-label">Country</label>
             <select class="input-full"
                     [ngClass]="{error: checkIfElementIsErrored(personal.get('address.country'))}"
                     formControlName="country">
-              <option value="">{{'OPTION.COUNTRY' | translate}}</option>
+              <option value="">Select Country</option>
               <option *ngFor="let country of countries$ | async" [ngValue]="country.code">
                 {{country.name}}
               </option>
             </select>
 
-            <label class="hidden-label">{{'LABEL.EMAIL' | translate}}</label>
-            <input class="input-full" placeholder="{{'LABEL.EMAIL' | translate}}" type="text"
+            <label class="hidden-label">Email</label>
+            <input class="input-full" placeholder="Email" type="text"
                    [ngClass]="{error: checkIfElementIsErrored(personal.get('address.email'))}"
                    formControlName="email">
 
-            <label class="hidden-label">{{'LABEL.PHONE' | translate}}</label>
-            <input class="input-full" placeholder="{{'LABEL.PHONE' | translate}}" type="text"
+            <label class="hidden-label">Phone Number</label>
+            <input class="input-full" placeholder="Phone Number" type="text"
                    [ngClass]="{error: checkIfElementIsErrored(personal.get('address.phone'))}"
                    formControlName="phone">
           </div>
@@ -151,47 +150,46 @@
           <div formGroupName="contact">
           	<div class="input-full">
           		<div>
-	          		<label>{{'LABEL.CONTACT_METHOD' | translate}}</label>
+	          		<label>What Is The Best Way To Contact You?</label>
 	          	</div>
 	          	<label for="ContactMethodEmail" class="radio-seperator">
-	            	<input class="" placeholder="{{'LABEL.EMAIL' | translate}}" id="ContactMethodEmail" type="radio" formControlName="contactMethod" value="email"
+	            	<input class="" placeholder="Email" id="ContactMethodEmail" type="radio" formControlName="contactMethod" value="email"
 	                   [ngClass]="{error: checkIfElementIsErrored(personal.get('contact.contactMethod'))}">
-	                   {{'LABEL.EMAIL' | translate}}
+	                   Email
 	            </label>
 
 	            <label for="ContactMethodPhone" class="radio-seperator">
-	            	<input class="" placeholder="{{'LABEL.PHONE' | translate}}" id="ContactMethodPhone" type="radio" formControlName="contactMethod" value="phone"
+	            	<input class="" placeholder="Phone" id="ContactMethodPhone" type="radio" formControlName="contactMethod" value="phone"
 	                   [ngClass]="{error: checkIfElementIsErrored(personal.get('contact.contactMethod'))}">
-	                   {{'LABEL.PHONE' | translate}}
+	                   Phone
 	            </label>
 			</div>
 			<div class="input-full">
 				<div>
-	          		<label>{{'LABEL.CONTACT_TIME' | translate}}</label>
+	          		<label>What Is The Best Time Of Day To Reach You?</label>
 	          	</div>
 	          	<label for="ContactTimeMorning" class="radio-seperator">
-	            	<input class="" placeholder="{{'LABEL.MORNING' | translate}}" id="ContactTimeMorning" type="radio" formControlName="contactTime" value="morning"
+	            	<input class="" placeholder="Morning" id="ContactTimeMorning" type="radio" formControlName="contactTime" value="morning"
 	                   [ngClass]="{error:checkIfElementIsErrored(personal.get('contact.contactTime'))}">
-	                   {{'LABEL.MORNING' | translate}}
+	                   Morning
 	            </label>
 
 	            <label for="ContactTimeAfternoon" class="radio-seperator">
-	            	<input class="" placeholder="{{'LABEL.AFTERNOON' | translate}}" id="ContactTimeAfternoon" type="radio" formControlName="contactTime" value="afternoon"
+	            	<input class="" placeholder="Afternoon" id="ContactTimeAfternoon" type="radio" formControlName="contactTime" value="afternoon"
 	                   [ngClass]="{error: checkIfElementIsErrored(personal.get('contact.contactTime'))}">
-	                   {{'LABEL.AFTERNOON' | translate}}
+	                   Afternoon
 	            </label>
 
 	            <label for="ContactTimeEvening" class="radio-seperator">
-	            	<input class="" placeholder="{{'LABEL.EVENING' | translate}}" id="ContactTimeEvening" type="radio" formControlName="contactTime" value="evening"
+	            	<input class="" placeholder="Evening" id="ContactTimeEvening" type="radio" formControlName="contactTime" value="evening"
 	                   [ngClass]="{error: checkIfElementIsErrored(personal.get('contact.contactTime'))}">
-	                   {{'LABEL.EVENING' | translate}}
+	                   Evening
 	            </label>
             </div>
       <div class="input-full">
         <div>
                 <label>What is your time zone?</label>
               </div>
-            <label class="hidden-label">{{'LABEL.PURCHASE_PLACE' | translate}}</label>
             <select class="input-full"
                     [ngClass]="{error: checkIfElementIsErrored(personal.get('contact.timeZone'))}"
                     formControlName="timeZone">
@@ -203,42 +201,33 @@
           </div>
 
           <div formGroupName="purchase">
-            <label>{{'LABEL.PURCHASE_DATE' | translate}}</label>
+            <label>Date of Purchase</label>
             <my-date-picker  class="input-full" name="date" [options]="dateOptions"
                             [ngClass]="{error: checkIfElementIsErrored(personal.get('purchase.date'))}"
                             formControlName="date"></my-date-picker>
-            <label class="hidden-label">{{'LABEL.PURCHASE_PLACE' | translate}}</label>
+            <label class="hidden-label">Place of Purchase</label>
             <select class="input-full"
                     [ngClass]="{error: checkIfElementIsErrored(personal.get('purchase.place'))}"
                     formControlName="place">
-              <option value="">{{'LABEL.PURCHASE_PLACE' | translate}}</option>
+              <option value="">Place of Purchase</option>
               <option *ngFor="let retailer of retailers$ | async" [ngValue]="retailer.name">
                 {{retailer.name}}
               </option>
             </select>
-            <label class="hidden-label">{{'LABEL.PURCHASE_PLACE_OTHER' | translate}}</label>
-            <input class="input-full" placeholder="{{'LABEL.PURCHASE_PLACE_OTHER' | translate}}" type="text"
+            <label class="hidden-label">If 'Other' please specify</label>
+            <input class="input-full" placeholder="If 'Other' please specify" type="text"
                    formControlName="other">
           </div>
 
 		<div class="grid input-full">
         	<div class="grid__item">
-               {{'LABEL.RECEIPT' | translate}}
+               If you still have the receipt would you please upload a picture of it?
             </div>
             <div class="grid__item large--one-half medium--one-half">
 		        <label for="ReceiptPhoto" class="input-full">
-		        	<input class="" placeholder="{{'LABEL.RECEIPT' | translate}}" id="ReceiptPhoto" type="file" (change)="fileUpload($event)"
+		        	<input class="" placeholder="If you still have the receipt would you please upload a picture of it?" id="ReceiptPhoto" type="file" (change)="fileUpload($event)"
 		               [ngClass]="{error: checkIfElementIsErrored(personal.get('receiptPhoto'))}">
 		        </label>
-	        </div>
-	        <div class="grid__item large--one-half medium--one-half">
-				<div *ngIf="wrongFileType" class="errors">
-					<ul>
-					  <li>
-					    {{'VALIDATION.WRONG_FILE_TYPE' | translate}}
-					  </li>
-					</ul>
-				</div>
 	        </div>
 		</div>
 
