@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   apiHost: 'http://blendtec.test',
   s3: 'https://s3-us-west-1.amazonaws.com/data.blendtec.com',
-  bucket: 'https://s3-us-west-1.amazonaws.com/apps.develop.blendtec.com/warranties/',
+  bucket: 'https://s3-us-west-1.amazonaws.com/apps.develop.blendtec.com/warranty-claim/',
   warrantiesEndPoint: '',
   assets: 'assets',
   captchaKey: '6LcWmzIUAAAAADoSNPMqAECfcdIl9Z8B4czc4MjP'
