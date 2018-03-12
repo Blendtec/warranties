@@ -10,7 +10,6 @@ export class WarrantiesService {
   constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) { }
 
   public post(command: any): Promise<any> {
-  	console.log(`${this.config.apiHost}${this.config.warrantiesEndPoint}`);
     return this.http.post(`${this.config.apiHost}${this.config.warrantiesEndPoint}`, command, {responseType: 'text'}).toPromise();
   }
 }

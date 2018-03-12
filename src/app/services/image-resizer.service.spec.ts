@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { ImageResizerService } from './image-resizer.service';
 
-describe('ImageResizerService', () => {
+xdescribe('ImageResizerService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [ImageResizerService]

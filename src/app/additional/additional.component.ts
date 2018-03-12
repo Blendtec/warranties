@@ -46,7 +46,7 @@ export class AdditionalComponent implements OnInit, OnDestroy {
     return this.warrantiesService.post(new WarrantiesCommand(formData).toJSON())
       .then((out) => {
         console.log(out);
-        if (out === "success") {
+        if (out === 'success') {
           this.storeService.passDisplayState(4);
         } else {
           this.storeService.passDisplayState(2);
@@ -97,13 +97,13 @@ export class AdditionalComponent implements OnInit, OnDestroy {
       event.target.files[0].name &&
       event.target.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
       this.wrongFileType = false;
-      let self = this;
+      const self = this;
       this.imageResizerService.resizeImage(event.target.files[0], function(out) {
         if (out) {
-          let reader = new FileReader();
+          const reader = new FileReader();
           reader.onload = function() {
             self.additional.get(photoKey).setValue(reader.result);
-          }
+          };
           reader.readAsDataURL(out);
         } else {
           this.additional.get(photoKey).setValue({});

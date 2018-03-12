@@ -86,13 +86,13 @@ export class ProductComponent implements OnInit, OnDestroy {
       event.target.files[0].name &&
       event.target.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
       this.wrongFileType = false;
-      let self = this;
+      const self = this;
       this.imageResizerService.resizeImage(event.target.files[0], function(out) {
         if (out) {
-          let reader = new FileReader();
+          const reader = new FileReader();
           reader.onload = function() {
             self.product.get(photoKey).setValue(reader.result);
-          }
+          };
           reader.readAsDataURL(out);
         } else {
           this.product.get(photoKey).setValue({});
