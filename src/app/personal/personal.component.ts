@@ -9,6 +9,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { APP_CONFIG, AppConfig } from '../config';
 import { ICountry, IPersonal, IState } from '../models';
+import { ImageResizerService } from '../services/image-resizer.service';
 
 @Component({
   selector: 'app-personal',
@@ -44,6 +45,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
     private getState: GetAssetService<IState>,
     private retailerService: RetailerService,
     private getTimeZones: GetAssetService<object[]>,
+    private imageResizerService: ImageResizerService,
      @Inject(APP_CONFIG) private config: AppConfig) {
 
       this.retailers$ = retailerService.getAll$();
@@ -102,7 +104,18 @@ export class PersonalComponent implements OnInit, OnDestroy {
       event.target.files[0].name &&
       event.target.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
       this.wrongFileType = false;
-      this.personal.get('receiptPhoto').setValue(event.target.files);
+      const self = this;
+      this.imageResizerService.resizeImage(event.target.files[0], function(out) {
+        if (out) {
+          const reader = new FileReader();
+          reader.onload = function() {
+            self.personal.get('receiptPhoto').setValue(reader.result);
+          };
+          reader.readAsDataURL(out);
+        } else {
+          this.personal.get('receiptPhoto').setValue({});
+        }
+      });
     } else {
        this.wrongFileType = true;
        this.personal.get('receiptPhoto').setValue({});
