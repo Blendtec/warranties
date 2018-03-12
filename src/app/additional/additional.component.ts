@@ -45,7 +45,6 @@ export class AdditionalComponent implements OnInit, OnDestroy {
   formSubmitted(formData) {
     return this.warrantiesService.post(new WarrantiesCommand(formData).toJSON())
       .then((out) => {
-        console.log(out);
         if (out === 'success') {
           this.storeService.passDisplayState(4);
         } else {
