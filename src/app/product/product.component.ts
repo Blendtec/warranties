@@ -9,6 +9,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { APP_CONFIG, AppConfig } from '../config';
 import { ICountry, IState } from '../models';
+import { ImageResizerService } from '../services/image-resizer.service';
 
 @Component({
   selector: 'app-product',
@@ -34,14 +35,11 @@ export class ProductComponent implements OnInit, OnDestroy {
   constructor(private storeService: StoreService,
     private formBuilder: FormBuilder,
     private jarInfo: GetAssetService<object[]>,
+    private imageResizerService: ImageResizerService,
      @Inject(APP_CONFIG) private config: AppConfig) {
 
       this.jars$ = jarInfo.getAll$('jars.json');
     }
-
-  formSubmitted(value) {
-    console.log(value);
-  }
 
   ngOnInit() {
     this.createForm();
@@ -82,14 +80,27 @@ export class ProductComponent implements OnInit, OnDestroy {
     }
   }
 
-  fileUpload(event, photoKey: string): void {
+  fileUpload(event, photoKey): void {
     if (event.target.files &&
       event.target.files[0] &&
       event.target.files[0].name &&
       event.target.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
-      this.product.get(photoKey).setValue(event.target.files);
+      this.wrongFileType = false;
+      let self = this;
+      this.imageResizerService.resizeImage(event.target.files[0], function(out) {
+        if (out) {
+          let reader = new FileReader();
+          reader.onload = function() {
+            self.product.get(photoKey).setValue(reader.result);
+          }
+          reader.readAsDataURL(out);
+        } else {
+          this.product.get(photoKey).setValue({});
+        }
+      });
     } else {
-       this.product.get(photoKey).setValue(null);
+       this.wrongFileType = true;
+       this.product.get(photoKey).setValue({});
     }
   }
 

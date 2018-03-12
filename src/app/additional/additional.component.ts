@@ -9,6 +9,9 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { APP_CONFIG, AppConfig } from '../config';
 import { ICountry, IState } from '../models';
+import { WarrantiesService } from '../services/warranties.service';
+import { WarrantiesCommand } from '../models/warranties.command';
+import { ImageResizerService } from '../services/image-resizer.service';
 
 @Component({
   selector: 'app-additional',
@@ -33,12 +36,28 @@ export class AdditionalComponent implements OnInit, OnDestroy {
 
   constructor(private storeService: StoreService,
     private formBuilder: FormBuilder,
-     @Inject(APP_CONFIG) private config: AppConfig) {
+     @Inject(APP_CONFIG) private config: AppConfig,
+    private imageResizerService: ImageResizerService,
+    private warrantiesService: WarrantiesService) {
     this.captchaKey = config.captchaKey;
     }
 
-  formSubmitted(value) {
-    console.log(value);
+  formSubmitted(formData) {
+    return this.warrantiesService.post(new WarrantiesCommand(formData).toJSON())
+      .then((out) => {
+        console.log(out);
+        if (out === "success") {
+          this.storeService.passDisplayState(4);
+        } else {
+          this.storeService.passDisplayState(2);
+          alert('Something went wrong with your application, please try again.');
+        }
+
+      })
+      .catch(() => {
+        this.storeService.passDisplayState(1);
+        alert('Something went wrong with your application, please try again.');
+      });
   }
 
   ngOnInit() {
@@ -72,14 +91,27 @@ export class AdditionalComponent implements OnInit, OnDestroy {
     }
   }
 
-  fileUpload(event, photoKey: string): void {
+  fileUpload(event, photoKey): void {
     if (event.target.files &&
       event.target.files[0] &&
       event.target.files[0].name &&
       event.target.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
-      this.additional.get(photoKey).setValue(event.target.files);
+      this.wrongFileType = false;
+      let self = this;
+      this.imageResizerService.resizeImage(event.target.files[0], function(out) {
+        if (out) {
+          let reader = new FileReader();
+          reader.onload = function() {
+            self.additional.get(photoKey).setValue(reader.result);
+          }
+          reader.readAsDataURL(out);
+        } else {
+          this.additional.get(photoKey).setValue({});
+        }
+      });
     } else {
-       this.additional.get(photoKey).setValue(null);
+       this.wrongFileType = true;
+       this.additional.get(photoKey).setValue({});
     }
   }
 
@@ -133,8 +165,7 @@ export class AdditionalComponent implements OnInit, OnDestroy {
     this.storeService.storeForm['additional'] = this.additional;
     this.attemptedToSubmit = true;
     if (this.additional.valid) {
-      console.log(this.storeService.storeForm);
-      this.storeService.passDisplayState(4);
+      this.formSubmitted(this.storeService.storeForm);
     }
   }
 

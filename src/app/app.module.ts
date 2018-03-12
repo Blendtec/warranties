@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { PersonalComponent } from './personal/personal.component';
 import { ProductComponent } from './product/product.component';
 import { AdditionalComponent } from './additional/additional.component';
-import { StoreService, GetAssetService, CountryService, RetailerService } from './services/';
+import { StoreService, GetAssetService, CountryService, RetailerService, WarrantiesService } from './services/';
 import { StateTrackerComponent } from './state-tracker/state-tracker.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
@@ -20,9 +20,10 @@ import { TranslateLoader, TranslateModule, TranslatePipe } from '@ngx-translate/
 import { CountrySelectComponent } from './directives/country-select/country-select.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { WindowService } from './services/window.service';
+import { ImageResizerService } from './services/image-resizer.service';
 import { SerialModalComponent } from './directives/serial-modal.component/serial-modal.component';
 import { MyDatePickerModule } from 'mydatepicker';
-
+import { Ng2ImgMaxModule } from 'ng2-img-max';
 
 export function HttpLoaderFactory(http: HttpClient, config: AppConfig) {
   return new TranslateHttpLoader(http, `${config.assets}/i18n/`, '.json');
@@ -47,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient, config: AppConfig) {
     ReactiveFormsModule,
     HttpClientModule,
     NgHttpLoaderModule,
+    Ng2ImgMaxModule,
     NgPipesModule,
     RecaptchaModule.forRoot(),
     TranslateModule.forRoot({
@@ -64,7 +66,9 @@ export function HttpLoaderFactory(http: HttpClient, config: AppConfig) {
   TranslatePipe,
   WindowService,
   CountryService,
-  RetailerService],
+  RetailerService,
+  WarrantiesService,
+  ImageResizerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
