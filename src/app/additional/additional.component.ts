@@ -33,6 +33,7 @@ export class AdditionalComponent implements OnInit, OnDestroy {
   public showshaftSecure = false;
   public showjarleaking = false;
   public showspinsmooth = false;
+  public currentlySubmitting = false;
 
   constructor(private storeService: StoreService,
     private formBuilder: FormBuilder,
@@ -43,17 +44,20 @@ export class AdditionalComponent implements OnInit, OnDestroy {
     }
 
   formSubmitted(formData) {
+    this.currentlySubmitting = true;
     return this.warrantiesService.post(new WarrantiesCommand(formData).toJSON())
       .then((out) => {
+         this.currentlySubmitting = false;
         if (out === 'success') {
           this.storeService.passDisplayState(4);
         } else {
           this.storeService.passDisplayState(2);
-          alert('Something went wrong with your application, please try again.');
+          alert('Error: ' + out + ', please try again');
         }
 
       })
       .catch(() => {
+         this.currentlySubmitting = false;
         this.storeService.passDisplayState(1);
         alert('Something went wrong with your application, please try again.');
       });
@@ -161,11 +165,14 @@ export class AdditionalComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(): void {
-    this.storeService.storeForm['additional'] = this.additional;
-    this.attemptedToSubmit = true;
-    if (this.additional.valid) {
-      this.formSubmitted(this.storeService.storeForm);
+    if (!this.currentlySubmitting) {
+      this.storeService.storeForm['additional'] = this.additional;
+      this.attemptedToSubmit = true;
+      if (this.additional.valid) {
+        this.formSubmitted(this.storeService.storeForm);
+      }
     }
+
   }
 
 }
