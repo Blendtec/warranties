@@ -1,158 +1,193 @@
+<div id="motorSerialInfo" [ngClass]="{'show': explainSerialMotor}" class="exit-intent-overlay">
+    <div class="exit-intent inline-subscribe">
+        <div class="display-table-cell exit-intent__content" style="overflow-y: scroll;">
+            <button type="button" class="close product-comparison--close exitButton" data-dismiss="modal" aria-hidden="true" (click)="explainSerialMotor = false">
+<i class="fa fa-times" style="position:fixed;" aria-hidden="true"></i>
+</button>
+
+            <div style="height:500px;">
+                <div class="modal-header">
+                    <h4>Where is my serial number</h4>
+                </div>
+
+                <hr>
+                <div class="modal-body">
+                    <h3>All Blenders Except The Designer 725</h3>
+                    <p>You can find the serial number on the bottom of your blender base. <span>Example:</span></p>
+                    <img src="//cdn.blendtec.com/images/Support/blender-serial-location.jpg">
+                    <h3>Designer 725 only</h3>
+                    <p>Hold down the red ‘X’ on your blender, then select ‘Rewards.’ This will display the serial number along with your last reward code. <span>Example:</span></p>
+                    <img src="//cdn.blendtec.com/images/Support/blender-serial-location-725.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="jarInfo" [ngClass]="{'show': explainSerialJar}" class="exit-intent-overlay">
+    <div class="exit-intent inline-subscribe" style="height:100%;">
+        <div class="display-table-cell exit-intent__content" style="overflow-y: scroll;">
+            <button (click)="explainSerialJar = false" type="button" id="" class="close product-comparison--close exitButton" data-dismiss="modal" aria-hidden="true" style="">
+<i class="fa fa-times" style="position:fixed;" aria-hidden="true"></i>
+</button>
+
+            <div style="height:350px;">
+                <div class="modal-header">
+                    <h4>Where is my jar number?</h4>
+                </div>
+
+                <hr>
+                <div class="modal-body">
+                    <p>You can find the jar number on the bottom of your jar. <span>Example:</span></p>
+                    <img src="//cdn.blendtec.com/images/Support/jar-serial-location.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="warranty-wiz--content">
-		<h1 class="warranty-wiz--header">PRODUCT INFORMATION</h1>
+    <h1 class="warranty-wiz--header">PRODUCT INFORMATION</h1>
     <h2 class="warranty-wiz--subheader">Next, tell us about your problem.</h2>
 
     <form novalidate (ngSubmit)="onSubmit()" [formGroup]="product" class="animate-floating-labels">
-      <!-- TODO - more elegant solution to massive if -->
-      <div class="errors" *ngIf="checkIfErrorsShow(product)"
-      >
-        <ul>
-          <li *ngIf="checkIfElementIsErrored(product.get('problemType'))">
-              Select your problem
-          </li>
-          <li *ngIf="checkIfElementIsErrored(product.get('motorSerial.serialPrefix'))">
-              Serial Prefix is required
-          </li>
-          <li *ngIf="checkIfElementIsErrored(product.get('motorSerial.serialSuffix'))">
-              Serial Suffix is required
-          </li>
-          <li *ngIf="checkIfElementIsErrored(product.get('motorSerial.serialPhoto'))">
-              Please upload a photo of the motor serial number. Make sure that the image is either a jpg, png, or gif.
-          </li>
-          <li *ngIf="checkIfElementIsErrored(product.get('jar.jarSize'))">
-              Jar size is required
-          </li>
-          <li *ngIf="checkIfElementIsErrored(product.get('jar.jarNumber'))">
-              Jar number is required
-          </li>
-          <li *ngIf="checkIfElementIsErrored(product.get('jar.jarPhoto'))">
-              Please upload a photo of the jar number. Make sure that the image is either a jpg, png, or gif.
-          </li>
-          <li *ngIf="checkIfElementIsErrored(product.get('problemDescription'))">
-              Please describe your problem
-          </li>
-        </ul>
-      </div>
-      <div>
+        <!-- TODO - more elegant solution to massive if -->
+        <div class="errors" *ngIf="checkIfErrorsShow(product)">
+            <ul>
+                <li *ngIf="checkIfElementIsErrored(product.get('problemType'))">
+                    Select your problem
+                </li>
+                <li *ngIf="checkIfElementIsErrored(product.get('motorSerial.serialPrefix'))">
+                    Serial Prefix is required
+                </li>
+                <li *ngIf="checkIfElementIsErrored(product.get('motorSerial.serialSuffix'))">
+                    Serial Suffix is required
+                </li>
+                <li *ngIf="checkIfElementIsErrored(product.get('motorSerial.serialPhoto'))">
+                    Please upload a photo of the motor serial number. Make sure that the image is either a jpg, png, or gif.
+                </li>
+                <li *ngIf="checkIfElementIsErrored(product.get('jar.jarSize'))">
+                    Jar size is required
+                </li>
+                <li *ngIf="checkIfElementIsErrored(product.get('jar.jarNumber'))">
+                    Jar number is required
+                </li>
+                <li *ngIf="checkIfElementIsErrored(product.get('jar.jarPhoto'))">
+                    Please upload a photo of the jar number. Make sure that the image is either a jpg, png, or gif.
+                </li>
+                <li *ngIf="checkIfElementIsErrored(product.get('problemDescription'))">
+                    Please describe your problem
+                </li>
+            </ul>
+        </div>
+        <div>
 
-    <div class="grid">
+            <div class="grid">
 
-      <div class="input-full grid__item">
-              <div>
-                <label>With what are you having a problem?</label>
-              </div>
-              <div>
-                <label for="problemMotor" class="radio-seperator">
+                <div class="input-full grid__item">
+                    <div>
+                        <label>With what are you having a problem?</label>
+                    </div>
+                    <div>
+                        <label for="problemMotor" class="radio-seperator">
                   <input class="" placeholder="The Blender Motor" id="problemMotor" (change)="requireJars()" type="radio" formControlName="problemType" value="motor"
                        [ngClass]="{error: checkIfElementIsErrored(product.get('problemType'))}">
                        The Blender Motor
                 </label>
-              </div>
-              <div>
-                <label for="problemJar" class="radio-seperator">
+                    </div>
+                    <div>
+                        <label for="problemJar" class="radio-seperator">
                   <input class="" placeholder="The Blender Jar" id="problemJar" (change)="requireJars()" type="radio" formControlName="problemType" value="jar"
                        [ngClass]="{error: checkIfElementIsErrored(product.get('problemType'))}">
                        The Blender Jar
                 </label>
-              </div>
-              <div>
-                <label for="problemBoth" class="radio-seperator">
+                    </div>
+                    <div>
+                        <label for="problemBoth" class="radio-seperator">
                   <input class="" placeholder="Both the motor and the jar" id="problemBoth" (change)="requireJars()" type="radio" formControlName="problemType" value="both"
                        [ngClass]="{error: checkIfElementIsErrored(product.get('problemType'))}">
                        Both the motor and the jar
                 </label>
-              </div>
-            </div>
-      <div class="grid__item medium--one-half large--one-half" style="margin-top:35px;" formGroupName="motorSerial">
-	        <span style="font-style:bold;">Motor Serial Number</span>
-          <div class="grid">
-            <div class="grid__item small--one-half medium--one-half large--one-half">
-              <label class="hidden-label">Serial Prefix</label>
-              <input class="input-full" placeholder="Serial Prefix" type="text"
-                     [ngClass]="{error: checkIfElementIsErrored(product.get('motorSerial.serialPrefix'))}"
-                     formControlName="serialPrefix">
-            </div>
-            <div class="grid__item small--one-tenth medium--one-tenth large--one-tenth" style="text-align:center;margin-top:16px;font-size:20px;">-</div>
-            <div class="grid__item small--one-third medium--one-third large--one-third">
-              <label class="hidden-label">Suffix</label>
-              <input class="input-full" placeholder="Suffix" type="text"
-                     [ngClass]="{error: checkIfElementIsErrored(product.get('motorSerial.serialSuffix'))}"
-                     formControlName="serialSuffix">
-            </div>
-            <div></div>
-          </div>
-      </div>
-      <div class="grid__item medium--one-half large--one-half" style="margin-top:35px;" formGroupName="motorSerial">
-	        <label for="serialPhoto" class="input-full">
-	        <span style="font-style:bold;">Motor Serial Number Photo</span>
-	        	<input class="input-full" placeholder="Motor Serial Number Photo" id="serialPhoto" type="file" (change)="fileUpload($event, 'motorSerial.serialPhoto')"
-	               [ngClass]="{error: checkIfElementIsErrored(product.get('motorSerial.serialPhoto'))}">
-	        </label>
-      </div>
-	<div *ngIf="product.get('problemType').value === 'jar' || product.get('problemType').value === 'both'" class="grid__item medium--one-half large--one-half" style="margin-top:35px;" formGroupName="jar">
-        <label >What is your Jar size?</label>
-        <select class="input-full"
-                [ngClass]="{error: checkIfElementIsErrored(product.get('jar.jarSize'))}"
-                formControlName="jarSize">
+                    </div>
+                </div>
+                <div class="grid__item medium--one-half large--one-half" style="margin-top:35px;" formGroupName="motorSerial">
+                    <span style="font-style:bold;">Motor Serial Number</span>
+                    <div class="grid">
+                        <div class="grid__item small--two-fifths medium--two-fifths large--two-fifths">
+                            <label class="hidden-label">Serial Prefix</label>
+                            <input class="input-full" placeholder="Serial Prefix" type="text" [ngClass]="{error: checkIfElementIsErrored(product.get('motorSerial.serialPrefix'))}" formControlName="serialPrefix">
+                        </div>
+                        <div class="grid__item small--one-twelfth medium--one-twelfth large--one-twelfth" style="text-align:center;margin-top:16px;font-size:20px;">-</div>
+                        <div class="grid__item small--one-third medium--one-third large--one-third">
+                            <label class="hidden-label">Suffix</label>
+                            <input class="input-full" placeholder="Suffix" type="text" [ngClass]="{error: checkIfElementIsErrored(product.get('motorSerial.serialSuffix'))}" formControlName="serialSuffix">
+                        </div>
+                        <div class="grid__item large--one-twelfth medium--one-twelfth small--one-twelfth" style="padding-left: 15px;"><i (click)="explainSerialMotor = true" class="questionButtonCenter fa fa-question-circle-o" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+                <div class="grid__item medium--one-half large--one-half" style="margin-top:35px;" formGroupName="motorSerial">
+                    <label for="serialPhoto" class="input-full">
+          <span style="font-style:bold;">Motor Serial Number Photo</span>
+            <input class="input-full" placeholder="Motor Serial Number Photo" id="serialPhoto" type="file" (change)="fileUpload($event, 'motorSerial.serialPhoto')"
+                 [ngClass]="{error: checkIfElementIsErrored(product.get('motorSerial.serialPhoto'))}">
+          </label>
+                </div>
+                <div *ngIf="product.get('problemType').value === 'jar' || product.get('problemType').value === 'both'" class="grid__item medium--one-half large--one-half" style="margin-top:35px;" formGroupName="jar">
+                    <label>What is your Jar size?</label>
+                    <select class="input-full" [ngClass]="{error: checkIfElementIsErrored(product.get('jar.jarSize'))}" formControlName="jarSize">
           <option *ngFor="let jar of jars$ | async" [ngValue]="jar.value">
             {{jar.name}}
           </option>
         </select>
-	</div>
-    <div *ngIf="product.get('problemType').value === 'jar' || product.get('problemType').value === 'both'" class="grid__item medium--one-third large--one-third small--one-half" style="margin-top:35px;">
-    <div *ngFor="let jar of jars$ | async">
-      <div *ngIf="product.get('jar.jarSize').value === jar.value">
-        <img style="width:100%;" src="{{jar.image}}">
-        <div style="text-align:center;color:#ED1B2C;">{{jar.name}}</div>
-      </div>
-    </div>
-  </div>
-	<div class="grid__item medium--one-sixth large--one-sixth" style="margin-top:35px;"></div>
-		</div>
-<div *ngIf="product.get('problemType').value === 'jar' || product.get('problemType').value === 'both'" class="grid">
-    <div class="grid__item medium--one-half large--one-half" style="margin-top:35px;">
-      <div formGroupName="jar">
-        <label>What is your Jar Number?</label>
-        <input class="input-full" placeholder="Jar Number:" type="text"
-               [ngClass]="{error: checkIfElementIsErrored(product.get('jar.jarNumber'))}"
-               formControlName="jarNumber">
-      </div>
+                </div>
+                <div *ngIf="product.get('problemType').value === 'jar' || product.get('problemType').value === 'both'" class="grid__item medium--one-third large--one-third small--one-half" style="margin-top:35px;">
+                    <div *ngFor="let jar of jars$ | async">
+                        <div *ngIf="product.get('jar.jarSize').value === jar.value">
+                            <img style="width:100%;" src="{{jar.image}}">
+                            <div style="text-align:center;color:#ED1B2C;">{{jar.name}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid__item medium--one-sixth large--one-sixth" style="margin-top:35px;"></div>
+            </div>
+            <div *ngIf="product.get('problemType').value === 'jar' || product.get('problemType').value === 'both'" class="grid">
+                <div class="grid__item medium--one-half large--one-half" style="margin-top:35px;">
+                    <div formGroupName="jar">
+                        <label>What is your Jar Number?</label>
+                        <input class="input-full" placeholder="Jar Number:" type="text" [ngClass]="{error: checkIfElementIsErrored(product.get('jar.jarNumber'))}" formControlName="jarNumber" style="width: 90%;float: left;">
+                        <div class="grid__item questionButton" ><i (click)="explainSerialJar = true" class="questionButtonCenter fa fa-question-circle-o" aria-hidden="true" style=""></i></div>
+                    </div>
 
-  </div>
-  <div class="grid__item medium--one-half large--one-half" style="margin-top:35px;">
-      <div formGroupName="jar">
-          <label for="jarNumberPhoto" class="input-full">
+                </div>
+                <div class="grid__item medium--one-half large--one-half" style="margin-top:35px;">
+                    <div formGroupName="jar">
+                        <label for="jarNumberPhoto" class="input-full">
           <span style="font-style:bold;">Jar Number Photo</span>
             <input class="input-full" placeholder="Jar Number Photo" id="jarNumberPhoto" type="file" (change)="fileUpload($event, 'jar.jarPhoto')"
                  [ngClass]="{error: checkIfElementIsErrored(product.get('jar.jarPhoto'))}">
           </label>
-      </div>
+                    </div>
 
-  </div>
-</div>
-<div class="grid" style="margin-top:35px;">
-  <div class="grid__item">
-  <div style="font-size:1rem;font-size:14px;font-style:bold;">Describe your blender's issue(s). Please be as descriptive as possible:</div>
-    <textarea [ngClass]="{error: checkIfElementIsErrored(product.get('problemDescription'))}" style="width:100%;border: 1px solid #ccc;" formControlName="problemDescription" maxlength="{{textAreaLength}}"></textarea>
-    <div style="font-size:1rem;font-size:14px;">You have <span style="color:#ED1B2C;">{{textAreaLength-product.get('problemDescription').value.length}}</span> character<span *ngIf="textAreaLength-product.get('problemDescription').value.length !== 1">s</span> available.</div>
-  </div>
-</div>
-    <div class="grid input-full">
-      <button id="product-submit--btn" name="button" class="step__footer__continue-btn btn" style="float:left;"
-      	(click)="previousStep()"
-              >
+                </div>
+            </div>
+            <div class="grid" style="margin-top:35px;">
+                <div class="grid__item">
+                    <div style="font-size:1rem;font-size:14px;font-style:bold;">Describe your blender's issue(s). Please be as descriptive as possible:</div>
+                    <textarea [ngClass]="{error: checkIfElementIsErrored(product.get('problemDescription'))}" style="width:100%;border: 1px solid #ccc;" formControlName="problemDescription" maxlength="{{textAreaLength}}"></textarea>
+                    <div style="font-size:1rem;font-size:14px;">You have <span style="color:#ED1B2C;">{{textAreaLength-product.get('problemDescription').value.length}}</span> character<span *ngIf="textAreaLength-product.get('problemDescription').value.length !== 1">s</span> available.</div>
+                </div>
+            </div>
+            <div class="grid input-full">
+                <button id="product-submit--btn" name="button" class="step__footer__continue-btn btn" style="float:left;" (click)="previousStep()">
         Previous
       </button>
-      <button id="product-submit--btn" name="button" class="step__footer__continue-btn btn" style="float:right;"
-              type="submit">
+                <button id="product-submit--btn" name="button" class="step__footer__continue-btn btn" style="float:right;" type="submit">
         NEXT
       </button>
-    </div>
+            </div>
 
 
-      </div>
+        </div>
 
     </form>
 
 </div>
-
