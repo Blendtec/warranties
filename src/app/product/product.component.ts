@@ -31,6 +31,8 @@ export class ProductComponent implements OnInit, OnDestroy {
   public isFormValid = false;
   public attemptedToSubmit = false;
   public textAreaLength = 500;
+  public explainSerialMotor = false;
+  public explainSerialJar = false;
 
   constructor(private storeService: StoreService,
     private formBuilder: FormBuilder,
