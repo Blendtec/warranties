@@ -17,4 +17,11 @@ export class ImageResizerService {
        );
   }
 
+  disabledButtonColor(resizing: boolean): string {
+    if (resizing) {
+      return 'grey';
+    }
+    return null;
+  }
+
 }
