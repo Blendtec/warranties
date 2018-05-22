@@ -46,7 +46,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
     private getState: GetAssetService<IState>,
     private retailerService: RetailerService,
     private getTimeZones: GetAssetService<object[]>,
-    private imageResizerService: ImageResizerService,
+    public imageResizerService: ImageResizerService,
      @Inject(APP_CONFIG) private config: AppConfig) {
 
       this.retailers$ = retailerService.getAll$();
