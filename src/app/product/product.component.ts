@@ -38,7 +38,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   constructor(private storeService: StoreService,
     private formBuilder: FormBuilder,
     private jarInfo: GetAssetService<object[]>,
-    public imageResizerService: ImageResizerService,
+    private imageResizerService: ImageResizerService,
      @Inject(APP_CONFIG) private config: AppConfig) {
 
       this.jars$ = jarInfo.getAll$('jars.json');

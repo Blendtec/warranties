@@ -39,7 +39,7 @@ export class AdditionalComponent implements OnInit, OnDestroy {
   constructor(private storeService: StoreService,
     private formBuilder: FormBuilder,
      @Inject(APP_CONFIG) private config: AppConfig,
-    public imageResizerService: ImageResizerService,
+    private imageResizerService: ImageResizerService,
     private warrantiesService: WarrantiesService) {
     this.captchaKey = config.captchaKey;
     }
