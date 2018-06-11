@@ -12,7 +12,6 @@ export class WarrantiesCommand {
 
   public toJSON() {
         return {
-          'Warranty': {
             'first_name': this.formData.personal.value.firstName,
             'last_name': this.formData.personal.value.lastName,
             'street': this.formData.personal.value.address.one + ' ' + this.formData.personal.value.address.two,
@@ -34,22 +33,18 @@ export class WarrantiesCommand {
             'wiggle_shaft': this.formData.additional.value.shaftSecure,
             'leaky_jar': this.formData.additional.value.jarLeaking,
             'city': this.formData.personal.value.address.city,
-            'state': this.formData.personal.value.address.stateProvince
-          },
-          'info': {
+            'state': this.formData.personal.value.address.stateProvince,
             'recaptcha': this.formData.additional.value.recaptcha,
-            'blenderPurchaseLocationExplanation': this.formData.personal.value.purchase.place,
+            'purchasePlace': this.formData.personal.value.purchase.place,
             'howToOwn': '',
             'whichProblem': this.formData.product.value.problemType,
-            'purchaseLocationOtherExplanation': this.formData.personal.value.purchase.other,
-            'startUsingBlender': this.formData.personal.value.purchase.date.formatted
-          },
-          'photos': {
+            'purchaseOther': this.formData.personal.value.purchase.other,
+            'purchaseDate': new Date(this.formData.personal.value.purchase.date.formatted)
+            .toISOString(),
             'serialnumber': this.formData.product.value.motorSerial.serialPhoto,
             'jarnumber': this.formData.product.value.jar.jarPhoto,
             'problem': this.formData.additional.value.problemPhoto,
             'receiptPhoto': this.formData.personal.value.receiptPhoto
-          }
         };
       }
 }

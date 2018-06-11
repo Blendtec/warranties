@@ -34,6 +34,7 @@ export class AdditionalComponent implements OnInit, OnDestroy {
   public showjarleaking = false;
   public showspinsmooth = false;
   public currentlySubmitting = false;
+  public imageResizing = false;
 
   constructor(private storeService: StoreService,
     private formBuilder: FormBuilder,
@@ -46,15 +47,9 @@ export class AdditionalComponent implements OnInit, OnDestroy {
   formSubmitted(formData) {
     this.currentlySubmitting = true;
     return this.warrantiesService.post(new WarrantiesCommand(formData).toJSON())
-      .then((out) => {
+      .then(() => {
          this.currentlySubmitting = false;
-        if (out === 'success') {
-          this.storeService.passDisplayState(4);
-        } else {
-          this.storeService.passDisplayState(2);
-          alert('Error: ' + out + ', please try again');
-        }
-
+         this.storeService.passDisplayState(4);
       })
       .catch(() => {
          this.currentlySubmitting = false;
@@ -101,7 +96,9 @@ export class AdditionalComponent implements OnInit, OnDestroy {
       event.target.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
       this.wrongFileType = false;
       const self = this;
+        self.imageResizing = true;
       this.imageResizerService.resizeImage(event.target.files[0], function(out) {
+        self.imageResizing = false;
         if (out) {
           const reader = new FileReader();
           reader.onload = function() {

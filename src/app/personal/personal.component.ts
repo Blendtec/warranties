@@ -35,6 +35,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
   private acceptableFileFormats = ['image/jpeg', 'image/jpg', 'image/png'];
   public wrongFileType = false;
   public dynamicRepeatValue: any;
+  public imageResizing = false;
 
   public isFormValid = false;
   public attemptedToSubmit = false;
@@ -105,7 +106,9 @@ export class PersonalComponent implements OnInit, OnDestroy {
       event.target.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
       this.wrongFileType = false;
       const self = this;
+      this.imageResizing = true;
       this.imageResizerService.resizeImage(event.target.files[0], function(out) {
+        self.imageResizing = false;
         if (out) {
           const reader = new FileReader();
           reader.onload = function() {

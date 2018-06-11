@@ -33,6 +33,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   public textAreaLength = 500;
   public explainSerialMotor = false;
   public explainSerialJar = false;
+  public imageResizing = false;
 
   constructor(private storeService: StoreService,
     private formBuilder: FormBuilder,
@@ -89,7 +90,9 @@ export class ProductComponent implements OnInit, OnDestroy {
       event.target.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
       this.wrongFileType = false;
       const self = this;
+        self.imageResizing = true;
       this.imageResizerService.resizeImage(event.target.files[0], function(out) {
+        self.imageResizing = false;
         if (out) {
           const reader = new FileReader();
           reader.onload = function() {

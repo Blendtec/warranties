@@ -5,10 +5,10 @@
 
 export const environment = {
   production: false,
-  apiHost: 'https://old.blendtec.com',
+  apiHost: 'http://localhost:3000',
   s3: 'https://s3-us-west-1.amazonaws.com/data.blendtec.com',
   bucket: 'https://s3-us-west-1.amazonaws.com/apps.develop.blendtec.com/warranty-claim/',
-  warrantiesEndPoint: '/api/warranty',
+  warrantiesEndPoint: '/warranty',
   assets: 'https://s3-us-west-1.amazonaws.com/apps.develop.blendtec.com/warranty-claim/assets',
   captchaKey: '6LcWmzIUAAAAADoSNPMqAECfcdIl9Z8B4czc4MjP'
 };
