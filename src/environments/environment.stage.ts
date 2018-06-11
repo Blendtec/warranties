@@ -5,7 +5,7 @@
 
 export const environment = {
   production: true,
-  apiHost: 'https://old.blendtec.com',
+  apiHost: 'https://transit-stage.blendtec.com',
   s3: 'https://s3-us-west-1.amazonaws.com/data.blendtec.com',
   bucket: 'https://s3-us-west-1.amazonaws.com/apps.stage.blendtec.com/warranty-claim/',
   warrantiesEndPoint: '/api/warranty',
