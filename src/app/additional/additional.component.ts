@@ -106,12 +106,12 @@ export class AdditionalComponent implements OnInit, OnDestroy {
           };
           reader.readAsDataURL(out);
         } else {
-          this.additional.get(photoKey).setValue({});
+          this.additional.get(photoKey).setValue('');
         }
       });
     } else {
        this.wrongFileType = true;
-       this.additional.get(photoKey).setValue({});
+       this.additional.get(photoKey).setValue('');
     }
   }
 

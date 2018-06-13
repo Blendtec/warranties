@@ -29,7 +29,7 @@ export class WarrantiesCommand {
         this.formData.product.value.motorSerial.serialSuffix,
       'jarSize': this.formData.product.value.jar.jarSize,
       'jarNumber': this.formData.product.value.jar.jarNumber,
-      'jarNumberImage': this.formData.product.value.jar.jarPhoto,
+      'jarNumberImage': this.formData.product.value.jar.jarPhoto || '',
       'description': this.formData.product.value.problemDescription,
       'whichProblem': this.formData.product.value.problemType,
       'hasUnusualSounds': this.formData.additional.value.unusualSounds,
@@ -41,9 +41,9 @@ export class WarrantiesCommand {
       'purchaseOther': this.formData.personal.value.purchase.other,
       'purchaseDate': new Date(this.formData.personal.value.purchase.date.formatted)
         .toISOString(),
-      'serialImage': this.formData.product.value.motorSerial.serialPhoto,
-      'problemImage': this.formData.additional.value.problemPhoto,
-      'receiptImage': this.formData.personal.value.receiptPhoto,
+      'serialImage': this.formData.product.value.motorSerial.serialPhoto || '',
+      'problemImage': this.formData.additional.value.problemPhoto || '' ,
+      'receiptImage': this.formData.personal.value.receiptPhoto || '',
       'recaptcha': this.formData.additional.value.recaptcha
     };
   }
