@@ -10,5 +10,5 @@ export interface IPersonal {
   serial: ISerial;
   contact: IContact;
   purchase: IPurchase;
-  receiptPhoto: object;
+  receiptPhoto: string;
 }

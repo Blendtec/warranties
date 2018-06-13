@@ -152,7 +152,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
           other: ['', []],
           date: ['', [Validators.required]]
         }, {validator: OtherPurchasePlaceValidator}),
-        receiptPhoto: [{}, []]
+        receiptPhoto: ['', []]
       });
     }
 
