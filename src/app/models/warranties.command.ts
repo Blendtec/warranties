@@ -11,41 +11,41 @@ export class WarrantiesCommand {
   }
 
   public toJSON() {
-        return {
-            'first_name': this.formData.personal.value.firstName,
-            'last_name': this.formData.personal.value.lastName,
-            'street': this.formData.personal.value.address.one + ' ' + this.formData.personal.value.address.two,
-            'zip_code': this.formData.personal.value.address.zip,
-            'country': this.formData.personal.value.address.country,
-            'phone_number': this.formData.personal.value.address.phone,
-            'email_address': this.formData.personal.value.address.email,
-            'preferred_contact_method': this.formData.personal.value.contact.contactMethod,
-            'preferred_contact_time': this.formData.personal.value.contact.contactTime,
-            'time_zone': this.formData.personal.value.contact.timeZone,
-            'serial_number': this.formData.product.value.motorSerial.serialPrefix +
-            '-' +
-            this.formData.product.value.motorSerial.serialSuffix,
-            'jar_size': this.formData.product.value.jar.jarSize,
-            'jar_number': this.formData.product.value.jar.jarNumber,
-            'description': this.formData.product.value.problemDescription,
-            'jar_sounds': this.formData.additional.value.unusualSounds,
-            'smooth_spinning': this.formData.additional.value.spinSmooth,
-            'wiggle_shaft': this.formData.additional.value.shaftSecure,
-            'leaky_jar': this.formData.additional.value.jarLeaking,
-            'city': this.formData.personal.value.address.city,
-            'state': this.formData.personal.value.address.stateProvince,
-            'recaptcha': this.formData.additional.value.recaptcha,
-            'purchasePlace': this.formData.personal.value.purchase.place,
-            'howToOwn': '',
-            'whichProblem': this.formData.product.value.problemType,
-            'purchaseOther': this.formData.personal.value.purchase.other,
-            'purchaseDate': new Date(this.formData.personal.value.purchase.date.formatted)
-            .toISOString(),
-            'serialnumber': this.formData.product.value.motorSerial.serialPhoto,
-            'jarnumber': this.formData.product.value.jar.jarPhoto,
-            'problem': this.formData.additional.value.problemPhoto,
-            'receiptPhoto': this.formData.personal.value.receiptPhoto
-        };
-      }
+    return {
+      'firstName': this.formData.personal.value.firstName,
+      'lastName': this.formData.personal.value.lastName,
+      'street': this.formData.personal.value.address.one + ' ' + this.formData.personal.value.address.two,
+      'city': this.formData.personal.value.address.city,
+      'state': this.formData.personal.value.address.stateProvince,
+      'zipCode': this.formData.personal.value.address.zip,
+      'country': this.formData.personal.value.address.country,
+      'phoneNumber': this.formData.personal.value.address.phone,
+      'emailAddress': this.formData.personal.value.address.email,
+      'contactMethod': this.formData.personal.value.contact.contactMethod,
+      'contactTime': this.formData.personal.value.contact.contactTime,
+      'timeZone': this.formData.personal.value.contact.timeZone,
+      'serialNumber': this.formData.product.value.motorSerial.serialPrefix +
+        '-' +
+        this.formData.product.value.motorSerial.serialSuffix,
+      'jarSize': this.formData.product.value.jar.jarSize,
+      'jarNumber': this.formData.product.value.jar.jarNumber,
+      'jarNumberImage': this.formData.product.value.jar.jarPhoto,
+      'description': this.formData.product.value.problemDescription,
+      'whichProblem': this.formData.product.value.problemType,
+      'hasUnusualSounds': this.formData.additional.value.unusualSounds,
+      'isSmoothSpinning': this.formData.additional.value.spinSmooth,
+      'isShaftSecure': this.formData.additional.value.shaftSecure,
+      'isLeakingJar': this.formData.additional.value.jarLeaking,
+      'purchasePlace': this.formData.personal.value.purchase.place,
+      'howToOwn': '',
+      'purchaseOther': this.formData.personal.value.purchase.other,
+      'purchaseDate': new Date(this.formData.personal.value.purchase.date.formatted)
+        .toISOString(),
+      'serialImage': this.formData.product.value.motorSerial.serialPhoto,
+      'problemImage': this.formData.additional.value.problemPhoto,
+      'receiptImage': this.formData.personal.value.receiptPhoto,
+      'recaptcha': this.formData.additional.value.recaptcha
+    };
+  }
 }
 
