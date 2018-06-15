@@ -1,5 +1,4 @@
 import { TestBed, inject } from '@angular/core/testing';
-
 import { WindowService } from './window.service';
 
 describe('WindowService', () => {
@@ -10,6 +9,7 @@ describe('WindowService', () => {
   });
 
   it('should be created', inject([WindowService], (service: WindowService) => {
-    expect(service).toBeTruthy();
+    expect(service)
+      .toBeTruthy();
   }));
 });

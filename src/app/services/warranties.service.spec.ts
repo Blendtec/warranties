@@ -3,18 +3,17 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 import { WarrantiesService } from './warranties.service';
 import { AppConfigModule } from '../config';
-import { TranslateService } from '@ngx-translate/core';
-
 
 describe('WarrantiesService', () => {
 
   let requestService: WarrantiesService;
   let httpMock: HttpTestingController;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
-        AppConfigModule,
+        AppConfigModule
       ],
       providers: [
         WarrantiesService
@@ -30,5 +29,3 @@ describe('WarrantiesService', () => {
     expect(requestService).toBeTruthy();
   });
 });
-
-

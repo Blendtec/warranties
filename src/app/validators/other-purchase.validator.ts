@@ -7,5 +7,6 @@ export function OtherPurchasePlaceValidator(formGroup: AbstractControl): {[key: 
   if (place && place.indexOf('Other') > -1 && !other) {
     return {required: true};
   }
+
   return null;
 }

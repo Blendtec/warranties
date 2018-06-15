@@ -1,24 +1,27 @@
+import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { IPersonal } from '../models/';
 
 @Injectable()
 export class StoreService {
+  storeForm: any;
+  storeFormData: any;
+  retrieveLanguage$: Observable<any>;
+  retrieveState$: Observable<any>;
+  displayState$: Observable<any>;
+  retrieveNumState$: Observable;
+
   private language = new Subject<string>();
-  private tester = true;
   private state = new Subject<string>();
   private displayState = new Subject<number>();
   private numState = new Subject<number>();
-  public storeForm: any;
-  public storeFormData: any;
-
-  retrieveLanguage$ = this.language.asObservable();
-  retrieveState$ = this.state.asObservable();
-  displayState$ = this.displayState.asObservable();
-  retrieveNumState$ = this.numState.asObservable();
 
   constructor() {
     this.language.next('en');
+    this.retrieveLanguage$ = this.language.asObservable();
+    this.retrieveState$ = this.state.asObservable();
+    this.displayState$ = this.displayState.asObservable();
+    this.retrieveNumState$ = this.numState.asObservable();
     this.storeForm = {};
     this.storeFormData = {};
   }

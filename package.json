@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "lint": "tslint -c tslint.json -p tsconfig.json src/**/*.ts",
+    "lint": "ng lint",
     "build": "ng build",
     "test": "ng test",
     "e2e": "ng e2e",

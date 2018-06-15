@@ -5,6 +5,8 @@
   "extends": ["angular-tslint-rules"],
   "rules": {
     "ordered-imports": false,
-    "no-null-keyword": false
+    "no-null-keyword": false,
+    "curly": true,
+    "newline-per-chained-call": false
   }
 }

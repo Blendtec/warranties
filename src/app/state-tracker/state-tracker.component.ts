@@ -3,7 +3,7 @@ import { StoreService } from '../services/store.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
-  selector: 'app-state-tracker',
+  selector: 'ngx-state-tracker',
   templateUrl: './state-tracker.component.html',
   styleUrls: ['./state-tracker.component.css']
 })
@@ -14,24 +14,20 @@ export class StateTrackerComponent implements OnInit, OnDestroy {
   defaultState = 1;
   displayState: number;
 
-
   constructor(private storeService: StoreService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.displayState = this.defaultState;
     this.appState = this.defaultState;
     const self = this;
-    this.appStateSub = this.storeService.displayState$.subscribe(
-      data => {
-          self.appState = data;
-      });
+    this.appStateSub = this.storeService.displayState$
+      .subscribe(data => self.appState = data);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.appStateSub.unsubscribe();
   }
-
 
 }

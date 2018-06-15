@@ -1,6 +1,6 @@
 <div class="warranty-wiz--container">
   <div class="warranty-wiz--steps">
-    <app-state-tracker *ngIf="appState > 0 && appState < 4"></app-state-tracker>
+    <ngx-state-tracker *ngIf="appState > 0 && appState < 4"></ngx-state-tracker>
   </div>
 <app-additional *ngIf="appState === 3"></app-additional>
 <app-personal *ngIf="appState === 1"></app-personal>
