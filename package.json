@@ -10,11 +10,11 @@
     "test": "ng test",
     "e2e": "ng e2e",
     "build:ci": "npm run env && ng build --aot --prod --deploy-url",
-    "test:ci": "ng test --single-run --code-coverage"
+    "test:ci": "npm run lint && ng test --single-run --code-coverage"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "5.1.0",
+    "@angular/animations": "^5.1.0",
     "@angular/common": "5.1.0",
     "@angular/compiler": "5.1.0",
     "@angular/core": "5.1.0",
