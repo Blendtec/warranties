@@ -10,7 +10,7 @@
     "test": "ng test",
     "e2e": "ng e2e",
     "build:ci": "npm run env && ng build --aot --prod --deploy-url",
-    "test:ci": "npm run lint && ng test --single-run --code-coverage"
+    "test:ci": "ng test --single-run --code-coverage"
   },
   "private": true,
   "dependencies": {
@@ -34,7 +34,8 @@
     "ng2-img-max": "^2.1.15",
     "ngx-pipes": "^2.0.5",
     "rxjs": "^5.5.5",
-    "zone.js": "^0.8.14"
+    "zone.js": "^0.8.14",
+    "protractor": "^5.1.2"
   },
   "devDependencies": {
     "@angular-devkit/schematics": "0.0.42",
@@ -57,7 +58,6 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "pretty-typescript": "^1.15.0",
-    "protractor": "~5.1.2",
     "shopify-node-api": "^1.8.0",
     "striptags": "^3.1.1",
     "ts-node": "~3.2.0",
