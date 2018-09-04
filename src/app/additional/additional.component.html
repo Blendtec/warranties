@@ -99,10 +99,6 @@
                      [ngClass]="{error: checkIfElementIsErrored(additional.get('problemPhoto'))}">
               </label>
             </div>
-            <div class="input-full grid__item " style="margin-top:35px;">
-              <re-captcha (resolved)="additional.get('recaptcha').setValue($event)"
-                            siteKey="{{captchaKey}}"></re-captcha>
-            </div>
    </div>
     <div class="grid input-full">
       <button id="additional-submit--btn" name="button" class="step__footer__continue-btn btn" style="float:left;"

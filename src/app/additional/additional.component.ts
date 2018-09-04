@@ -124,8 +124,7 @@ export class AdditionalComponent implements OnInit, OnDestroy {
         shaftSecure: ['', []],
         jarLeaking: ['', []],
         spinSmooth: ['', []],
-        problemPhoto: [null, [Validators.required]],
-        recaptcha: [false, [RecaptchaValidator]]
+        problemPhoto: [null, [Validators.required]]
       });
     }
   }
