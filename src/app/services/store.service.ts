@@ -9,7 +9,7 @@ export class StoreService {
   retrieveLanguage$: Observable<any>;
   retrieveState$: Observable<any>;
   displayState$: Observable<any>;
-  retrieveNumState$: Observable;
+  retrieveNumState$: Observable<any>;
 
   private language = new Subject<string>();
   private state = new Subject<string>();
