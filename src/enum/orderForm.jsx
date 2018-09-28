@@ -1,11 +1,11 @@
 const orderForm = Object.freeze({
-    registration: {
+    personal: {
             firstName: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder_key: 'FIRST_NAME',
-                    errormessage_key: 'REQUIRED_FIRST_NAME'
+                    placeholder: 'First Name',
+                    errormessage: 'First Name is Required'
                 },
                 value: '',
                 validation: {
@@ -19,8 +19,8 @@ const orderForm = Object.freeze({
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder_key: 'LAST_NAME',
-                    errormessage_key: 'REQUIRED_LAST_NAME'
+                    placeholder: 'Last Name',
+                    errormessage: 'Last Name is Required'
                 },
                 value: '',
                 validation: {
@@ -34,8 +34,8 @@ const orderForm = Object.freeze({
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder_key: 'ADDRESS',
-                    errormessage_key: 'REQUIRED_ADDRESS'
+                    placeholder: 'Street Addres',
+                    errormessage: 'Street Address is Required'
                 },
                 value: '',
                 validation: {
@@ -49,7 +49,7 @@ const orderForm = Object.freeze({
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder_key: 'ADDRESS_TWO'
+                    placeholder: 'Apt/Suite'
                 },
                 value: '',
                 validation: {
@@ -63,8 +63,8 @@ const orderForm = Object.freeze({
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder_key: 'CITY',
-                    errormessage_key: 'REQUIRED_CITY'
+                    placeholder: 'City',
+                    errormessage: 'City is Required'
                 },
                 value: '',
                 validation: {
@@ -75,10 +75,10 @@ const orderForm = Object.freeze({
                 classes: 'grid__item large--one-half medium--one-half small--one-half registration-top-padding'
             },
             state: {
-                elementType: 'select',
+                elementType: 'states',
                 elementConfig: {
-                    placeholder_key: 'STATE',
-                    errormessage_key: 'REQUIRED_STATE',
+                    placeholder: 'State',
+                    errormessage: 'Please Select your State',
                     options: [
                     ]
                 },
@@ -91,8 +91,8 @@ const orderForm = Object.freeze({
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder_key: 'ZIP',
-                    errormessage_key: 'REQUIRED_ZIP'
+                    placeholder: 'Zip Code',
+                    errormessage: 'Please Enter your Zip Code'
                 },
                 value: '',
                 validation: {
@@ -105,8 +105,8 @@ const orderForm = Object.freeze({
             country: {
                 elementType: 'select',
                 elementConfig: {
-                    placeholder_key: 'COUNTRY',
-                    errormessage_key: 'REQUIRED_COUNTRY',
+                    placeholder: 'Country',
+                    errormessage: 'Country is Required',
                     options: [
                     ]
                 },
@@ -122,8 +122,8 @@ const orderForm = Object.freeze({
                 elementType: 'input',
                 elementConfig: {
                     type: 'email',
-                    placeholder_key: 'EMAIL',
-                    errormessage_key: 'REQUIRED_EMAIL'
+                    placeholder: 'Email',
+                    errormessage: 'Please enter a valid Email'
                 },
                 value: '',
                 validation: {
@@ -138,8 +138,8 @@ const orderForm = Object.freeze({
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder_key: 'PHONE',
-                    errormessage_key: null
+                    placeholder: 'Phone Number',
+                    errormessage: null
                 },
                 value: '',
                 validation: {
@@ -148,44 +148,13 @@ const orderForm = Object.freeze({
                 valid: false,
                 touched: false,
                 classes: 'grid__item registration-top-padding'
-            },            
-            serialPrefix: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'text',
-                    placeholder_key: 'SERIAL',
-                    errormessage_key: 'REQUIRED_PREFIX'
-                },
-                value: '',
-                validation: {
-                    required: true,
-                    prefix: true
-                },
-                valid: false,
-                touched: false,
-                classes: 'grid__item large--one-third medium--one-third small--one-third registration-top-padding'
-            },
-            serialSuffix: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'text',
-                    placeholder_key: '',
-                    errormessage_key: 'REQUIRED_SUFFIX'
-                },
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                touched: false,
-                classes: 'grid__item large--one-third medium--one-third small--one-third registration-top-padding'
             },
             purchaseDate: {
                 elementType: 'date',
                 elementConfig: {
                 	type: 'text',
-                	placeholder_key: 'PURCHASE_DATE',
-                    errormessage_key: 'REQUIRED_PURCHASE_DATE'
+                	placeholder: 'Date of Purchase',
+                    errormessage: 'Date of Purchase is required'
                 },
                 value: null,
                 validation: {
@@ -194,68 +163,8 @@ const orderForm = Object.freeze({
                 valid: false,
                 touched: false,
                 classes: 'grid__item registration-top-padding'
-            },
-            retailers: {
-                elementType: 'select',
-                elementConfig: {
-                	placeholder_key: 'PURCHASE_PLACE',
-                    errormessage_key: 'REQUIRED_PURCHASE_PLACE',
-                    options: [
-                    ]
-                },
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                touched: false,
-                classes: 'grid__item registration-top-padding'
-            },
-            other: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'text',
-                    placeholder_key: 'PURCHASE_PLACE_OTHER'
-                },
-                value: '',
-                validation: {
-                },
-                valid: true,
-                touched: false,
-                classes: 'grid__item registration-top-padding'
-            },
-            sendRecipes: {
-                elementType: 'checkbox',
-                elementConfig: {
-                    type: 'checkbox',
-                    placeholder_key: 'NEWSLETTER'
-                },
-                value: false,
-                validation: {
-                },
-                valid: true,
-                touched: false,
-                classes: 'grid__item registration-top-padding'
-            },
-            captcha: {
-                elementType: 'captcha',
-                elementConfig: {
-                    type: 'text',
-                    placeholder_key: '',
-                    errormessage_key: 'REQUIRED_CAPTCHA'
-                },
-                value: '',
-                validation: {
-                	required: true
-                },
-                valid: false,
-                touched: false,
-                captchaKey: '6LcWmzIUAAAAADoSNPMqAECfcdIl9Z8B4czc4MjP',
-                classes: 'grid__item registration-top-padding'
             }
-        },
-        firstSection: ['firstName', 'lastName', 'street', 'apt', 'City', 'state', 'zipCode', 'country', 'email', 'phone_number'],
-        secondSection: ['purchaseDate', 'retailers', 'other', 'sendRecipes', 'captcha']
+        }
     });
 
 export default orderForm;

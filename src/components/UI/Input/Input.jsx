@@ -2,6 +2,7 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Recaptcha from '../../Recaptcha/recaptcha';
+import States from '../States/States';
 
 const input = (props) => {
     let inputElement = null;
@@ -44,6 +45,13 @@ const input = (props) => {
                 <label>{props.elementConfig.placeholder}</label>
                 <DatePicker selected={props.value} onChange={props.changed}/>
                 </div>);
+            break;
+        case ('states'):
+            inputElement = (<States  
+                    classes={inputClasses.join(' ')}
+                    value={props.value}
+                    changed={props.changed}
+                />);
             break;
         case ('captcha'):
             inputElement = (<Recaptcha onChange={props.changed} captchaKey={props.captchaKey} />);
