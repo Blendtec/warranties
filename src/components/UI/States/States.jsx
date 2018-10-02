@@ -10,7 +10,7 @@ class States extends Component {
 
     setSelectStates(states = null, country = null) {
     	if (this.state.states || states) {
-	    	let currCountry = 'US';
+	    	let currCountry = country;
 	    	let availStates = states || this.state.states;
 	    	
 	    	let currStates = availStates.filter(state => {
@@ -34,21 +34,9 @@ class States extends Component {
     axios.get(infoFiles.statesFile)
       .then(res => {
 	        const states = res.data;
-	        console.log(states);
-	        const showStates = this.setSelectStates(states);
-	        let stateUpdater = {states: states};
-	        console.log(states);
-	        if (showStates) {
-		        const updatedOrderForm = {
-		            ...this.state.orderForm
-		        };
-		        updatedOrderForm.state.validation = { required: Boolean(showStates.length)};
-		        updatedOrderForm.state.elementConfig.options = showStates;
-	        	stateUpdater = {
-	        		states: states,
-	        		orderForm: updatedOrderForm
-	        	};
-	        }
+	        const country = this.props.country || 'US';
+	        const showStates = this.setSelectStates(states, country);
+	        let stateUpdater = {states: showStates};
 	        this.setState((state, props) => {
 	    		return stateUpdater;
 	    	});

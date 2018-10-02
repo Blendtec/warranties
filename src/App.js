@@ -58,7 +58,9 @@ class App extends Component {
         return isValid;
     }
 
+
     inputChangedHandler = (event, inputIdentifier, page) => {
+    	console.log('asdf', event);
         let updatedOrderForm = {
             ...this.state.orderForm[page]
         };
@@ -99,7 +101,6 @@ class App extends Component {
     }
 
     getErrorMessages(formElement) {
-    	console.log(formElement);
     	const errorMessages = Object.keys(formElement).filter(key => {
     		if (formElement[key].valid === false && formElement[key].touched === true) {
     			return true;
