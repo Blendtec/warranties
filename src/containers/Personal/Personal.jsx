@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Input from '../../components/UI/Input/Input';
 import Aux from '../../hoc/Aux/Aux';
 import infoFiles from '../../enum/info-files';
+import { connect } from 'react-redux';
 
 class Personal extends Component {
     state = {
@@ -56,4 +57,12 @@ class Personal extends Component {
 
 }
 
-export default Personal;
+const mapStateToProps = state => {
+    return {
+        formElement: state.personal,
+    }
+};
+
+
+
+export default connect(mapStateToProps, null)(Personal);
